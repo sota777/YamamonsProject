@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jp.KEN.yamamons.model.LoginModel;
 
 @Controller
-@RequestMapping("seafoodlogin")
+@RequestMapping("login")
 @SessionAttributes("loginModel")
 public class LoginController {
 
@@ -21,20 +21,20 @@ public class LoginController {
 		return new LoginModel();
 	}
 
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public String toLogin() {
-		return "seafoodLogin";
+		return "login";
 	}
 
 	@RequestMapping(method= RequestMethod.POST)
 	public String toRegist(@Validated @ModelAttribute LoginModel lModel, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "seafoodLogin";
+			return "login";
 		}else if (lModel.getLoginId().equals("duke") && lModel.getPassword().equals("dolphin7")) {
 			return "redirect:/form";
 		}else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
-			return "seafoodLogin";
+			return "login";
 		}
 	}
 
