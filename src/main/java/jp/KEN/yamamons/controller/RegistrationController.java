@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jp.KEN.yamamons.Group.Group1;
+import jp.KEN.yamamons.Group.GroupOrder;
 import jp.KEN.yamamons.entity.Members;
 import jp.KEN.yamamons.model.MembersModel;
 
@@ -21,7 +21,7 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public String registMembers(Model model,@Validated(Group1.class)@ModelAttribute MembersModel membersModel,
+	public String registMembers(Model model,@Validated(GroupOrder.class)@ModelAttribute MembersModel membersModel,
 			BindingResult result) {
 		if(result.hasErrors()) {
 			model.addAttribute("headline", "会員登録");
