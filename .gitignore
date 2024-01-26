@@ -1,5 +1,9 @@
 .settings
-target/
+target
 .classpath
 .project
 .springBeans
+target/*
+target/*.xml
+MANIFEST.MF
+pom.properties
