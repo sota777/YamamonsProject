@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>登録完了画面</title>
+<title>登録完了画面s</title>
 </head>
 <body>
 	<h1>登録完了画面</h1>
-
 </body>
 </html>

@@ -9,7 +9,6 @@
 <title>レンタル完了</title>
 </head>
 <body>
-	<h1>レンタル完了</h1>
-
+	<h1>レンタル完了s</h1>
 </body>
 </html>

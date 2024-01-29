@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>在庫管理</title>
+<title>在庫管理あ</title>
 </head>
 <body>
 	<h1>在庫管理</h1>
-
 </body>
 </html>

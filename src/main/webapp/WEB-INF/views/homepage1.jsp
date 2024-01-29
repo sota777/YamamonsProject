@@ -14,8 +14,7 @@
 		<input type="submit" value="ログイン" class="btn">
 		<input type="submit" value="新規登録" class="btn">
 	</header>
-		<h1>おすすめ商品</h1>
-
+		<h1>aおすすめ商品</h1>
 
 </body>
 </html>

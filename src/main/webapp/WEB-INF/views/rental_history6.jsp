@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>レンタル内容確認</title>
+<title>あレンタル内容確認</title>
 </head>
 <body>
 	<h1>レンタル内容確認</h1>
-
 </body>
 </html>

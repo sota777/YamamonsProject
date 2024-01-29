@@ -15,7 +15,7 @@
 <div id="wrapper">
 	<header><h1></h1></header>
 	<main>
-		<table border="1">
+		<table border="3">
 
 
 		</table>
