@@ -1,5 +1,7 @@
 package jp.KEN.yamamons.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -8,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.KEN.yamamons.Group.GroupOrder;
+import jp.KEN.yamamons.dao.MembersDao;
 import jp.KEN.yamamons.entity.Members;
 import jp.KEN.yamamons.model.MembersModel;
 
+@Controller
 public class RegistrationController {
+	@Autowired
+	private MembersDao membersDao;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String toRegistration(Model model) {
@@ -29,7 +35,7 @@ public class RegistrationController {
 		}
 
 		Members members = new Members();
-		members.setCustomerNamel(membersModel.getName());
+		members.setCustomerName(membersModel.getName());
 		members.setAddress(membersModel.getAddres());
 		members.setTel(membersModel.getPhoneNumber());
 		members.setMail(membersModel.getEmail());
