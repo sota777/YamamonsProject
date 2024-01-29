@@ -7,6 +7,12 @@ public class CartModel implements Serializable {
 	private ArrayList<String> cart;
 	private String itemNo;
 
+	/*
+	public CartModel() {
+		this.cart = new ArrayList<String>();
+	}
+	*/
+
 	public String getItemNo() {
 		return itemNo;
 	}
@@ -14,10 +20,7 @@ public class CartModel implements Serializable {
 	public void setItemNo(String itemNo) {
 		this.itemNo = itemNo;
 	}
-	
-	public CartModel() {
-		this.cart = new ArrayList<String>();
-	}
+
 
 	public ArrayList<String> getCart() {
 		return cart;
