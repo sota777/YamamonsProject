@@ -26,24 +26,28 @@ public class MembersDao {
 
 	private RowMapper<Members> membersMapper = new BeanPropertyRowMapper<Members>(Members.class);
 
+	//t_customerの一覧を返すためのメソッド
 	public List<Members> getCustomerList() {
 		String sql = "SELECT * FROM t_customer";
 		List<Members> membersList = jdbcTemplate.query(sql, membersMapper);
 		return membersList;
 	}
 
-
+	//メールアドレスの完全一致検索
+	//メールアドレスが一致するIDのパスワードとメールアドレスを返す
+	//Controller側で戻ってきたpasswordが、入力されたpasswordと一致するか確認する?
 	public Members getCusMailByMail(String mail) {
-		String sql = "SELECT mail FROM t_customer WHERE mail LIKE ?";
+		String sql = "SELECT mail,password FROM t_customer WHERE mail LIKE ?";
 		mail = mail.replace("%","\\%").replace("_", "\\_");
-		mail = "%" + mail + "%";
 		Object[] parameters = { mail };
 		Members cusMail = (Members) jdbcTemplate.query(sql,parameters,membersMapper);
 		return cusMail;
 	}
 
+	//顧客情報を登録するためのメソッド
 	public int insertCus(Members members) {
 		String sql = "INSERT INTO t_customer(customerName,address,tel,mail,creditNo,planNo,password) VALUES(?,?,?,?,?,?,?);";
+
 		Object[] parameters = { members.getCustomerName(), members.getAddress(), members.getTel(), members.getMail(),
 				members.getCreditNo(), members.getPlanNo(), members.getPassword() };
 		TransactionStatus transactionStatus = null;

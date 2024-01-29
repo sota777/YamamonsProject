@@ -33,8 +33,8 @@ public class Members implements Serializable {
 		return customerName;
 	}
 
-	public void setCustomerName(String customerNamel) {
-		this.customerName = customerNamel;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public String getAddress() {
@@ -84,6 +84,7 @@ public class Members implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 
