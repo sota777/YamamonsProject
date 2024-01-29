@@ -7,7 +7,7 @@ public class Members implements Serializable {
 
 	private String customerId;
 
-	private String customerNamel;
+	private String customerName;
 
 	private String address;
 
@@ -29,12 +29,12 @@ public class Members implements Serializable {
 		this.customerId = customerId;
 	}
 
-	public String getCustomerNamel() {
-		return customerNamel;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setCustomerNamel(String customerNamel) {
-		this.customerNamel = customerNamel;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public String getAddress() {
@@ -84,6 +84,7 @@ public class Members implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 

@@ -34,8 +34,8 @@ public class MembersDao {
 
 	public int insertCus(Members members) {
 		String sql = "INSERT INTO members(customerName,address,tel,mail,creditNo,planNo,password) VALUES(?,?,?,?,?,?,?);";
-		Object[] parameters = { members.getCustomerName(), members.getAdress(), members.getTel(), members.getMail(),
-				members.getCreditNo(), members.PlanNo(), members.getPassword() };
+		Object[] parameters = { members.getCustomerName(), members.getAddress(), members.getTel(), members.getMail(),
+				members.getCreditNo(), members.getPlanNo(), members.getPassword() };
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
 		int numberRow = 0;
