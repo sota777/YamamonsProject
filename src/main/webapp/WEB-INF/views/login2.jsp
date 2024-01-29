@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Session サンプル</title>
+<title>ログイン</title>
 <style>
 .error {
 	color: #ff0000;
