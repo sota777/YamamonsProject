@@ -29,15 +29,16 @@ public class RegistrationController {
 		}
 
 		Members members = new Members();
-		members.setName(membersModel.getName());
-		members.setEmail(membersModel.getEmail());
-		members.setPhoneNumber(membersModel.getPhoneNumber());
-		members.setAddres(membersModel.getAddres());
-		members.setCredit(membersModel.getCredit());
+		members.setCustomerNamel(membersModel.getName());
+		members.setAddress(membersModel.getAddres());
+		members.setTel(membersModel.getPhoneNumber());
+		members.setMail(membersModel.getEmail());
+		members.setCreditNo(membersModel.getCredit());
+		members.setPlanNo(membersModel.getPlanNo());
 		members.setPassword(membersModel.getPassword());
 
 
-		int numberOfRow = membersDao.insert(members);
+		int numberOfRow = membersDao.insertCus(members);
 		if (numberOfRow == 0){
 			model.addAttribute("message", "登録に失敗しました。");
 			model.addAttribute("headline", "会員登録");
