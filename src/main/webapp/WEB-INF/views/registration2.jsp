@@ -10,6 +10,7 @@
 </head>
 <body>
 	<div class="container">
+	<jsp:include page="headerkari.jsp"/>
 	<h1>会員登録</h1>
 		<form:form modelAttribute="membersModel">
 	<div>
@@ -39,7 +40,9 @@
 	<div>
 		<p><input type="submit" value="登録する"></p>
 	</div>
+
 	</form:form>
+	<jsp:include page="footerkari.jsp"/>
 	</div>
 </body>
 </html>

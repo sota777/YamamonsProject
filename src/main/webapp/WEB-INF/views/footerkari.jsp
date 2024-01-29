@@ -4,6 +4,6 @@
 	<br>
 	<br>
 	<div class="copyright">
-		<small>&copy; "a会社名"</small>
+		<small>&copy; 株式会社 Music Life Agency</small>
 	</div>
 </footer>

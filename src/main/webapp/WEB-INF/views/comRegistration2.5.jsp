@@ -9,6 +9,6 @@
 <title>登録完了画面s</title>
 </head>
 <body>
-	<h1>登録完了画面</h1>
+	<h1>登録完了しました</h1>
 </body>
 </html>
