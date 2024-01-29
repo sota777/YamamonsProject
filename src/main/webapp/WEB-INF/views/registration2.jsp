@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 	<h1>会員登録</h1>
-		<form:form modelAttribute="validationModel">
+		<form:form modelAttribute="membersModel">
 	<div>
 		<label>氏名</label>
 		<form:input path="name" size="20" />
@@ -27,16 +27,14 @@
 		<form:input path="phoneNumber" size="15" />
 		<form:errors path="phoneNumber" element="span" cssClass="errors" />
 	</div>
-	<div>
-		<label>生年月日</label>
-				<form:select path="birthYear" items="${years}" itemLabel="label" itemValue="data" />&nbsp;年
-					<form:select path="birthMonth" items="${months}" itemLabel="label" itemValue="data" />&nbsp;月
-					<form:select path="birthDay" items="${days}" itemLabel="label" itemValue="data" />&nbsp;日
-	</div>
+
 	<div>
 		<label>決済方法選択</label>
-		<form:select path="payment" items="${paymentMap }" multipe="false"/>
-		<form:errors path="payment" element="span" />
+		<form:radiobutton path="credit" label="楽天" value="rakuten"/>
+		<form:radiobutton path="credit" label="JCB" value="jcb"/>
+		<form:radiobutton path="credit" label="VISA" value="visa"/>
+		<form:radiobutton path="credit" label="MASTER" value="master"/>
+		<form:errors path="credit" element="span" />
 	</div>
 	<div>
 		<p><input type="submit" value="登録する"></p>
