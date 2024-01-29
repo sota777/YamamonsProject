@@ -2,34 +2,39 @@ package jp.KEN.yamamons.entity;
 
 import java.io.Serializable;
 
+//t_customer(顧客情報)のエンティティ
 public class Members implements Serializable {
 
-	private String name;
+	private String customerId;
 
-	private String email;
+	private String customerNamel;
 
-	private String phoneNumber;
+	private Integer address;
 
-	private Integer credit;
+	private String tel;
+
+	private String mail;
+
+	private String creditNo;
+
+	private String planNo;
 
 	private String password;
 
-	private String addres;
-
-	public String getName() {
-		return name;
+	public String getCustomerId() {
+		return customerId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCustomerNamel() {
+		return customerNamel;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCustomerNamel(String customerNamel) {
+		this.customerNamel = customerNamel;
 	}
 
 	public String getPhoneNumber() {
@@ -40,12 +45,44 @@ public class Members implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Integer getCredit() {
-		return credit;
+	public Integer getAddress() {
+		return address;
 	}
 
-	public void setCredit(Integer credit) {
-		this.credit = credit;
+	public void setAddress(Integer address) {
+		this.address = address;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getCreditNo() {
+		return creditNo;
+	}
+
+	public void setCreditNo(String creditNo) {
+		this.creditNo = creditNo;
+	}
+
+	public String getPlanNo() {
+		return planNo;
+	}
+
+	public void setPlanNo(String planNo) {
+		this.planNo = planNo;
 	}
 
 	public String getPassword() {
@@ -56,12 +93,5 @@ public class Members implements Serializable {
 		this.password = password;
 	}
 
-	public String getAddres() {
-		return addres;
-	}
-
-	public void setAddres(String addres) {
-		this.addres = addres;
-	}
 
 }
