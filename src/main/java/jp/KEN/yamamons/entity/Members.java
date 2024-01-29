@@ -9,8 +9,6 @@ public class Members implements Serializable {
 
 	private String customerNamel;
 
-	private String phoneNumber;
-
 	private Integer address;
 
 	private String tel;
