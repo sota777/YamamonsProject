@@ -13,10 +13,10 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import jp.KEN.yamamons.entity.Members;
+import jp.KEN.yamamons.entity.Items;
 
 @Component
-public class MembersDao {
+public class ItemsDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -24,32 +24,21 @@ public class MembersDao {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	private RowMapper<Members> membersMapper = new BeanPropertyRowMapper<Members>(Members.class);
+	private RowMapper<Items> itemsMapper = new BeanPropertyRowMapper<Items>(Items.class);
 
-	//t_customerの一覧を返すためのメソッド
-	public List<Members> getCustomerList() {
-		String sql = "SELECT * FROM t_customer";
-		List<Members> membersList = jdbcTemplate.query(sql, membersMapper);
-		return membersList;
+	//t_itemの一覧を返すためのメソッド
+	public List<Items> getItemsList() {
+		String sql = "SELECT * FROM t_item";
+		List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
+		return itemsList;
 	}
 
-	//メールアドレスの完全一致検索
-	//メールアドレスが一致する顧客のパスワードとメールアドレスを返す
-	//Controller側で戻ってきたpasswordが、入力されたpasswordと一致するか確認する?
-	public Members getCusMailByMail(String mail) {
-		String sql = "SELECT mail,password FROM t_customer WHERE mail LIKE ?";
-		mail = mail.replace("%","\\%").replace("_", "\\_");
-		Object[] parameters = { mail };
-		Members cusMail = (Members) jdbcTemplate.query(sql,parameters,membersMapper);
-		return cusMail;
-	}
+	//商品情報を登録するためのメソッド
+	public int insertItem(Items items) {
+		String sql = "INSERT INTO t_item(itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?);";
 
-	//顧客情報を登録するためのメソッド
-	public int insertCus(Members members) {
-		String sql = "INSERT INTO t_customer(customerName,address,tel,mail,creditNo,planNo,password) VALUES(?,?,?,?,?,?,?);";
-
-		Object[] parameters = { members.getCustomerName(), members.getAddress(), members.getTel(), members.getMail(),
-				members.getCreditNo(), members.getPlanNo(), members.getPassword() };
+		Object[] parameters = { items.getItemName(), items.getItemQuantity(), items.getGenreNo(), items.getDirector(),
+				items.getTypeNo(), items.getItemPicture() };
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
 		int numberRow = 0;
