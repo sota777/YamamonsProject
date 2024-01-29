@@ -1,17 +1,30 @@
 package jp.KEN.yamamons.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-//import jp.ken.session.model.CartModel;
+import jp.KEN.yamamons.dao.ItemsDao;
+import jp.KEN.yamamons.entity.Items;
+import jp.KEN.yamamons.model.CartModel;
+import jp.KEN.yamamons.model.LoginModel;
+
+
 
 @Controller
 @SessionAttributes({ "loginModel", "cModel" })
 public class ItemController {
-	/*
-	 *
-	 * 	@Autowired
-		private Dao dao;	//Item系のDaoクラス名で設定
+
+
+		@Autowired
+		private ItemsDao itemsDao;
 
 
 		//「○○さんログイン中」的な感じでJSP表示するためセッション登録
@@ -41,7 +54,7 @@ public class ItemController {
 		model.addAttribute("message", message);
 
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-		List<Items> itemsList = Dao.getList();
+		List<Items> itemsList = itemsDao.getItemsList();
 		model.addAttribute("itemsList", itemsList);
 		return "rental_form";
 
@@ -64,11 +77,10 @@ public class ItemController {
 
 		model.addAttribute("message",message);
 
-		List<Items> itemsList = Dao.getList();
+		List<Items> itemsList = itemsDao.getItemsList();
 		model.addAttribute("itemsList", itemsList);
 		return "rental_form";
 
 	}
-	*/
 
 }
