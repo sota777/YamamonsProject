@@ -9,9 +9,22 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes({ "loginModel", "cModel" })
 public class ItemController {
 	/*
-	public CartModel setupCart() {
-		return new CartModel();
-	}
+	 *
+	 * 	@Autowired
+		private Dao dao;	//Item系のDaoクラス名で設定
+
+
+		//「○○さんログイン中」的な感じでJSP表示するためセッション登録
+		@ModelAttribute("loginModel")
+		public LoginModel setupLoginModel() {
+			return new LoginModel();
+		}
+
+		//画面遷移時もカート内容を引き継ぐためセッション登録
+		@ModelAttribute("cModel")
+		public CartModel setupCartModel() {
+			return new CartModel();
+		}
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
@@ -26,7 +39,12 @@ public class ItemController {
 			message = "商品を選んでください";
 		}
 		model.addAttribute("message", message);
-		return "seafoodList";
+
+		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
+		List<Items> itemsList = Dao.getList();
+		model.addAttribute("itemsList", itemsList);
+		return "rental_form";
+
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
@@ -45,7 +63,11 @@ public class ItemController {
 		}
 
 		model.addAttribute("message",message);
-		return "seafoodList";
+
+		List<Items> itemsList = Dao.getList();
+		model.addAttribute("itemsList", itemsList);
+		return "rental_form";
+
 	}
 	*/
 
