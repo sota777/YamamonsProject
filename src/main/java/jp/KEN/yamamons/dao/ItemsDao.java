@@ -26,8 +26,8 @@ public class ItemsDao {
 
 	private RowMapper<Items> itemsMapper = new BeanPropertyRowMapper<Items>(Items.class);
 
-	//t_customerの一覧を返すためのメソッド
-	public List<Items> getCustomerList() {
+	//t_itemの一覧を返すためのメソッド
+	public List<Items> getItemsList() {
 		String sql = "SELECT * FROM t_item";
 		List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
 		return itemsList;
