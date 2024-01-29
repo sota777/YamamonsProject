@@ -38,7 +38,7 @@ public class RegistrationController {
 		members.setPassword(membersModel.getPassword());
 
 
-		int numberOfRow = membersDao.insertCas(members);
+		int numberOfRow = membersDao.insertCus(members);
 		if (numberOfRow == 0){
 			model.addAttribute("message", "登録に失敗しました。");
 			model.addAttribute("headline", "会員登録");
