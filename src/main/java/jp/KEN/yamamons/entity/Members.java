@@ -9,7 +9,7 @@ public class Members implements Serializable {
 
 	private String customerNamel;
 
-	private Integer address;
+	private String address;
 
 	private String tel;
 
@@ -37,19 +37,11 @@ public class Members implements Serializable {
 		this.customerNamel = customerNamel;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public Integer getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(Integer address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -92,6 +84,7 @@ public class Members implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 }
