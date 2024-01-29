@@ -34,7 +34,7 @@ public class MembersDao {
 	}
 
 	//メールアドレスの完全一致検索
-	//メールアドレスが一致するIDのパスワードとメールアドレスを返す
+	//メールアドレスが一致する顧客のパスワードとメールアドレスを返す
 	//Controller側で戻ってきたpasswordが、入力されたpasswordと一致するか確認する?
 	public Members getCusMailByMail(String mail) {
 		String sql = "SELECT mail,password FROM t_customer WHERE mail LIKE ?";
