@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Items;
+import jp.KEN.yamamons.model.CartModel;
 import jp.KEN.yamamons.model.LoginModel;
 
-//import jp.ken.session.model.CartModel;
+
 
 @Controller
 @SessionAttributes({ "loginModel", "cModel" })
