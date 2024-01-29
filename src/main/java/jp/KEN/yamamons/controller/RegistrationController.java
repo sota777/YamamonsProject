@@ -23,7 +23,7 @@ public class RegistrationController {
 	public String toRegistration(Model model) {
 		model.addAttribute("membersModel", new MembersModel());
 		model.addAttribute("headline", "会員登録");
-		return "membersRegistration";
+		return "registration2";
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -31,7 +31,7 @@ public class RegistrationController {
 			BindingResult result) {
 		if(result.hasErrors()) {
 			model.addAttribute("headline", "会員登録");
-			return "membersRegistration";
+			return "comRegistration";
 		}
 
 		Members members = new Members();
