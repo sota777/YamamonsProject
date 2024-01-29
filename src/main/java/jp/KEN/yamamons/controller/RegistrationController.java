@@ -31,8 +31,9 @@ public class RegistrationController {
 			BindingResult result) {
 		if(result.hasErrors()) {
 			model.addAttribute("headline", "会員登録");
-			return "comRegistration";
+			return "registration2";
 		}
+
 
 		Members members = new Members();
 		members.setCustomerName(membersModel.getName());
@@ -48,10 +49,10 @@ public class RegistrationController {
 		if (numberOfRow == 0){
 			model.addAttribute("message", "登録に失敗しました。");
 			model.addAttribute("headline", "会員登録");
-			return "membersRegistration";
+			return "registration2";
 		}
 
-		return "redirect:/complete";
+		return "redirect:/comRegistration2.5";
 
 	}
 
