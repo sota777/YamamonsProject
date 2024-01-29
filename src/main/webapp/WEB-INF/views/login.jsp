@@ -18,7 +18,7 @@ table {
 </style>
 </head>
 <body>
-		<jsp:include page="headerkari.jsp"></jsp:include>
+		<jsp:include page="header.jsp"></jsp:include>
 	<h1>ログイン画面</h1>
 	<hr />
 	<form:form modelAttribute="loginModel">
@@ -51,7 +51,7 @@ table {
 	</form:form>
 	<hr />
 	<footer>
-			<jsp:include page="footerkari.jsp"></jsp:include>
+			<jsp:include page="footer.jsp"></jsp:include>
 
 	</footer>
 			</body>
