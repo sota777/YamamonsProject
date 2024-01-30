@@ -1,5 +1,6 @@
 package jp.KEN.yamamons.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jp.KEN.yamamons.dao.MembersDao;
+import jp.KEN.yamamons.entity.Members;
 import jp.KEN.yamamons.model.LoginModel;
 
 @Controller
 @RequestMapping("login")
 @SessionAttributes("loginModel")
 public class LoginController {
+
+	@Autowired
+	private MembersDao membersDao;
 
 	@ModelAttribute("loginModel")
 	public LoginModel setupLoginForm() {
@@ -23,20 +29,28 @@ public class LoginController {
 
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public String toLogin() {
-		return "login";
+		return "login2";
 	}
 
 	@RequestMapping(method= RequestMethod.POST)
 	public String toRegist(@Validated @ModelAttribute LoginModel lModel, BindingResult result, Model model) {
+		String cusMail = lModel.getLoginMail();
+		Members loginCusData = membersDao.getCusDataByMail(cusMail);
+		//エラーチェック
 		if (result.hasErrors()) {
-			return "login";
-		}else if (lModel.getLoginId().equals("duke") && lModel.getPassword().equals("dolphin7")) {
-			return "redirect:/form";
+			return "login2";
+
+		//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
+		//一致すれば商品選択ページに飛ぶ
+		}else if (lModel.getLoginMail().equals(loginCusData.getMail()) && lModel.getPassword().equals(loginCusData.getPassword())) {
+			return "redirect:/rental_form3";
 		}else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
-			return "login";
+			return "login2";
 		}
+
 	}
+
 
 }
 

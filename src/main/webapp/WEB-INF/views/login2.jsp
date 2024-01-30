@@ -27,10 +27,10 @@ table {
 			<tr>
 				<td>ログインID</td>
 				<td>
-					<form:input path="loginId" />
+					<form:input path="loginMail" />
 				</td>
 				<td>
-					<form:errors path="loginId" element="div" cssClass="error" />
+					<form:errors path="loginMail" element="div" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
