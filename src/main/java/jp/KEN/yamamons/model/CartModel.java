@@ -1,17 +1,15 @@
 package jp.KEN.yamamons.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CartModel implements Serializable {
+public class CartModel {
+
 	private ArrayList<String> cart;
 	private String itemNo;
 
-	/*
 	public CartModel() {
 		this.cart = new ArrayList<String>();
 	}
-	*/
 
 	public String getItemNo() {
 		return itemNo;
@@ -20,7 +18,6 @@ public class CartModel implements Serializable {
 	public void setItemNo(String itemNo) {
 		this.itemNo = itemNo;
 	}
-
 
 	public ArrayList<String> getCart() {
 		return cart;
