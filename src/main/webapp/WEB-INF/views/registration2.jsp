@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 	<jsp:include page="headerkari.jsp"/>
-	<h1>会員登録</h1>
+	<h1><c:out value="${headline }"/></h1>
 		<form:form modelAttribute="membersModel">
 	<div>
 		<label>氏名</label>
@@ -20,12 +20,12 @@
 	</div>
 	<div>
 		<label>住所</label>
-		<form:input path="email" size="30" />
-		<form:errors path="email" element="span" cssClass="errors" />
+		<form:input path="address" size="30" />
+		<form:errors path="address" element="span" cssClass="errors" />
 	</div>
 	<div>
-		<label>携帯番号(ハイフンなし・半角数字)</label>
-		<form:input path="phoneNumber" size="15" />
+		<label>携帯番号(ハイフン・半角数字)</label>
+		<form:input path="phoneNumber" size="15" placeholder="000-0000-0000"/>
 		<form:errors path="phoneNumber" element="span" cssClass="errors" />
 	</div>
 
@@ -40,7 +40,9 @@
 	<div>
 		<p><input type="submit" value="登録する"></p>
 	</div>
-
+	<div class="form-row errors">
+		<c:out value="${message }"/>
+	</div>
 	</form:form>
 	<jsp:include page="footerkari.jsp"/>
 	</div>
