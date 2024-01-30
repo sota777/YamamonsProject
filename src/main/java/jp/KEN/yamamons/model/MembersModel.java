@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import jp.KEN.yamamons.Group.Group1;
@@ -22,12 +23,13 @@ public class MembersModel implements Serializable {
 	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="携帯番号ではありません",groups=Group1.class)
 	private String phoneNumber;
 
-	//@CreditCardNumber(message="クレジットカードではありません")
 	private String credit;
 
 	private String planNo;
 
 	@NotEmpty(message="パスワードは必須です")
+	@Length(min=4, max=10,message="4文字以上10文字以下で入力してください",groups=Group1.class)
+
 	private String password;
 
 	@NotEmpty(message="住所は必須です")

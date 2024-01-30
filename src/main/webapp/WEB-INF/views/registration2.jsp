@@ -29,8 +29,8 @@
 		<form:errors path="mail" element="span" cssClass="errors" />
 	</div>
 	<div>
-		<label>パスワード</label>
-		<form:input path="password" size="30" />
+		<label>パスワード(4文字以上10文字以下の英数字)</label>
+		<form:password path="password" size="30" />
 		<form:errors path="password" element="span" cssClass="errors" />
 	</div>
 	<div>
