@@ -8,13 +8,19 @@
 <meta charset="UTF-8">
 <title>ホーム</title>
 </head>
-<body>
-	<h1>YAMAMONS</h1>
-	<header>
+<header>
+	<form action="/login2" method="post">
 		<input type="submit" value="ログイン" class="btn">
+	</form>
+	<form action="/registration2" method="get">
 		<input type="submit" value="新規登録" class="btn">
+	</form>
 	</header>
-		<h1>aおすすめ商品</h1>
+
+<body>
+	<center><h1>MUSIC LIFE AGENCY</h1></center>
+		<h1>おすすめ商品</h1>
 
 </body>
 </html>
+
