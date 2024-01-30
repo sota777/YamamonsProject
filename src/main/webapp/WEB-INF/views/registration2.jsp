@@ -44,6 +44,7 @@
 		<c:out value="${message }"/>
 	</div>
 	</form:form>
+	<div>
 	<jsp:include page="footerkari.jsp"/>
 	</div>
 </body>
