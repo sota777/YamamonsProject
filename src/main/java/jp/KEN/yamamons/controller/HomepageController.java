@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomepageController {
 
-	@RequestMapping(value="/homepage1", method= RequestMethod.GET)
+	@RequestMapping(value="/home", method= RequestMethod.GET)
 		public String toHomepage() {
 			return "/homepage1";
 		}
 
-	@RequestMapping(value="/homepage1", method= RequestMethod.POST)
+	@RequestMapping(value="/home", method= RequestMethod.POST)
 		public String homepage() {
-
+			return "/homepege1";
 	}
-	}
+}
 
 
 

@@ -9,7 +9,8 @@
 <title>ホーム</title>
 </head>
 <header>
-	<form action="/login2" method="post">
+	<a href="login">ログイン</a>
+	<form action="/login" method="post">
 		<input type="submit" value="ログイン" class="btn">
 	</form>
 	<form action="/registration2" method="get">
