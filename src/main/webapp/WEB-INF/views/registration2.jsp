@@ -11,6 +11,7 @@
 <body>
 	<div class="container">
 	<jsp:include page="headerkari.jsp"/>
+	<a href="login">ログイン画面へ</a>
 	<h1><c:out value="${headline }"/></h1>
 		<form:form modelAttribute="membersModel">
 	<div>
