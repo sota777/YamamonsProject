@@ -30,6 +30,7 @@ public class RegistrationController {
 	public String registMembers(Model model,@Validated(GroupOrder.class)@ModelAttribute MembersModel membersModel,
 			BindingResult result) {
 		if(result.hasErrors()) {
+			System.out.println("エラーだよ");
 			model.addAttribute("headline", "会員登録");
 			return "registration2";
 		}
@@ -37,9 +38,9 @@ public class RegistrationController {
 
 		Members members = new Members();
 		members.setCustomerName(membersModel.getName());
-		members.setAddress(membersModel.getAddres());
+		members.setAddress(membersModel.getAddress());
 		members.setTel(membersModel.getPhoneNumber());
-		members.setMail(membersModel.getEmail());
+		members.setMail(membersModel.getMail());
 		members.setCreditNo(membersModel.getCredit());
 		members.setPlanNo(membersModel.getPlanNo());
 		members.setPassword(membersModel.getPassword());

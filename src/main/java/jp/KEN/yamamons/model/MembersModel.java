@@ -16,7 +16,7 @@ public class MembersModel implements Serializable {
 
 	@NotEmpty(message="emailは必須です")
 	@Email(groups=Group1.class, message="メールアドレスではありません")
-	private String email;
+	private String mail;
 
 	@NotEmpty(message="電話番号は必須です")
 	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="携帯番号ではありません",groups=Group1.class)
@@ -31,7 +31,7 @@ public class MembersModel implements Serializable {
 	private String password;
 
 	@NotEmpty(message="住所は必須です")
-	private String addres;
+	private String address;
 
 	public String getName() {
 		return name;
@@ -41,12 +41,12 @@ public class MembersModel implements Serializable {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public String getPhoneNumber() {
@@ -81,12 +81,12 @@ public class MembersModel implements Serializable {
 		this.password = password;
 	}
 
-	public String getAddres() {
-		return addres;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddres(String addres) {
-		this.addres = addres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 
