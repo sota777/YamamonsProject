@@ -18,7 +18,9 @@ table {
 </style>
 </head>
 <body>
+
 		<jsp:include page="headerkari.jsp"></jsp:include>
+		<a href="registration">登録画面へ</a>
 	<h1>ログイン画面</h1>
 	<hr />
 	<form:form modelAttribute="loginModel">

@@ -9,13 +9,19 @@
 <title>ホーム</title>
 </head>
 <header>
-	<a href="login">ログイン</a>
-	<form action="/login" method="post">
-		<input type="submit" value="ログイン" class="btn">
-	</form>
-	<form action="/registration2" method="get">
-		<input type="submit" value="新規登録" class="btn">
-	</form>
+	<a href="login">ログイン</a>/<a href="registration">新規登録</a>
+
+	<%--
+	ボタン処理した場合のJSP
+		 <form action="/login" method="post">
+			<input type="submit" value="ログイン" class="btn">
+		</form>
+		<form action="/registration2" method="get">
+			<input type="submit" value="新規登録" class="btn">
+		</form>
+
+	--%>
+
 	</header>
 
 <body>
