@@ -24,6 +24,16 @@
 		<form:errors path="address" element="span" cssClass="errors" />
 	</div>
 	<div>
+		<label>メールアドレス</label>
+		<form:input path="mail" size="30" />
+		<form:errors path="mail" element="span" cssClass="errors" />
+	</div>
+	<div>
+		<label>パスワード</label>
+		<form:input path="password" size="30" />
+		<form:errors path="password" element="span" cssClass="errors" />
+	</div>
+	<div>
 		<label>携帯番号(ハイフン・半角数字)</label>
 		<form:input path="phoneNumber" size="15" placeholder="000-0000-0000"/>
 		<form:errors path="phoneNumber" element="span" cssClass="errors" />
@@ -31,10 +41,10 @@
 
 	<div>
 		<label>決済方法選択</label>
-		<form:radiobutton path="credit" label="楽天" value="rakuten"/>
-		<form:radiobutton path="credit" label="JCB" value="jcb"/>
-		<form:radiobutton path="credit" label="VISA" value="visa"/>
-		<form:radiobutton path="credit" label="MASTER" value="master"/>
+		<form:radiobutton path="credit" label="楽天" value="0"/>
+		<form:radiobutton path="credit" label="JCB" value="1"/>
+		<form:radiobutton path="credit" label="VISA" value="2"/>
+		<form:radiobutton path="credit" label="MASTER" value="3"/>
 		<form:errors path="credit" element="span" />
 	</div>
 	<div>
