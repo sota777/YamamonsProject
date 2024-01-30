@@ -29,7 +29,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public String toLogin() {
-		return "login";
+		return "login2";
 	}
 
 	@RequestMapping(method= RequestMethod.POST)
@@ -38,15 +38,15 @@ public class LoginController {
 		Members loginCusData = membersDao.getCusDataByMail(cusMail);
 		//エラーチェック
 		if (result.hasErrors()) {
-			return "login";
+			return "login2";
 
 		//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
 		//一致すれば商品選択ページに飛ぶ
 		}else if (lModel.getLoginMail().equals(loginCusData.getMail()) && lModel.getPassword().equals(loginCusData.getPassword())) {
-			return "redirect:/form";
+			return "redirect:/rental_form3";
 		}else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
-			return "login";
+			return "login2";
 		}
 
 	}
