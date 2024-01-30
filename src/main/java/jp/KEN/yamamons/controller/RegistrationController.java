@@ -53,14 +53,14 @@ public class RegistrationController {
 			return "registration2";
 		}
 
-		return "redirect:/form";
+		return "redirect:/complete";
 
 	}
 
 	@RequestMapping(value = "/complete", method = RequestMethod.GET)
 	public String toComplete(Model model) {
 		model.addAttribute("headline", "会員登録完了");
-		return "membersRegistrationComplete";
+		return "comRegistration2.5";
 	}
 
 
