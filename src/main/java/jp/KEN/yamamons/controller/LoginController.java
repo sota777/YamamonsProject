@@ -43,7 +43,7 @@ public class LoginController {
 		//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
 		//一致すれば商品選択ページに飛ぶ
 		}else if (lModel.getLoginMail().equals(loginCusData.getMail()) && lModel.getPassword().equals(loginCusData.getPassword())) {
-			return "redirect:/rental_form3";
+			return "redirect:/form";
 		}else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
 			return "login2";
