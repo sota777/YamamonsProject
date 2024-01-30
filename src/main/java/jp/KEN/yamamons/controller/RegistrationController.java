@@ -53,7 +53,7 @@ public class RegistrationController {
 			return "registration2";
 		}
 
-		return "redirect:/comRegistration2.5";
+		return "redirect:/form";
 
 	}
 
