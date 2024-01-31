@@ -20,5 +20,6 @@
 	<p>
 		<input type ="submit" name="clear" value="カートを空にする">
 	</p>
+	<a href="confirm">カートを確認</a>
 </body>
 </html>
