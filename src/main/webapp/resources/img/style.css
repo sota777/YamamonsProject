@@ -1,0 +1,41 @@
+@charset "UTF-8";
+html,body,p{
+  padding:0;
+  margin:0;
+}
+
+body{
+  margin-top:50px;
+  background: #FFF;
+  text-align:center;
+}
+
+.sample {
+  font-size:5em;
+  text-align:center;
+  line-height:0.95em;
+  font-weight:bold;
+  color: #03A9F4;
+  text-shadow:
+    0.04em 0.02em 0 #B0BEC5,
+    0.08em 0.05em 0 rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+.btn--green.btn--emboss {
+  color: #00662d;
+  text-shadow: -1px -1px 1px #00ff71;
+  border-bottom: 5px solid #00662d;
+  text-decoration: none;
+}
+
+.btn--green.btn--cubic:hover {
+  margin-top: 3px;
+  border-bottom: 2px solid #00662d;
+}
+
+.fa-position-right {
+    position: absolute;
+    top: calc(50% - .5em);
+    right: 1rem;
+}
+
