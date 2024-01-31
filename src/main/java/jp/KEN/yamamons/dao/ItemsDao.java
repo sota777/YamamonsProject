@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -56,5 +57,20 @@ public class ItemsDao {
 			}
 		}
 		return numberRow;
+	}
+
+	public Items getItemsByNo(Integer itemNo) {
+		String sql = "SELECT * FROM t_item WHERE itemNo=?";
+		//INパラメータに使用する値の配列を生成
+		Object[] parameters = {itemNo};
+		try {
+			//第二引数はIDでとってきた配列を入れる
+			//queryForObjectは検索結果が一件の時
+			Items items = jdbcTemplate.queryForObject(sql, parameters, itemsMapper);
+			return items;
+		} catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
