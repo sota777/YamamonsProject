@@ -10,6 +10,16 @@
 </head>
 <body>
 	<h1>レンタルサイト</h1>
+	
 	<img src="resources/img/ドラえもん.png">
+	<input type ="submit" value="カートに入れる">
+	
+	
+	
+	
+	<p>
+		<input type ="submit" name="clear" value="カートを空にする">
+	</p>
+	<a href="confirm">カートを確認</a>
 </body>
 </html>
