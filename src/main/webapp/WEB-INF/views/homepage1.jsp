@@ -15,7 +15,7 @@
 	<div class="sample" >MUSIC LIFE AGENCY</div>
 
 <header>
-<a href="login"  class="btn btn--green btn--emboss btn--cubic">ログイン</a>
+<a href="login"  class="btn btn--green btn--emboss btn--cubic">ログイン</a>あ
 <a href="registration"  class="btn btn--green btn--emboss btn--cubic">新規登録</a>
 
 	<!--  ボタン処理した場合のJSP
