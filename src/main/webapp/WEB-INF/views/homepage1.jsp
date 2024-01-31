@@ -30,9 +30,9 @@
 
 	</header>
 
-		<h1>おすすめ商品</h1>
-
-		<img src="resources/img/しんちゃん.jpg" alt="写真" width="350" height="250"/> <img src="resources/img/ドラえもん.png" alt="写真" width="350" height="250"/>
+		<h3>おすすめ商品</h3>
+		<h1>金曜日の5時</h1>
+		<img src="resources/img/しんちゃん.jpg" alt="写真" width="350" height="250"/> <img src="resources/img/ドラえもん.png" alt="写真" width="350" height="250"/> <img src="resources/img/忍たま乱太郎.jpg" alt="写真" width="350" height="250"/>
 
 
 </body>
