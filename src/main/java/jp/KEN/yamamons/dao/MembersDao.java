@@ -40,7 +40,6 @@ public class MembersDao {
 	public Members getCusDataByMail(String mail) {
 		String sql = "SELECT * FROM t_customer WHERE mail LIKE ?";
 		mail = mail.replace("%","\\%").replace("_", "\\_");
-		//mail = "\""+ mail + "\"";
 		Object[] parameters = { mail };
 		try {
 			Members cusMail = jdbcTemplate.queryForObject(sql,parameters,membersMapper);

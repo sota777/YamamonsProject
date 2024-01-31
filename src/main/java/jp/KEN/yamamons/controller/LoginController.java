@@ -21,37 +21,43 @@ public class LoginController {
 
 	@Autowired
 	private MembersDao membersDao;
-	
+
 	//ログイン情報をセッションに登録
 	@ModelAttribute("loginModel")
 	public LoginModel setupLoginForm() {
 		return new LoginModel();
 	}
 
-	@RequestMapping(value = "/login",method=RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String toLogin() {
 		return "login2";
 	}
 
-	@RequestMapping(method= RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String toRegist(@Validated @ModelAttribute LoginModel lModel, BindingResult result, Model model) {
 		String cusMail = lModel.getLoginMail();
 		Members loginCusData = membersDao.getCusDataByMail(cusMail);
+
+		//入力したMailアドレスがDBと一致しない場合
+		if (loginCusData == null) {
+			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
+			return "login2";
+		}
+
 		//エラーチェック
 		if (result.hasErrors()) {
 			return "login2";
 
-		//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
-		//一致すれば商品選択ページに飛ぶ
-		}else if (lModel.getLoginMail().equals(loginCusData.getMail()) && lModel.getPassword().equals(loginCusData.getPassword())) {
+			//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
+			//一致すれば商品選択ページに飛ぶ
+		} else if (lModel.getLoginMail().equals(loginCusData.getMail())
+				&& lModel.getPassword().equals(loginCusData.getPassword())) {
 			return "redirect:/form";
-		}else {
+		} else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
 			return "login2";
 		}
 
 	}
 
-
 }
-
