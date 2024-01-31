@@ -23,7 +23,7 @@
 		</tr>
 		<c:forEach var="itemsList" items="${itemsList }">
 			<tr>
-				<td><img src="resources/img/<c:out value="${itemsList.itemPicture }" />"></td>
+				<td><img src="resources/img/<c:out value="${itemsList.itemPicture }"  />"width="96" height="128" alt="${itemsList.itemName }"></td>
 				<td><c:out value="${itemsList.itemName }" /></td>
 				<td><c:out value="${itemsList.director }" /></td>
 				<td><input type="submit" value="カートに入れる">
