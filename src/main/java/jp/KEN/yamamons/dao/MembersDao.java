@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -41,8 +42,13 @@ public class MembersDao {
 		mail = mail.replace("%","\\%").replace("_", "\\_");
 		//mail = "\""+ mail + "\"";
 		Object[] parameters = { mail };
-		Members cusMail = jdbcTemplate.queryForObject(sql,parameters,membersMapper);
-		return cusMail;
+		try {
+			Members cusMail = jdbcTemplate.queryForObject(sql,parameters,membersMapper);
+			return cusMail;
+		}catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	//顧客情報を登録するためのメソッド
