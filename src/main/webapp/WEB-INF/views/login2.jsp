@@ -27,7 +27,7 @@ table {
 		<div class="error">${errorMessage }</div>
 		<table>
 			<tr>
-				<td>ログインID</td>
+				<td>メールアドレス</td>
 				<td>
 					<form:input path="loginMail" />
 				</td>
