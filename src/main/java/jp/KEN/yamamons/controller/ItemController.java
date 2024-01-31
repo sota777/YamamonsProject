@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.model.CartModel;
-import jp.KEN.yamamons.model.LoginModel;
 
 
 
@@ -26,12 +25,14 @@ public class ItemController {
 		@Autowired
 		private ItemsDao itemsDao;
 
-
+		/* loginControllerでloginModelのセッションを登録するので
+		 * ここではセッション登録不要？
 		//「○○さんログイン中」的な感じでJSP表示するためセッション登録
 		@ModelAttribute("loginModel")
 		public LoginModel setupLoginModel() {
 			return new LoginModel();
 		}
+		*/
 
 		//画面遷移時もカート内容を引き継ぐためセッション登録
 		@ModelAttribute("cModel")
@@ -79,7 +80,7 @@ public class ItemController {
 
 		List<Items> itemsList = itemsDao.getItemsList();
 		model.addAttribute("itemsList", itemsList);
-		return "rental_form";
+		return "rental_form3";
 
 	}
 
