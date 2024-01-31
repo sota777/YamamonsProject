@@ -15,7 +15,7 @@
 	<div class="sample" >MUSIC LIFE AGENCY</div>
 
 <header>
-<a href="login"  class="btn btn--green btn--emboss btn--cubic">ログイン</a>あ
+<a href="login"  class="btn btn--green btn--emboss btn--cubic">ログイン</a>
 <a href="registration"  class="btn btn--green btn--emboss btn--cubic">新規登録</a>
 
 	<!--  ボタン処理した場合のJSP
@@ -31,6 +31,9 @@
 	</header>
 
 		<h1>おすすめ商品</h1>
+
+		<img src="resources/img/しんちゃん.jpg" alt="写真" width="350" height="250"/> <img src="resources/img/ドラえもん.png" alt="写真" width="350" height="250"/>
+
 
 </body>
 </html>
