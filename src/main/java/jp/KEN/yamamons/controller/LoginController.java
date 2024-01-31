@@ -21,7 +21,8 @@ public class LoginController {
 
 	@Autowired
 	private MembersDao membersDao;
-
+	
+	//ログイン情報をセッションに登録
 	@ModelAttribute("loginModel")
 	public LoginModel setupLoginForm() {
 		return new LoginModel();

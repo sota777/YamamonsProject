@@ -10,6 +10,6 @@
 </head>
 <body>
 	<h1>レンタルサイト</h1>
-	<img src="ドラえもん.jpg">
+	<img src="resources/img/ドラえもん.png">
 </body>
 </html>
