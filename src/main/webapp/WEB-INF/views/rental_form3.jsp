@@ -10,13 +10,30 @@
 </head>
 <body>
 	<h1>レンタルサイト</h1>
-	
+
 	<img src="resources/img/ドラえもん.png">
-	<input type ="submit" value="カートに入れる">
-	
-	
-	
-	
+
+	<table border="1">
+
+		<tr>
+			<th>商品画像</th>
+			<th>商品名</th>
+			<th>監督名</th>
+			<th></th>
+		</tr>
+		<c:forEach var="itemsList" items="${itemsList }">
+			<tr>
+				<td><img src="resources/img/<c:out value="${itemsList.itemPicture }" />"></td>
+				<td><c:out value="${itemsList.itemName }" /></td>
+				<td><c:out value="${itemsList.director }" /></td>
+				<td><input type="submit" value="カートに入れる">
+					<input type="hidden" name="itemNo" value="${itemsList.itemNo }"></td>
+
+		</c:forEach>
+
+	</table>
+
+
 	<p>
 		<input type ="submit" name="clear" value="カートを空にする">
 	</p>
