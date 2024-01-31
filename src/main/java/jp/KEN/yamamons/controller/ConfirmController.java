@@ -29,7 +29,7 @@ public class ConfirmController {
 		if (cModel != null) {
 			cart = cModel.getCart();
 		}
-		String message;
+		String message = null;
 		if (cart != null && !cart.isEmpty()) {
 			for (int i = 0; i < cart.size(); i++) {
 				//ID検索
@@ -41,19 +41,8 @@ public class ConfirmController {
 			message = "カートは空です";
 		}
 		model.addAttribute("message", message);
+		model.addAttribute("cartItems",cartItems);
 
-		/*
-		if (members == null) {
-			model.addAttribute("message", "該当データはありません");
-		} else {
-			List<Members> membersList = new ArrayList<Members>();
-			membersList.add(members);
-			model.addAttribute("membersList", membersList);
-		}
-		} catch (NumberFormatException e) {
-		model.addAttribute("message", "IDが不正です");
-		}
-		*/
 
 		return "rental_cart4";
 
