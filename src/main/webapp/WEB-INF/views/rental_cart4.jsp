@@ -12,24 +12,39 @@
 </style>
 </head>
 <body>
-<div id="wrapper">
-	<header><h1></h1></header>
+	<div id="wrapper">
 	<main>
-		<table border="3">
+		<h1>レンタル確認画面</h1>
+
+	<table border="1">
+		<tr>
+			<th>商品画像</th>
+			<th>商品名</th>
+			<th>商品点数</th>
+
+		</tr>
+		<c:forEach var="itemsList" items="${itemsList }">
+			<form:form modelAttribute="cModel">
+			<tr>
+				<td><img
+				src="resources/img/<c:out value="${itemsList.itemPicture }"  />"
+						width="96" height="128" alt="${itemsList.itemName }"></td>
+				<td><c:out value="${itemsList.itemName }" /></td>
+				<td><c:out value="${cModel.getCart().size()}" /></td>
 
 
-		</table>
-		<p>
-			<%=request.getAttribute("message") %>
-		</p>
-		<form action="form" method="post">
-			<p>
-				<input type="submit" name="clear" value="カートを空にする">
-			</p>
-		</form>
-		<p>
-			<a href="rental_confirmation">レ</a>
-		</p>
+			</form:form>
+		</c:forEach>
+	</table>
+	<form action="clear" method="get">
+		<input type="submit" name="clear" value="カート消去">
+	</form>
+	<br>
+	<form action="clear" method="get">
+				<input type="submit" class="btn" value="レンタル完了へ">
+	</form>
+				 <a href="/homepage1">ホームへ
+				 </a>
 	</main>
 	</div>
 </body>
