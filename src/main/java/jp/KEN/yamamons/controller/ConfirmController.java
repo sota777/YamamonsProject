@@ -30,7 +30,6 @@ public class ConfirmController {
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
 			cart = cModel.getCart();
-			System.out.println("get通信："+cart.size());
 		}
 
 		//cartの要素(ItemNo)を一つずつ取り出し、商品情報をItemsDaoからとってくる
