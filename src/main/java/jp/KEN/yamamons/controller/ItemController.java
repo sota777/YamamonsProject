@@ -44,10 +44,15 @@ public class ItemController {
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
+		String message;
+
+		//cModelに商品番号が入っている場合は、ArrayListのcartに
+		//カートに入れた商品の番号を配列で入れていく。
 		if (cModel != null) {
 			cart = cModel.getCart();
 		}
-		String message;
+
+		//カートに入っている商品の数を表示するmessage作成
 		if (cart != null && !cart.isEmpty()) {
 			message = "カートに" + cart.size() + "個の商品が入っています";
 		} else {
@@ -64,21 +69,19 @@ public class ItemController {
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String toAddCart(@ModelAttribute("cModel") CartModel cModel, Model model) {
-
 		String message;
 		String cartInNo = cModel.getItemNo();
 		cModel.addCart(cartInNo);
 
-		System.out.println("cModel"+cModel.getCart());
-
+		//カートに入っている商品の数を表示するmessage作成
 		if (cModel.getCart().isEmpty()) {
 			message="商品を選んでください";
 		}else {
 			message="カートに"+cModel.getCart().size()+"個の商品が入っています";
 		}
-
 		model.addAttribute("message",message);
 
+		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsList();
 		model.addAttribute("itemsList", itemsList);
 		return "rental_form3";
@@ -87,6 +90,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
 	public String toClearCart(Model model, SessionStatus status) {
+		//カートのsession情報を破棄する
 		status.setComplete();
 		return "redirect:/form";
 	}
