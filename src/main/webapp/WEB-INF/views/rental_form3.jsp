@@ -10,11 +10,9 @@
 </head>
 <body>
 	<h1>レンタルサイト</h1>
-
-	<img src="resources/img/ドラえもん.png">
+	<h2>いらっしゃいませ、${CusData.customerName }さん</h2>
 
 	<table border="1">
-
 		<tr>
 			<th>商品画像</th>
 			<th>商品名</th>
@@ -30,10 +28,7 @@
 					<input type="hidden" name="itemNo" value="${itemsList.itemNo }"></td>
 
 		</c:forEach>
-
 	</table>
-
-
 	<p>
 		<input type ="submit" name="clear" value="カートを空にする">
 	</p>
