@@ -1,5 +1,7 @@
 package jp.KEN.yamamons.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +36,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String toRegist(@Validated @ModelAttribute LoginModel lModel, BindingResult result, Model model) {
-		String cusMail = lModel.getLoginMail();
+	public String toRegist(@Validated @ModelAttribute LoginModel loginModel, BindingResult result, Model model,HttpSession session) {
+		String cusMail = loginModel.getLoginMail();
 		Members loginCusData = membersDao.getCusDataByMail(cusMail);
 
 		//入力したMailアドレスがDBと一致しない場合
@@ -50,8 +52,9 @@ public class LoginController {
 
 			//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
 			//一致すれば商品選択ページに飛ぶ
-		} else if (lModel.getLoginMail().equals(loginCusData.getMail())
-				&& lModel.getPassword().equals(loginCusData.getPassword())) {
+		} else if (loginModel.getLoginMail().equals(loginCusData.getMail())
+				&& loginModel.getPassword().equals(loginCusData.getPassword())) {
+			session.setAttribute("CusData", loginCusData);
 			return "redirect:/form";
 		} else {
 			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");

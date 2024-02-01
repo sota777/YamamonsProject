@@ -10,7 +10,15 @@ public class LoginModel implements Serializable {
 	@NotEmpty(message="パスワードは必須入力です")
 	private String password;
 
+	private String customerName;
 
+
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 	public String getLoginMail() {
 		return loginMail;
 	}
