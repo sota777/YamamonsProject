@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Items;
@@ -82,6 +83,12 @@ public class ItemController {
 		model.addAttribute("itemsList", itemsList);
 		return "rental_form3";
 
+	}
+
+	@RequestMapping(value = "/clear", method = RequestMethod.GET)
+	public String toClearCart(Model model, SessionStatus status) {
+		status.setComplete();
+		return "redirect:/form";
 	}
 
 }
