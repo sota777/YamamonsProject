@@ -36,24 +36,16 @@ public class ConfirmController {
 		//取ってきた商品情報をcartItemsに入れていく
 		String message = null;
 		if (cart != null && !cart.isEmpty()) {
-			for (int i = 0; i < cart.size(); i++) {
-				//ID検索
-				Integer itemNo = new Integer(Integer.parseInt(cart.get(i)));
-				Items items = itemsDao.getItemsByNo(itemNo);
-				cartItems.add(items);
+				cartItems = toGetCartItems(cart);
 				message = "カートに" + cart.size() + "個の商品が入っています";
-
-			}
 		} else {
 			message = "カートは空です";
 		}
-
 		DeleteModel dModel = new DeleteModel();
 		model.addAttribute("message", message);
 		model.addAttribute("cartItems", cartItems);
 		model.addAttribute(dModel);
 		return "rental_cart4";
-
 	}
 
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
@@ -74,31 +66,46 @@ public class ConfirmController {
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
-		String message= "null";
-		System.out.println("GET通信");
+		String message = "null";
+		ArrayList<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
 			cart = cModel.getCart();
-		}
-		if (cModel == null) {
+		} else {
+			//nullの時は確認画面に戻る
 			return "redirect:/confirm";
 		}
-
-		for (String itemNo : cart) {
-			int order = itemsDao.reduceItemQuantity(itemNo);
-			if(order == 2) {
+		for (int i = 0; i < cart.size(); i++) {
+			//注文前の在庫数を確認する
+			int quantity = itemsDao.toGetItemQuantity(cart.get(i));
+			if(quantity < 1) {
 				message = "在庫が足りない為貸出が出来ません";
-				model.addAttribute("message",message);
-				return "redirect:/confirm";
+				model.addAttribute("message", message);
+				cartItems = toGetCartItems(cart);
+				model.addAttribute("cartItems", cartItems);
+				return "rental_cart4";
 			}
+			int order = itemsDao.reduceItemQuantity(cart.get(i));
 			if (order == 0) {
 				message = "貸出に失敗しました";
-				return "redirect:/confirm";
+				return "rental_cart4";
 			}
 		}
-
 		return "comRental5";
+	}
+
+	//カートに入っている商品情報一覧を取り出すためのメソッド
+	public ArrayList<Items> toGetCartItems (ArrayList<String> cart){
+		ArrayList<Items> cartItems = new ArrayList<Items>();
+		for (int i = 0; i < cart.size(); i++) {
+			//ID検索
+			Integer itemNo = new Integer(Integer.parseInt(cart.get(i)));
+			//商品情報の取り出し
+			Items items = itemsDao.getItemsByNo(itemNo);
+			cartItems.add(items);
+		}
+		return cartItems;
 	}
 
 }
