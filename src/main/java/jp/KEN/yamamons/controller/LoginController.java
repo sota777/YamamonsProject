@@ -52,6 +52,9 @@ public class LoginController {
 
 			//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
 			//一致すれば商品選択ページに飛ぶ
+		} else if (loginModel.getLoginMail().equals("kanri@kenschool.com")
+				&& loginModel.getPassword().equals("admin")) {
+			return "redirect:/admin";
 		} else if (loginModel.getLoginMail().equals(loginCusData.getMail())
 				&& loginModel.getPassword().equals(loginCusData.getPassword())) {
 			session.setAttribute("CusData", loginCusData);
