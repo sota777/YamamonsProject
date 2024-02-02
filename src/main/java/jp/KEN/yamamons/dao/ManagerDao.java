@@ -10,6 +10,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import jp.KEN.yamamons.entity.Items;
+import jp.KEN.yamamons.entity.Order;
 
 @Component
 public class ManagerDao {
@@ -48,6 +49,56 @@ public class ManagerDao {
 	}
 
 	//管理者が返却処理対応したとき、貸出し状況の変更処理
-	//public int updataStatusDao()
+	public int updataStatusDao(Order order) {
+		String sql = "UPDATE t_order SET rentalStatusNo=? WHERE orderNo=?;";
+		Object[] parameters = { order.getRentalStatusNo(),order.getOrderNo()};
+
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
+		int numberRow = 0;
+
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
+
+	//返却処理対応したときの在庫状況の変更処理
+	public int updataItemQuaDao(Items items) {
+		String sql = "UPDATE t_item SET itemQuantity=? WHERE itemNo=?;";
+		Object[] parameters = { items.getItemQuantity(),items.getItemNo()};
+
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
+		int numberRow = 0;
+
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+
+	}
 
 }
