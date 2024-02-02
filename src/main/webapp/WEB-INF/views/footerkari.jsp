@@ -3,9 +3,6 @@
 <footer>
 
 
-<br>
-<br>
-<br>
 
 	<div class="copyright">
 		<small>&copy; 株式会社 Music Life Agency</small>
