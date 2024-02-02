@@ -71,4 +71,34 @@ public class ConfirmController {
 		return "redirect:/confirm";
 	}
 
+	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
+	public String toOderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
+		ArrayList<String> cart = null;
+		String message= "null";
+		System.out.println("GET通信");
+
+		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
+		if (cModel != null) {
+			cart = cModel.getCart();
+		}
+		if (cModel == null) {
+			return "redirect:/confirm";
+		}
+
+		for (String itemNo : cart) {
+			int order = itemsDao.reduceItemQuantity(itemNo);
+			if(order == 2) {
+				message = "在庫が足りない為貸出が出来ません";
+				model.addAttribute("message",message);
+				return "redirect:/confirm";
+			}
+			if (order == 0) {
+				message = "貸出に失敗しました";
+				return "redirect:/confirm";
+			}
+		}
+
+		return "comRental5";
+	}
+
 }
