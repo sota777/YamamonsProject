@@ -26,15 +26,6 @@ public class ItemController {
 		@Autowired
 		private ItemsDao itemsDao;
 
-		/* loginControllerでloginModelのセッションを登録するので
-		 * ここではセッション登録不要？
-		//「○○さんログイン中」的な感じでJSP表示するためセッション登録
-		@ModelAttribute("loginModel")
-		public LoginModel setupLoginModel() {
-			return new LoginModel();
-		}
-		*/
-
 		//画面遷移時もカート内容を引き継ぐためセッション登録
 		@ModelAttribute("cModel")
 		public CartModel setupCartModel() {

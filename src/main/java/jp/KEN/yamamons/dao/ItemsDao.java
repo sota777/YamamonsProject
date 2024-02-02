@@ -59,6 +59,7 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	//商品番号から商品情報を取り出すメソッド
 	public Items getItemsByNo(Integer itemNo) {
 		String sql = "SELECT * FROM t_item WHERE itemNo=?";
 		//INパラメータに使用する値の配列を生成
@@ -74,19 +75,23 @@ public class ItemsDao {
 		}
 	}
 
-	//注文が完了した時に、注文された商品番号の在庫を1つ減らすためのメソッド
+	//商品番号の在庫数を取り出すメソッド
+	public int toGetItemQuantity(String itemNo) {
+		String sql = "SELECT itemQuantity FROM t_item WHERE itemNo=?";
+		Object[] parameters = {itemNo};
+		try {
+			int quantity = jdbcTemplate.queryForInt(sql, parameters);
+			return quantity;
+		} catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+
+	//商品番号の在庫を1つ減らすためのメソッド
 	public int reduceItemQuantity(String itemNo) {
 		int numberRow = 0;
-
-		//まず、注文完了前の在庫数を確認する
-		Items preItem = getItemsByNo(Integer.parseInt(itemNo));
-
-		//在庫が0の場合は注文できない
-		if (Integer.parseInt(preItem.getItemQuantity())<1) {
-			return numberRow=2;
-		}
-
-		//在庫を1つ減らすSQL文
 		String sql = "UPDATE t_item SET itemQuantity = itemQuantity - 1 WHERE itemNo=?";
 		Object[] parameters = {itemNo};
 
@@ -108,4 +113,5 @@ public class ItemsDao {
 		}
 		return numberRow;
 	}
+	
 }

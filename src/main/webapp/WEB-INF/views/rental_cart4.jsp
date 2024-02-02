@@ -41,6 +41,10 @@ td {
 				<input type="submit" name="clear" value="カート消去">
 			</form>
 			<br>
+			<p>
+				<c:out value="${message }"/>
+			</p>
+
 			<form action="orderComplete" method="get">
 				<input type="submit" class="btn" value="レンタル完了へ">
 			</form>
