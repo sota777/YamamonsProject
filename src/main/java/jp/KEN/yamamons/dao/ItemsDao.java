@@ -73,4 +73,39 @@ public class ItemsDao {
 			return null;
 		}
 	}
+
+	//注文が完了した時に、注文された商品番号の在庫を1つ減らすためのメソッド
+	public int reduceItemQuantity(String itemNo) {
+		int numberRow = 0;
+
+		//まず、注文完了前の在庫数を確認する
+		Items preItem = getItemsByNo(Integer.parseInt(itemNo));
+
+		//在庫が0の場合は注文できない
+		if (Integer.parseInt(preItem.getItemQuantity())<1) {
+			return numberRow=2;
+		}
+
+		//在庫を1つ減らすSQL文
+		String sql = "UPDATE t_item SET itemQuantity = itemQuantity - 1 WHERE itemNo=?";
+		Object[] parameters = {itemNo};
+
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
 }

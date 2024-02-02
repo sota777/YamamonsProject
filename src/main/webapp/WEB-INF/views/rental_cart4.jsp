@@ -41,10 +41,10 @@ td {
 				<input type="submit" name="clear" value="カート消去">
 			</form>
 			<br>
-			<form action="clear" method="get">
+			<form action="orderComplete" method="get">
 				<input type="submit" class="btn" value="レンタル完了へ">
 			</form>
-			<a href="/homepage1">ホームへ </a>
+			<a href="home">ホームへ </a>
 		</main>
 	</div>
 </body>
