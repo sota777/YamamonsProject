@@ -25,8 +25,8 @@
 		<div class="container">
       <form action="rental_form3.jsp" method="get">
     <p class="fsize">ログイン画面</p>
-    <input type="text" placeholder="MailAddress" />
-    <input type="password" placeholder="Password" />
+    <form:input path="loginMail" placeholder="MailAddress" />
+    <form:password path="password" placeholder="Password" />
     <a href="form" >
     <button type="submit">Login</button></a>
 </form>
