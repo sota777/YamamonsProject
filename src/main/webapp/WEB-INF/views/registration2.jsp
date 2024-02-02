@@ -7,11 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>新規会員登録</title>
+<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
+
 </head>
-<body>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+
 	<div class="container">
 	<jsp:include page="headerkari.jsp"/>
-	<a href="login">ログイン画面へ</a>
+<a href="login" >
+			<input type="submit" value=ログイン class="btn btn--green btn--emboss btn--cubic"></a>
+	</div>
 	<h1><c:out value="${headline }"/></h1>
 		<form:form modelAttribute="membersModel">
 	<div>
