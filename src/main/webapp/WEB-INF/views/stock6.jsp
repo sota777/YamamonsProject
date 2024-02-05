@@ -18,7 +18,7 @@
 			<th>在庫数</th>
 			<th>貸出状況</th>
 		</tr>
-		<c:forEach var="itemsList,orderList" items="${itemsList, orderList }">
+		<c:forEach var="itemsList" items="${itemsList}">
 			<form:form modelAttribute="cModel,orderModel">
 				<tr>
 					<td><img
