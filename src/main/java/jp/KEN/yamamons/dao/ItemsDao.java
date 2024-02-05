@@ -1,5 +1,6 @@
 package jp.KEN.yamamons.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,14 @@ public class ItemsDao {
 		}
 	}
 
+	public List<Items> getItemsExceptCart(ArrayList<String> cart) {
+		String sql = "SELECT * FROM t_item WHERE NOT (itemNo= ?)";
+		Object[] parameters = {cart};
+		List<Items> items = jdbcTemplate.query(sql,parameters, itemsMapper);
+
+		return items;
+	}
+
 	//商品番号の在庫数を取り出すメソッド
 	public int toGetItemQuantity(String itemNo) {
 		String sql = "SELECT itemQuantity FROM t_item WHERE itemNo=?";
@@ -113,5 +122,5 @@ public class ItemsDao {
 		}
 		return numberRow;
 	}
-	
+
 }
