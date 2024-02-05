@@ -1,8 +1,12 @@
 package jp.KEN.yamamons.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionException;
@@ -20,6 +24,8 @@ public class ManagerDao {
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
+
+	private RowMapper<Order> ordersMapper = new BeanPropertyRowMapper<Order>(Order.class);
 
 	//管理者が商品を追加するDao
 	public int insertItem(Items items) {
@@ -98,7 +104,15 @@ public class ManagerDao {
 			}
 		}
 		return numberRow;
+	}
 
+	//商品ごと貸出し中のレコードの抽出
+	public List<Order> getOrderItemNo(Items itemNo) {
+		String sql = "SELECT * FROM t_order WHERE itemNo=? AND rentalStatusNo=1;";
+		Object[] parameters = {itemNo};
+
+		List<Order> orderList = jdbcTemplate.query(sql,parameters,ordersMapper);
+		return orderList;
 	}
 
 }
