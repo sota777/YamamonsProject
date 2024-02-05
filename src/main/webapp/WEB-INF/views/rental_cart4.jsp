@@ -25,14 +25,16 @@ td {
 					<th>商品点数</th>
 
 				</tr>
-				<c:forEach var="cartItems" items="${cartItems }" begin="0" end="100" step="1" varStatus="status">
+				<c:forEach var="cartItems" items="${cartItems }" begin="0" end="100"
+					step="1" varStatus="status">
 					<form:form modelAttribute="dModel">
 						<tr>
-							<td><img src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
-						width="96" height="128" alt="${cartItems.itemName }"></td>
+							<td><img
+								src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
+								width="96" height="128" alt="${cartItems.itemName }"></td>
 							<td><c:out value="${cartItems.itemName }" /></td>
-							<td><input type="submit" value="削除">
-							<input type="hidden" name="index" value="${status.count }"></td>
+							<td><input type="submit" value="削除"> <input
+								type="hidden" name="index" value="${status.count }"></td>
 						</tr>
 					</form:form>
 				</c:forEach>
@@ -42,13 +44,23 @@ td {
 			</form>
 			<br>
 			<p>
-				<c:out value="${message }"/>
+				<c:out value="${message }" />
 			</p>
 
-			<form action="orderComplete" method="get">
-				<input type="submit" class="btn" value="レンタル完了へ">
-			</form>
-			<a href="home">ホームへ </a>
+
+			<c:if test="${!empty errormessage}">
+			<p>
+				<c:out value="${errormessage }" />
+			</p>
+				<p>
+					<a href="confirm">カート確認画面へ戻る</a>
+				</p>
+			</c:if>
+
+				<form action="orderComplete" method="get">
+					<input type="submit" class="btn" value="レンタル完了へ">
+				</form>
+				<a href="home">ホームへ </a>
 		</main>
 	</div>
 </body>

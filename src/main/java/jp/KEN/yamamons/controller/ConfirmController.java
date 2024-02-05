@@ -64,9 +64,9 @@ public class ConfirmController {
 	}
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
-	public String toOderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
+	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
-		String message = "null";
+		String errormessage = "null";
 		ArrayList<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
@@ -80,20 +80,26 @@ public class ConfirmController {
 			//注文前の在庫数を確認する
 			int quantity = itemsDao.toGetItemQuantity(cart.get(i));
 			if(quantity < 1) {
-				message = "在庫が足りない為貸出が出来ません";
-				model.addAttribute("message", message);
+				errormessage = "在庫が足りない為貸出が出来ません";
+				model.addAttribute("errormessage", errormessage);
 				cartItems = toGetCartItems(cart);
 				model.addAttribute("cartItems", cartItems);
 				return "rental_cart4";
 			}
 			int order = itemsDao.reduceItemQuantity(cart.get(i));
 			if (order == 0) {
-				message = "貸出に失敗しました";
+				errormessage = "貸出に失敗しました";
 				return "rental_cart4";
 			}
 		}
 		return "comRental5";
 	}
+
+	@RequestMapping(value = "/orderComplete", method = RequestMethod.POST)
+	public String toRedirectOrder(@ModelAttribute("cModel") CartModel cModel, Model model) {
+		return "redirect;/orderComplete";
+	}
+
 
 	//カートに入っている商品情報一覧を取り出すためのメソッド
 	public ArrayList<Items> toGetCartItems (ArrayList<String> cart){
