@@ -36,6 +36,7 @@ public class ItemController {
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
 		String message;
+		itemsDao.deleteItem2();
 
 		//cModelに商品番号が入っている場合は、ArrayListのcartに
 		//カートに入れた商品の番号を配列で入れていく。
@@ -72,9 +73,18 @@ public class ItemController {
 		}
 		model.addAttribute("message",message);
 
+
+		//カートに入れた商品をt_item2に追加する
+
+		Integer itemNo = new Integer(Integer.parseInt(cartInNo));
+		Items items = itemsDao.getItemsByNo(itemNo);
+		itemsDao.insertItem2(items);
+
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
 		model.addAttribute("itemsList", itemsList);
+
+
 		return "rental_form3";
 
 	}
