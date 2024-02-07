@@ -36,8 +36,19 @@ public class ConfirmController {
 		//取ってきた商品情報をcartItemsに入れていく
 		String message = null;
 		if (cart != null && !cart.isEmpty()) {
-				cartItems = toGetCartItems(cart);
-				message = "カートに" + cart.size() + "個の商品が入っています";
+			cartItems = toGetCartItems(cart);
+			message = "カートに" + cart.size() + "個の商品が入っています";
+
+			/*
+			 * ArrayList<String> rentalHistory = itemsDao.getHistoryByCustomerId(loginModel.getCustomerName());
+
+			if(cart.contains(rentalHistory)) {
+
+			}
+			*/
+
+
+
 		} else {
 			message = "カートは空です";
 		}
