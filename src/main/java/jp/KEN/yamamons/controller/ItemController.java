@@ -36,6 +36,7 @@ public class ItemController {
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
 		String message;
+		itemsDao.deleteItem2();
 
 		//cModelに商品番号が入っている場合は、ArrayListのcartに
 		//カートに入れた商品の番号を配列で入れていく。
