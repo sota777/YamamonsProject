@@ -72,9 +72,18 @@ public class ItemController {
 		}
 		model.addAttribute("message",message);
 
+
+		//カートに入れた商品をt_item2に追加する
+
+		Integer itemNo = new Integer(Integer.parseInt(cartInNo));
+		Items items = itemsDao.getItemsByNo(itemNo);
+		itemsDao.insertItem2(items);
+
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
 		model.addAttribute("itemsList", itemsList);
+
+
 		return "rental_form3";
 
 	}

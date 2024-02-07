@@ -77,9 +77,9 @@ public class ItemsDao {
 	}
 
 	public List<Items> getItemsExceptCart(ArrayList<String> cart) {
-		String sql = "SELECT * FROM t_item WHERE NOT (itemNo= ?)";
-		Object[] parameters = {cart};
-		List<Items> items = jdbcTemplate.query(sql,parameters, itemsMapper);
+		String sql = "SELECT * FROM t_item WHERE itemNo NOT IN(select itemNo from t_item2)";
+		//Object[] parameters = {cart};
+		List<Items> items = jdbcTemplate.query(sql,itemsMapper);
 
 		return items;
 	}
@@ -121,6 +121,59 @@ public class ItemsDao {
 			}
 		}
 		return numberRow;
+	}
+
+
+
+
+
+
+
+
+
+
+	public int insertItem2(Items items) {
+		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?,?);";
+
+		Object[] parameters = { items.getItemNo(), items.getItemName(), items.getItemQuantity(), items.getGenreNo(), items.getDirector(),
+				items.getTypeNo(), items.getItemPicture() };
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		int numberRow = 0;
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
+
+	public void deleteItem2() {
+		String sql = "DELETE FROM t_item2";
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			jdbcTemplate.update(sql);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return;
 	}
 
 }

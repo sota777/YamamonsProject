@@ -87,12 +87,15 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 			int order = itemsDao.reduceItemQuantity(cart.get(i));
-			
+
 			if (order == 0) {
 				errormessage = "貸出に失敗しました";
 				return "rental_cart4";
 			}
 		}
+
+		itemsDao.deleteItem2();
+
 		return "comRental5";
 	}
 
