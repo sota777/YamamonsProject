@@ -26,11 +26,15 @@ body{
   text-shadow: -1px -1px 1px #00ff71;
   border-bottom: 5px solid #00662d;
   text-decoration: none;
+  text-align: right; /* テキストを右に寄せる */
+    }
 }
 
 .btn--green.btn--cubic:hover {
   margin-top: 3px;
   border-bottom: 2px solid #00662d;
+  text-align: right; /* テキストを右に寄せる */
+    }
 }
 
 .fa-position-right {

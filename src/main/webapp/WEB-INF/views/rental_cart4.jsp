@@ -7,16 +7,38 @@
 <head>
 <meta charset="UTF-8">
 <title>カート内容確認</title>
+<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
+<link href="/yamamons/resources/img/rental.css" type="text/css" rel="stylesheet" />
+
 <style>
 td {
 	text-align: center;
 }
+    table {
+        width: 100%; /* テーブルを利用可能な全幅に設定 */
+        border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+    }
+
+    th, td {
+        padding: 10px; /* オプション: セルに余白を追加してスペーシングを改善 */
+        text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
+    }
+    strong {
+    	background-color: white;
+    }
 </style>
 </head>
-<body>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+	<div class="sample" >CART</div><br>
+		<form action="clear" method="get">
+					<input type="submit" name="clear" value="カートを空にする" class="btn btn--green btn--emboss btn--cubic">
+		</form>
+		<a href="form" >
+			<input type="submit" value="レンタルサイト" class="btn btn--green btn--emboss btn--cubic"></a><br>
+<br>
 	<div id="wrapper">
 		<main>
-			<h1>レンタル確認画面</h1>
+
 
 			<table border="1">
 				<tr>
@@ -29,19 +51,16 @@ td {
 					step="1" varStatus="status">
 					<form:form modelAttribute="dModel">
 						<tr>
-							<td><img
-								src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
+							<td>
+							<img src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
 								width="96" height="128" alt="${cartItems.itemName }"></td>
-							<td><c:out value="${cartItems.itemName }" /></td>
-							<td><input type="submit" value="削除"> <input
-								type="hidden" name="index" value="${status.count }"></td>
+							<th><strong><c:out value="${cartItems.itemName }" /></strong></th>
+							<td><input type="submit" value="削除">
+								<input type="hidden" name="index" value="${status.count }"></td>
 						</tr>
 					</form:form>
 				</c:forEach>
 			</table>
-			<form action="clear" method="get">
-				<input type="submit" name="clear" value="カート消去">
-			</form>
 			<br>
 			<p>
 				<c:out value="${message }" />
@@ -53,15 +72,31 @@ td {
 				<c:out value="${errormessage }" />
 			</p>
 				<p>
-					<a href="confirm">カート確認画面へ戻る</a>
-				</p>
+							</p>
 			</c:if>
-
-				<form action="orderComplete" method="get">
-					<input type="submit" class="btn" value="レンタル完了へ">
+<br>
+				 <form action="orderComplete" method="get">
+        			<input type="submit" class="btn btn--green btn--emboss btn--cubic"
+        			value="RENTAL"  style="font-size: 24px;">
 				</form>
-				<a href="home">ホームへ </a>
+    			<br>
+    			<br>
+    			<br>
+
+
 		</main>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<footer>
+
+			<jsp:include page="footerkari.jsp"></jsp:include>
+
+	</footer>
 </body>
 </html>
