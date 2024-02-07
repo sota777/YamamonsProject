@@ -1,4 +1,4 @@
-//レンタル画面履歴表示のコントローラー
+
 
 package jp.KEN.yamamons.controller;
 

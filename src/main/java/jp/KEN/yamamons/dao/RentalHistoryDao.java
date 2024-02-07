@@ -1,4 +1,4 @@
-//RentalHistoryDao {//レンタル履歴閲覧画面のDAO コード
+
  package jp.KEN.yamamons.dao;
 
 import java.util.List;
