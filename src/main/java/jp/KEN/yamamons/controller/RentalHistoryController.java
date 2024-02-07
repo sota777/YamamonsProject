@@ -1,4 +1,4 @@
-
+//COMMIT用
 
 package jp.KEN.yamamons.controller;
 
