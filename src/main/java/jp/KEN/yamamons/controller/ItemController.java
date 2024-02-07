@@ -82,6 +82,8 @@ public class ItemController {
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
 		model.addAttribute("itemsList", itemsList);
+
+
 		return "rental_form3";
 
 	}

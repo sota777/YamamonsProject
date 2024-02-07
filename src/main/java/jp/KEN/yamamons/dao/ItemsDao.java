@@ -156,4 +156,24 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	public void deleteItem2() {
+		String sql = "DELETE FROM t_item2";
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			jdbcTemplate.update(sql);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return;
+	}
+
 }
