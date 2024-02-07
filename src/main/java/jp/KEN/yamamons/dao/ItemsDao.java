@@ -133,7 +133,7 @@ public class ItemsDao {
 
 
 	public int insertItem2(Items items) {
-		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?);";
+		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?,?);";
 
 		Object[] parameters = { items.getItemNo(), items.getItemName(), items.getItemQuantity(), items.getGenreNo(), items.getDirector(),
 				items.getTypeNo(), items.getItemPicture() };
