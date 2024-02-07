@@ -52,12 +52,15 @@
 	<form:errors path="credit" element="span" />
 </div>
 
+
     <button type="submit">ragistration</button>
+
 
     <div class="form-row errors">
     	<c:out value="${message }"></c:out>
     </div>
     </form:form>
+
 
     <div>
 	<jsp:include page="footerkari.jsp"/>
