@@ -36,7 +36,7 @@
 
 	<div class="container">
 		<p >
-			<font face='Palatino Linotype' ><strong>～Ragistration～</strong></font>
+			<img src="/yamamons/resources/img/regist.png">
 		</p>
 
 		<form:form modelAttribute="membersModel">
