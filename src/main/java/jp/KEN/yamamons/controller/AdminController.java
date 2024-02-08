@@ -1,4 +1,5 @@
 package jp.KEN.yamamons.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.ManagerDao;
 import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.entity.Order;
+import jp.KEN.yamamons.model.AdminModel;
 
 
 @SessionAttributes("loginModel")
@@ -31,10 +33,20 @@ public class AdminController {
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsList();
 		model.addAttribute("itemsList", itemsList);
-		for(Items itemNo : itemsList) {
-			List<Order> orderList = ManagerDao.getOrderItemNo(itemNo);
-			System.out.println(orderList.size());
+
+		AdminModel aModel = new AdminModel();
+		List<String> orderStatusList = new ArrayList<String>();
+
+		for(int i = 0;i <= itemsList.size();i++) {
+			aModel.setItemNo(i);
+			//for(Items itemNo : itemsList) {
+				List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
+				System.out.println(orderList.size());
+				orderStatusList.add(String.valueOf(orderList.size()));
+			//}
 		}
+
+		model.addAttribute("orderList",orderStatusList);
 
 
 		return "stock6";

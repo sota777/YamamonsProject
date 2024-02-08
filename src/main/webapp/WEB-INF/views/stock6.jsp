@@ -26,7 +26,7 @@
 						width="96" height="128" alt="${itemsList.itemName }"></td>
 					<td><c:out value="${itemsList.itemName }" /></td>
 					<td><c:out value="${itemsList.itemQuantity }" /></td>
-					 <td><c:out value="${orderList.orderQuantity }" /></td>
+					 <td><c:out value="${orderStatusList }" /></td>
 
 			</form:form>
 		</c:forEach>

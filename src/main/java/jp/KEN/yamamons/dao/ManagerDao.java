@@ -107,10 +107,10 @@ public class ManagerDao {
 	}
 
 	//商品ごと貸出し中のレコードの抽出
-	public List<Order> getOrderItemNo(Items itemNo) {
+	public List<Order> getOrderItemNo(int i) {
 		String sql = "SELECT * FROM t_order WHERE itemNo=? AND rentalStatusNo=1;";
-		Object[] parameters = {itemNo};
-
+		Object[] parameters = {i};
+		System.out.println("Dao" + i);
 		List<Order> orderList = jdbcTemplate.query(sql,parameters,ordersMapper);
 		return orderList;
 	}
