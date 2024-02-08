@@ -42,7 +42,7 @@ public class LoginController {
 
 		//入力したMailアドレスがDBと一致しない場合
 		if (loginCusData == null) {
-			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
+			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
 			return "login2";
 		}
 
