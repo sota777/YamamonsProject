@@ -6,26 +6,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ログイン</title>
-<style>
-.error {
-	color: #ff0000;
-	}
-table {
-	border-collapse: separate;
-	border-spacing: 10px;
-}
-</style>
-</head>
-<body>
+<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
+<link href="/yamamons/resources/img/login.css" type="text/css" rel="stylesheet" />
 
-		<jsp:include page="headerkari.jsp"></jsp:include>
-		<a href="registration">登録画面へ</a>
-	<h1>ログイン画面</h1>
-	<hr />
-	<form:form modelAttribute="loginModel">
+</head>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+	<jsp:include page="headerkari.jsp"></jsp:include>
+
+		<a href="registration" >
+			<input type="submit" value="新規登録へ" class="btn btn--green btn--emboss btn--cubic"></a>
+<br>
+
+	<form:form modelAttribute="loginModel"><br>
 		<div class="error">${errorMessage }</div>
-		<table>
+
+		<div class="container">
+      <form action="rental_form3.jsp" method="get">
+    <p class="fsize">ログイン画面</p>
+    <form:input path="loginMail" placeholder="MailAddress" />
+    <form:password path="password" placeholder="Password" />
+    <a href="form" >
+    <button type="submit">Login</button></a>
+</form>
+    </div>
+		<!--  <table>
 			<tr>
 				<td>メールアドレス</td>
 				<td>
@@ -49,7 +55,7 @@ table {
 					<input type="submit" value="ログイン" />
 				</td>
 			</tr>
-		</table>
+		</table>-->
 	</form:form>
 	<hr />
 	<footer>

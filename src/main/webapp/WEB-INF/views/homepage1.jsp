@@ -11,30 +11,56 @@
 
 </head>
 
-<body>
-	<div class="sample" >MUSIC LIFE AGENCY</div>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+	<div class="sample" >MUSIC LIFE AGENCY</div><br>
 
 <header>
-<a href="login"  class="btn btn--green btn--emboss btn--cubic">ログイン</a>
-<a href="registration"  class="btn btn--green btn--emboss btn--cubic">新規登録</a>
-
-	<!--  ボタン処理した場合のJSP
-		 <form action="/login" method="post">
-			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic">
-		</form>
-		<form action="/registration2" method="get">
-			<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic">
-		</form>-->
-
-
+<a href="login"  >
+			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a><br>
+<a href="registration" >
+			<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic"></a><br>
+<br>
 
 	</header>
+  <section class="zoom-out">
+    <div class="zoom-out-img">
+  <a href="https://www.shinchan-movie.com/2024/">
+    <img src="resources/img/しんちゃん食.jpg" alt="写真" width="400" height="250"/><br>
+  </a>
+</div>
 
-		<h3>おすすめ商品</h3>
-		<h1>金曜日の5時</h1>
-		<img src="resources/img/しんちゃん.jpg" alt="写真" width="350" height="250"/> <img src="resources/img/ドラえもん.png" alt="写真" width="350" height="250"/> <img src="resources/img/忍たま乱太郎.jpg" alt="写真" width="350" height="250"/>
-
-
+   <div class="zoom-out-img">
+  <a href="https://doraeiga.com/2024/">
+    <img src="resources/img/ドラえもん2.jpg" alt="写真" width="500" height="250"/>
+  </a>
+</div>
+<br>
+   <div class="zoom-out-img">
+  <a href="https://minions.jp/">
+    <img src="resources/img/ミニオン.jpg" alt="写真" width="400" height="250"/>
+  </a>
+	</div>
+	 <div class="zoom-out-img">
+  <a href="https://minions.jp/">
+    <img src="resources/img/しんちゃん.jpg" alt="写真" width="400" height="250"/>
+  </a>
+	</div>
+	 <div class="zoom-out-img">
+  <a href="https://minions.jp/">
+    <img src="resources/img/ドラえもん.png" alt="写真" width="400" height="250"/>
+  </a>
+	</div>
+	 <div class="zoom-out-img">
+  <a href="https://minions.jp/">
+    <img src="resources/img/ミニオン.jpg" alt="写真" width="400" height="250"/>
+  </a>
+	</div>
+	 <div class="zoom-out-img">
+  <a href="https://minions.jp/">
+    <img src="resources/img/ミニオン.jpg" alt="写真" width="400" height="250"/>
+  </a>
+	</div>
+</section>
 </body>
 </html>
 

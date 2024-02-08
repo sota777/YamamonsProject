@@ -26,15 +26,6 @@ public class ItemController {
 		@Autowired
 		private ItemsDao itemsDao;
 
-		/* loginControllerでloginModelのセッションを登録するので
-		 * ここではセッション登録不要？
-		//「○○さんログイン中」的な感じでJSP表示するためセッション登録
-		@ModelAttribute("loginModel")
-		public LoginModel setupLoginModel() {
-			return new LoginModel();
-		}
-		*/
-
 		//画面遷移時もカート内容を引き継ぐためセッション登録
 		@ModelAttribute("cModel")
 		public CartModel setupCartModel() {
@@ -45,6 +36,7 @@ public class ItemController {
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
 		String message;
+		itemsDao.deleteItem2();
 
 		//cModelに商品番号が入っている場合は、ArrayListのcartに
 		//カートに入れた商品の番号を配列で入れていく。
@@ -81,9 +73,18 @@ public class ItemController {
 		}
 		model.addAttribute("message",message);
 
+
+		//カートに入れた商品をt_item2に追加する
+
+		Integer itemNo = new Integer(Integer.parseInt(cartInNo));
+		Items items = itemsDao.getItemsByNo(itemNo);
+		itemsDao.insertItem2(items);
+
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-		List<Items> itemsList = itemsDao.getItemsList();
+		List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
 		model.addAttribute("itemsList", itemsList);
+
+
 		return "rental_form3";
 
 	}

@@ -1,5 +1,6 @@
 package jp.KEN.yamamons.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	//商品番号から商品情報を取り出すメソッド
 	public Items getItemsByNo(Integer itemNo) {
 		String sql = "SELECT * FROM t_item WHERE itemNo=?";
 		//INパラメータに使用する値の配列を生成
@@ -74,19 +76,31 @@ public class ItemsDao {
 		}
 	}
 
-	//注文が完了した時に、注文された商品番号の在庫を1つ減らすためのメソッド
+	public List<Items> getItemsExceptCart(ArrayList<String> cart) {
+		String sql = "SELECT * FROM t_item WHERE itemNo NOT IN(select itemNo from t_item2)";
+		//Object[] parameters = {cart};
+		List<Items> items = jdbcTemplate.query(sql,itemsMapper);
+
+		return items;
+	}
+
+	//商品番号の在庫数を取り出すメソッド
+	public int toGetItemQuantity(String itemNo) {
+		String sql = "SELECT itemQuantity FROM t_item WHERE itemNo=?";
+		Object[] parameters = {itemNo};
+		try {
+			int quantity = jdbcTemplate.queryForInt(sql, parameters);
+			return quantity;
+		} catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+
+	//商品番号の在庫を1つ減らすためのメソッド
 	public int reduceItemQuantity(String itemNo) {
 		int numberRow = 0;
-
-		//まず、注文完了前の在庫数を確認する
-		Items preItem = getItemsByNo(Integer.parseInt(itemNo));
-
-		//在庫が0の場合は注文できない
-		if (Integer.parseInt(preItem.getItemQuantity())<1) {
-			return numberRow=2;
-		}
-
-		//在庫を1つ減らすSQL文
 		String sql = "UPDATE t_item SET itemQuantity = itemQuantity - 1 WHERE itemNo=?";
 		Object[] parameters = {itemNo};
 
@@ -108,4 +122,58 @@ public class ItemsDao {
 		}
 		return numberRow;
 	}
+
+
+
+
+
+
+
+
+
+
+	public int insertItem2(Items items) {
+		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?,?);";
+
+		Object[] parameters = { items.getItemNo(), items.getItemName(), items.getItemQuantity(), items.getGenreNo(), items.getDirector(),
+				items.getTypeNo(), items.getItemPicture() };
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		int numberRow = 0;
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
+
+	public void deleteItem2() {
+		String sql = "DELETE FROM t_item2";
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			jdbcTemplate.update(sql);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return;
+	}
+
 }
