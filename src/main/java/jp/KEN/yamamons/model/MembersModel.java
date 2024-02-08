@@ -2,6 +2,7 @@ package jp.KEN.yamamons.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
@@ -23,6 +24,7 @@ public class MembersModel implements Serializable {
 	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="※Not Phonenumber",groups=Group1.class)
 	private String phoneNumber;
 
+	@NotNull(message="※Not Empty Credit")
 	private String credit;
 
 	private String planNo;
