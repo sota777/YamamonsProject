@@ -69,8 +69,6 @@
 				<label><form:radiobutton path="credit"  value="3" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/master.png" ></label>
 			</div>
 
-
-
     <button type="submit">ragistration</button>
 
 
