@@ -31,7 +31,7 @@
 
    <div class="zoom-out-img">
   <a href="https://doraeiga.com/2024/">
-    <img src="resources/img/ドラえもん2.jpg" alt="写真" width="500" height="250"/>
+    <img src="resources/img/ドラえもん2.jpg" alt="写真" width="500" height="250" />
   </a>
 </div>
 <br>
