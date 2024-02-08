@@ -18,7 +18,7 @@ body{
   color: #ff69b4;
   text-shadow:
     0.04em 0.02em 0 #B0BEC5,
-    0.08em 0.05em 0 rgba(0, 0, 0, 0.6);
+    0.08em 0.05em 0 rgba(0, 0, 0, 0.6) ;
   text-align: center;
 }
 .btn--green.btn--emboss {
@@ -28,14 +28,14 @@ body{
   text-decoration: none;
   text-align: right; /* テキストを右に寄せる */
     }
-}
+
 
 .btn--green.btn--cubic:hover {
   margin-top: 3px;
   border-bottom: 2px solid #00662d;
   text-align: right; /* テキストを右に寄せる */
     }
-}
+
 
 .fa-position-right {
     position: absolute;
