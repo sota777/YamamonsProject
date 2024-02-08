@@ -31,8 +31,12 @@ public class RentalHistoryController {
 
 		@RequestMapping(value="/history", method= RequestMethod.GET)
 			public String toRentalHistory(@ModelAttribute LoginModel loginModel, Model model) {
-				List<Items> rentalHistory = rentalHistoryDao.getHistoryByCustomerName(loginModel.getCustomerName());
-				model.addAttribute("rentalHistory", rentalHistory);
+				List<Items> rentalHistories = rentalHistoryDao.getHistoryByLoginMail(loginModel.getLoginMail());
+				System.out.println("なぜ？"+rentalHistories);
+				System.out.println(loginModel.getLoginMail());
+				model.addAttribute("rentalHistories", rentalHistories);
+
+
 				return "rental_history6";
 
 		}

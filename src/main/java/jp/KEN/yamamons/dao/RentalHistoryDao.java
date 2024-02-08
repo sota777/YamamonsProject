@@ -35,9 +35,9 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 
 
 	//履歴を表示するためのメソッド
-	public List<Items> getHistoryByCustomerName(String customerName) {
-		String sql = "SELECT itemName, itemPicture FROM t_item WHERE itemNo = (SELECT rentalHistory FROM t_customer WHERE customerName = ?) ;";
-		Object[] parameters = {customerName} ;
+	public List<Items> getHistoryByLoginMail(String loginMail) {
+		String sql = "SELECT itemName, itemPicture FROM t_item WHERE itemNo = (SELECT rentalHistory FROM t_customer WHERE mail = ?) ;";
+		Object[] parameters = {loginMail} ;
 		//TransactionStatus transactionStatus = null;
 		//DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
 		//transactionStatus = transactionManager.getTransaction(transactionDefinition);
