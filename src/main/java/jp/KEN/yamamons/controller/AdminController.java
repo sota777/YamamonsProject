@@ -41,7 +41,7 @@ public class AdminController {
 			aModel.setItemNo(i);
 			//for(Items itemNo : itemsList) {
 				List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
-				System.out.println(orderList.size());
+				//System.out.println(orderList.size());
 				orderStatusList.add(String.valueOf(orderList.size()));
 			//}
 		}

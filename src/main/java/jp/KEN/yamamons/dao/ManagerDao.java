@@ -110,7 +110,7 @@ public class ManagerDao {
 	public List<Order> getOrderItemNo(int i) {
 		String sql = "SELECT * FROM t_order WHERE itemNo=? AND rentalStatusNo=1;";
 		Object[] parameters = {i};
-		System.out.println("Dao" + i);
+		//System.out.println("Dao" + i);
 		List<Order> orderList = jdbcTemplate.query(sql,parameters,ordersMapper);
 		return orderList;
 	}
