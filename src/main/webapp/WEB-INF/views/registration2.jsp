@@ -66,7 +66,7 @@
 				<label><form:radiobutton path="credit"  value="0" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/R.png" ></label>
 				<label><form:radiobutton path="credit"  value="1" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/jcb.png" ></label>
 				<label><form:radiobutton path="credit"  value="2" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/visa.png" ></label>
-				<form:radiobutton path="credit"  value="3" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/master.png" >
+				<label><form:radiobutton path="credit"  value="3" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/master.png" ></label>
 			</div>
 
 
