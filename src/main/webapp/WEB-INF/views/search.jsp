@@ -12,9 +12,12 @@
 
 <style>
     table {
-        width:100%; /* テーブルを利用可能な全幅に設定 */
+    	width:60%;
+		margin-left: 20%; 
+		margin-right: 50%;
         border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
         text-align: center;
+        
     }
 
     th, td {
@@ -33,9 +36,6 @@
 		<main>
 			<form:form modelAttribute="items">
 				<div class="form-row">
-					作品名を入力してください
-				</div>
-				<div class="form-row">
 					<label for="itemName"></label>
 					<form:input path="itemName" placeholder="作品名"/>
 					<input type="submit" value="検索する"  class="btn btn--green btn--emboss btn--cubic">
@@ -46,24 +46,25 @@
 			</form:form>
 			<!-- memberListにデータ（検索結果があった場合）表示される -->
 			<c:if test="${ !empty itemsList}">
-				<table>
+				<table border="1">
 					
 					
 			<tr>
-				<th>商品画像</th>
-				<th>商品名</th>
-				<th>監督名</th>
-				<th></th>
+				<th><img src="/yamamons/resources/img/movie.png"></th>
+				<th><img src="/yamamons/resources/img/name.png"></th>
+				<th><img src="/yamamons/resources/img/director.png"></th>
+				
 				</tr>
 		<c:forEach var="itemsList" items="${itemsList }">
 				<tr>
 					<td>
 						<img src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 						width="150" height="250" alt="${itemsList.itemName }"/></td>
-					<td width="100" height="250"><strong><c:out value="${itemsList.itemName }" /></strong></td>
+					<td ><strong><c:out value="${itemsList.itemName }" /></strong></td>
 					<td><c:out value="${itemsList.director }" /></td>
 				</tr>
 					</c:forEach>
+					
 				</table>
 			</c:if>
 		</main>
