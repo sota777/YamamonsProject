@@ -78,13 +78,8 @@
     </form:form>
 
 
-    <div>
+	</div>
 	<jsp:include page="footerkari.jsp"/>
-	</div>
-
-
-	</div>
-
 </body>
 </html>
 

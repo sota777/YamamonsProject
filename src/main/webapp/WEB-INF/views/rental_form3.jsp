@@ -52,7 +52,7 @@
 					<td>
 						<img src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 						width="150" height="250" alt="${itemsList.itemName }"/></td>
-					<td width="20" height="250"><strong><c:out value="${itemsList.itemName }" /></strong></td>
+					<td  height="250"><strong><c:out value="${itemsList.itemName }" /></strong></td>
 					<td><c:out value="${itemsList.director }" /></td>
 					<td><input type="submit" value="カートに入れる" >
 					<input type="hidden" name="itemNo" value="${itemsList.itemNo }"></td>

@@ -16,9 +16,11 @@
 
 <header>
 <a href="login"  >
-			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a><br>
+			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a>
 <a href="registration" >
-			<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic"></a><br>
+<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic"></a>
+<a href="search" >
+			<input type="submit" value="映画検索" class="btn btn--green btn--emboss btn--cubic"></a>
 <br>
 
 	</header>
