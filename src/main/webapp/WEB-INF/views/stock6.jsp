@@ -18,15 +18,15 @@
 			<th>在庫数</th>
 			<th>貸出状況</th>
 		</tr>
-		<c:forEach var="itemsList,orderList" items="${itemsList, orderList }">
-			<form:form modelAttribute="cModel,orderModel">
+		<c:forEach begin="1" end="${itemsList.size()}" step="1" var="i">
+			<form:form modelAttribute="cModel,orderModel,orderList">
 				<tr>
 					<td><img
-						src="resources/img/<c:out value="${itemsList.itemPicture }"  />"
-						width="96" height="128" alt="${itemsList.itemName }"></td>
-					<td><c:out value="${itemsList.itemName }" /></td>
-					<td><c:out value="${itemsList.itemQuantity }" /></td>
-					 <td><c:out value="${orderList.orderQuantity }" /></td>
+						src="resources/img/<c:out value="${itemsList[i].itemPicture }"  />"
+						width="96" height="128" alt="${itemsList[i].itemName }"></td>
+					<td><c:out value="${itemsList[i].itemName }" /></td>
+					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
+					 <td><c:out value="${orderList[i]}" /></td>
 
 			</form:form>
 		</c:forEach>
