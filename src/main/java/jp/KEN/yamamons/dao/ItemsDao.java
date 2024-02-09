@@ -176,4 +176,15 @@ public class ItemsDao {
 		return;
 	}
 
+	public List<Items> getListByName(String itemName){
+		String sql = "SELECT * FROM t_item WHERE itemName LIKE ?";
+		//ワイルドカード文字をただの文字として認識するため
+		itemName = itemName.replace("%", "\\%").replace("_", "\\_");
+		itemName = "%" + itemName + "%";
+		Object[] parameters = {itemName};
+		//queryメソッドは検索結果の件数が決まっていないとき
+		//第二引数にINパラメータにセットする配列、あとは上と一緒
+		List<Items> itemsList = jdbcTemplate.query(sql, parameters, itemsMapper);
+		return itemsList;
+	}
 }

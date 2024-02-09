@@ -5,6 +5,7 @@
 
 
 	<div class="copyright">
-		<small>&copy; 株式会社 Music Life Agency</small>
+		<br>
+		&copy; 株式会社 Music Life Agency
 	</div>
 </footer>
