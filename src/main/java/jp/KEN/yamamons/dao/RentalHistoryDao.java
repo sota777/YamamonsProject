@@ -4,6 +4,7 @@
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -46,6 +47,22 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 		return items;
 
 	}
+
+
+	//顧客IDと商品Idからその人のレンタル商品履歴を表示するメソッド
+	public Order getHistoryByCustomerId(String cusId,String itemNo){
+		String sql = "SELECT * FROM t_order WHERE customerId=? AND itemNo=?";
+		Object[] parameters = {cusId,itemNo };
+		try {
+			Order orderHisNo = jdbcTemplate.queryForObject(sql, parameters, membersMapper);
+			return orderHisNo;
+		}catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 
 }
 
