@@ -15,6 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.model.CartModel;
+import jp.KEN.yamamons.model.LoginModel;
 
 
 
@@ -90,9 +91,11 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
-	public String toClearCart(Model model, SessionStatus status) {
+	public String toClearCart(@ModelAttribute("cModel")CartModel cModel, Model model, LoginModel loginModel, SessionStatus status ){
 		//カートのsession情報を破棄する
 		status.setComplete();
+		 // loginModelは保持したままで良いので、再度modelに登録
+	    model.addAttribute("loginModel",loginModel);
 		return "redirect:/form";
 	}
 

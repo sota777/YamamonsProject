@@ -4,7 +4,6 @@ package jp.KEN.yamamons.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -29,6 +28,7 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 	private PlatformTransactionManager transactionManager;
 
 	private RowMapper<Members> membersMapper = new BeanPropertyRowMapper<Members>(Members.class);
+	private RowMapper<Order> ordersMapper = new BeanPropertyRowMapper<Order>(Order.class);
 	private RowMapper<Items> itemsMapper = new BeanPropertyRowMapper<Items>(Items.class);
 
 
@@ -122,7 +122,7 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 		String sql = "SELECT * FROM t_order WHERE customerId=? AND itemNo=?";
 		Object[] parameters = {cusId,itemNo };
 		try {
-			Order orderHisNo = jdbcTemplate.queryForObject(sql, parameters, membersMapper);
+			Order orderHisNo = jdbcTemplate.queryForObject(sql, parameters, ordersMapper);
 			return orderHisNo;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
@@ -131,7 +131,5 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 	}
 
 
-
-}
 
 }

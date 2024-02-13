@@ -32,12 +32,6 @@ public class ConfirmController {
 	@Autowired
 	private MembersDao membersDao;
 
-	@Autowired
-	private RentalHistoryDao rentalHistoryDao;
-
-	@Autowired
-	private MembersDao membersDao;
-
 	@ModelAttribute("loginModel")
 	public LoginModel setupLoginForm() {
 		return new LoginModel();
@@ -62,7 +56,7 @@ public class ConfirmController {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
 
-			
+
 			System.out.println("loginData;"+loginModel.getLoginMail());
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
