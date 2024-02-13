@@ -14,9 +14,7 @@
 	.errors{
 		color:red;
 	}
-	radiobutton[value="0"]{
-		image:url(R1.png);
-	}
+
 </style>
 <meta charset="UTF-8">
 <title>新規会員登録</title>
@@ -38,7 +36,7 @@
 
 	<div class="container">
 		<p >
-			<font face='Palatino Linotype' ><strong>～Ragistration～</strong></font>
+			<img src="/yamamons/resources/img/regist.png">
 		</p>
 
 		<form:form modelAttribute="membersModel">
@@ -64,14 +62,12 @@
 				<form:input path="phoneNumber" size="15" placeholder="000-0000-0000" />
 			</div>
 			<div>
-				<form:errors path="credit" element="span" />
-				<form:radiobutton path="credit" label="楽天" value="0" />
-				<form:radiobutton path="credit" label="JCB" value="1" />
-				<form:radiobutton path="credit" label="VISA" value="2" />
-				<form:radiobutton path="credit" label="MASTER" value="3" />
+				<form:errors path="credit" element="span" cssClass="errors" /><br>
+				<label><form:radiobutton path="credit"  value="0" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/R.png" ></label>
+				<label><form:radiobutton path="credit"  value="1" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/jcb.png" ></label>
+				<label><form:radiobutton path="credit"  value="2" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/visa.png" ></label>
+				<label><form:radiobutton path="credit"  value="3" style="transform:scale(1.5);"/> <img src="/yamamons/resources/img/master.png" ></label>
 			</div>
-
-
 
     <button type="submit">ragistration</button>
 
@@ -82,13 +78,8 @@
     </form:form>
 
 
-    <div>
+	</div>
 	<jsp:include page="footerkari.jsp"/>
-	</div>
-
-
-	</div>
-
 </body>
 </html>
 

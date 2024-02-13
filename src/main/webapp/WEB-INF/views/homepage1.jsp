@@ -16,9 +16,11 @@
 
 <header>
 <a href="login"  >
-			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a><br>
+			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a>
 <a href="registration" >
-			<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic"></a><br>
+<input type="submit" value="新規登録" class="btn btn--green btn--emboss btn--cubic"></a>
+<a href="search" >
+			<input type="submit" value="映画検索" class="btn btn--green btn--emboss btn--cubic"></a>
 <br>
 
 	</header>
@@ -31,7 +33,7 @@
 
    <div class="zoom-out-img">
   <a href="https://doraeiga.com/2024/">
-    <img src="resources/img/ドラえもん2.jpg" alt="写真" width="500" height="250"/>
+    <img src="resources/img/ドラえもん2.jpg" alt="写真" width="500" height="250" />
   </a>
 </div>
 <br>
