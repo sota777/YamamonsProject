@@ -57,5 +57,26 @@ public class AdminController {
 		return "stock6";
 	}
 
+	@RequestMapping(value = "/newItem", method = RequestMethod.GET)
+	public String toNerItem(Model model) {
+		return "newItem7";
+	}
+
+	@RequestMapping(value = "/newItem", method = RequestMethod.POST)
+	public String NerItem(Model model) {
+		return "newItem7";
+	}
+
+	@RequestMapping(value = "/rentalStatus", method = RequestMethod.GET)
+	public String toRentalStatus(Model model) {
+		return "RentalStatus8";
+	}
+
+	@RequestMapping(value = "/rentalStatus", method = RequestMethod.POST)
+	public String RentalStatus(Model model) {
+		return "RentalStatus8";
+	}
+
+
 
 }
