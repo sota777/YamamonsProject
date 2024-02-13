@@ -1,6 +1,7 @@
 package jp.KEN.yamamons.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jp.KEN.yamamons.dao.ItemsDao;
+import jp.KEN.yamamons.dao.MembersDao;
+import jp.KEN.yamamons.dao.RentalHistoryDao;
 import jp.KEN.yamamons.entity.Items;
+import jp.KEN.yamamons.entity.Members;
+import jp.KEN.yamamons.entity.Order;
 import jp.KEN.yamamons.model.CartModel;
 import jp.KEN.yamamons.model.DeleteModel;
+import jp.KEN.yamamons.model.LoginModel;
 
 @Controller
 @SessionAttributes({ "loginModel", "cModel" })
@@ -21,6 +27,17 @@ public class ConfirmController {
 
 	@Autowired
 	private ItemsDao itemsDao; //Item系のDaoクラス名で設定
+
+	@Autowired
+	private RentalHistoryDao rentalHistoryDao;
+
+	@Autowired
+	private MembersDao membersDao;
+
+	@ModelAttribute("loginModel")
+	public LoginModel setupLoginForm() {
+		return new LoginModel();
+	}
 
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, Model model) {
@@ -38,16 +55,6 @@ public class ConfirmController {
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
-
-			/*
-			 * ArrayList<String> rentalHistory = itemsDao.getHistoryByCustomerId(loginModel.getCustomerName());
-
-			if(cart.contains(rentalHistory)) {
-
-			}
-			*/
-
-
 
 		} else {
 			message = "カートは空です";
@@ -75,7 +82,8 @@ public class ConfirmController {
 	}
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
-	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
+	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
+			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = "null";
 		ArrayList<Items> cartItems = null;
@@ -104,6 +112,25 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 		}
+
+
+
+		List<Order> orderList = new ArrayList<Order>();
+		Order order = new Order();
+
+		for(String roop : cart) {
+			order.setItemNo(roop);
+			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
+			String customerId = members.getCustomerId();
+			System.out.println(customerId);
+			order.setCustomerId(customerId);
+			order.setOrderQuantity("1");
+			order.setRentalStatusNo("1");
+			orderList.add(order);
+		}
+
+		rentalHistoryDao.addOrder(orderList);
+
 
 		itemsDao.deleteItem2();
 
