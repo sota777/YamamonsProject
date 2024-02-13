@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -63,7 +66,30 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/newItem", method = RequestMethod.POST)
-	public String NerItem(Model model) {
+	public String NerItem(Model model,@Validated @ModelAttribute AdminModel adminmodel,
+			BindingResult result) {
+
+		if(result.hasErrors()) {
+			System.out.println("エラーだよ");
+			model.addAttribute("headline", "会員登録");
+			return "newItem7";
+		}
+
+
+		Items items = new Items();
+		items.setItemName(adminmodel.getItemName());
+		items.setItemQuantity(adminmodel.getItemQuanity());
+		items.setGenreNo(adminmodel.getGenreNo());
+		items.setDirector(adminmodel.getDirector());
+		items.setTypeNo(adminmodel.getTypeNo());
+
+		int numberOfRow = ManagerDao.updataItemQuaDao(items);
+		if (numberOfRow == 0){
+			model.addAttribute("message", "登録に失敗しました。");
+			model.addAttribute("headline", "商品登録");
+			return "newItem7";
+		}
+
 		return "newItem7";
 	}
 
