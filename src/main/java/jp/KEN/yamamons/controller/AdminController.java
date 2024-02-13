@@ -100,6 +100,8 @@ public class AdminController {
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.GET)
 	public String toRentalStatus(Model model) {
 
+		System.out.println("GET");
+
 		//情報表示
 		//itemリストから基本情報を取得
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute

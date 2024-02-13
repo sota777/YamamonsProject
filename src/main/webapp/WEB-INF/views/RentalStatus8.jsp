@@ -34,14 +34,16 @@
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
 					 <td><c:out value="${orderList[i]}" /></td>
 					 <td>
-							<input type="checkbox" name="itemNo" value="${itemsList[i].itemNo }" >
+							<input type="checkbox" name="itemNunber" value="${itemsList[i].itemNo }" >
 					</td>
 			</form:form>
 		</c:forEach>
+				<tr>
+					<td colspan="5" >
+						<button type="submit">ragistration</button>
+					</td>
+				</tr>
 	</table>
-
-	<input type="submit" value="送信">
-
 	<a href="home">ホームへ </a>
 </body>
 </html>
