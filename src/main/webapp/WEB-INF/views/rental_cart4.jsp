@@ -66,6 +66,14 @@ td {
 				<c:out value="${message }" />
 			</p>
 
+			<c:if test="${!empty alertMessage}">
+			<p>
+			<font color="red">
+				<c:out value="${alertMessage }" />
+			</font>
+			</p>
+			</c:if>
+
 
 			<c:if test="${!empty errormessage}">
 			<p>
