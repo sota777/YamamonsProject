@@ -1,6 +1,7 @@
 package jp.KEN.yamamons.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,17 @@ public class ConfirmController {
 	@Autowired
 	private MembersDao membersDao;
 
+	@Autowired
+	private RentalHistoryDao rentalHistoryDao;
+
+	@Autowired
+	private MembersDao membersDao;
+
+	@ModelAttribute("loginModel")
+	public LoginModel setupLoginForm() {
+		return new LoginModel();
+	}
+
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, LoginModel loginModel, Model model) {
 		ArrayList<String> cart = null;
@@ -49,14 +61,8 @@ public class ConfirmController {
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
-			System.out.println(message);
-			/*
-			 * ArrayList<String> rentalHistory = itemsDao.getHistoryByCustomerId(loginModel.getCustomerName());
 
-			if(cart.contains(rentalHistory)) {
-
-			}
-			*/
+			
 			System.out.println("loginData;"+loginModel.getLoginMail());
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
@@ -87,7 +93,6 @@ public class ConfirmController {
 				dupMessage += "は以前レンタルした事があります。";
 			}
 
-
 		} else {
 			message = "カートは空です";
 		}
@@ -115,7 +120,8 @@ public class ConfirmController {
 	}
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
-	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel, Model model) {
+	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
+			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = "null";
 		ArrayList<Items> cartItems = null;
@@ -144,6 +150,25 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 		}
+
+
+
+		List<Order> orderList = new ArrayList<Order>();
+		Order order = new Order();
+
+		for(String roop : cart) {
+			order.setItemNo(roop);
+			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
+			String customerId = members.getCustomerId();
+			System.out.println(customerId);
+			order.setCustomerId(customerId);
+			order.setOrderQuantity("1");
+			order.setRentalStatusNo("1");
+			orderList.add(order);
+		}
+
+		rentalHistoryDao.addOrder(orderList);
+
 
 		itemsDao.deleteItem2();
 

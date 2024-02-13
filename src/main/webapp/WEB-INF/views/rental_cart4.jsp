@@ -91,6 +91,8 @@ td {
     			<br>
     			<br>
 
+		<a href="history"  >
+			<input type="submit" value="レンタル履歴" class="btn btn--green btn--emboss btn--cubic"></a><br>
 
 		</main>
 	</div>

@@ -2,8 +2,6 @@
 
 package jp.KEN.yamamons.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jp.KEN.yamamons.dao.RentalHistoryDao;
-import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.model.LoginModel;
 
 
@@ -31,8 +28,10 @@ public class RentalHistoryController {
 
 		@RequestMapping(value="/history", method= RequestMethod.GET)
 			public String toRentalHistory(@ModelAttribute LoginModel loginModel, Model model) {
-				List<Items> rentalHistory = rentalHistoryDao.getHistoryByCustomerName(loginModel.getCustomerName());
-				model.addAttribute("rentalHistory", rentalHistory);
+//				List<Items> rentalHistories = rentalHistoryDao.getHistoryByLoginMail(loginModel.getLoginMail());
+//				model.addAttribute("rentalHistories", rentalHistories);
+
+
 				return "rental_history6";
 
 		}
