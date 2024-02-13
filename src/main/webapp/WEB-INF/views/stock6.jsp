@@ -33,7 +33,8 @@
 						width="96" height="128" alt="${itemsList[i].itemName }"></td>
 					<td><c:out value="${itemsList[i].itemName }" /></td>
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
-					 <td><c:out value="${orderList[i]}" /></td>
+					<td><c:out value="${orderList[i]}" /></td>
+
 
 			</form:form>
 		</c:forEach>
