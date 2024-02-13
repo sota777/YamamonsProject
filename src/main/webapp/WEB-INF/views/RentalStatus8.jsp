@@ -9,6 +9,13 @@
 <title>返却処理</title>
 </head>
 <body>
+	<h1>返却処理</h1>
+		<a href="admin"  >
+			<input type="submit" value="在庫登録">
+		</a>
+		<a href="rentalStatus"  >
+			<input type="submit" value="在庫管理へ">
+		</a>
 	<table border="1">
 		<tr>
 			<th>商品画像</th>
@@ -27,14 +34,14 @@
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
 					 <td><c:out value="${orderList[i]}" /></td>
 					 <td>
-						<a href="rentalStatus">
-							<input type="submit" value="返却" name="${itemList[i].itemNo }">
-						</a>
+							<input type="checkbox" name="itemNo" value="${itemsList[i].itemNo }" >
 					</td>
-
 			</form:form>
 		</c:forEach>
 	</table>
+
+	<input type="submit" value="送信">
+
 	<a href="home">ホームへ </a>
 </body>
 </html>

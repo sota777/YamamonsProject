@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class AdminModel implements Serializable{
 
 	private int itemNo;
+	private String itemNunber;
 	private String StatusNo;
 	@NotEmpty(message="商品名は必須です")
 	private String itemName;
@@ -21,6 +22,12 @@ public class AdminModel implements Serializable{
 	}
 	public void setItemNo(int itemNo) {
 		this.itemNo = itemNo;
+	}
+	public String getItemNunber() {
+		return itemNunber;
+	}
+	public void setItemNunber(String itemNunber) {
+		this.itemNunber = itemNunber;
 	}
 	public String getStatusNo() {
 		return StatusNo;

@@ -83,7 +83,7 @@ public class ManagerDao {
 	//返却処理対応したときの在庫状況の変更処理
 	public int updataItemQuaDao(Items items) {
 		String sql = "UPDATE t_item SET itemQuantity= itemQuantity + 1 WHERE itemNo=?;";
-		Object[] parameters = { items.getItemQuantity(),items.getItemNo()};
+		Object[] parameters = {items.getItemNo()};
 
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();

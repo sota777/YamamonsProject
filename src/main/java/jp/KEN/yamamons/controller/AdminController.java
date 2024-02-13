@@ -127,6 +127,7 @@ public class AdminController {
 	public String RentalStatus(Model model,@Validated @ModelAttribute AdminModel adminmodel,
 			BindingResult result) {
 
+		System.out.println("POST");
 		//情報表示
 		//itemリストから基本情報を取得
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
@@ -154,7 +155,8 @@ public class AdminController {
 
 		//返却された時の在庫の追加
 		Items items = new Items();
-		items.setItemQuantity(adminmodel.getItemQuanity());
+		items.setItemNo(adminmodel.getItemNunber());
+
 
 		int numberOfRow = ManagerDao.updataItemQuaDao(items);
 		if (numberOfRow == 0){
