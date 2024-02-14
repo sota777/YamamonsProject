@@ -7,7 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class AdminModel implements Serializable{
 
 	private int itemNo;
-	private int StatusNo;
+	private String itemNunber;
+	private String StatusNo;
 	@NotEmpty(message="商品名は必須です")
 	private String itemName;
 	private String itemQuanity;
@@ -15,16 +16,23 @@ public class AdminModel implements Serializable{
 	@NotEmpty(message="監督名は必須です")
 	private String director;
 	private String typeNo;
+	private String itemPicture;
 	public int getItemNo() {
 		return itemNo;
 	}
 	public void setItemNo(int itemNo) {
 		this.itemNo = itemNo;
 	}
-	public int getStatusNo() {
+	public String getItemNunber() {
+		return itemNunber;
+	}
+	public void setItemNunber(String itemNunber) {
+		this.itemNunber = itemNunber;
+	}
+	public String getStatusNo() {
 		return StatusNo;
 	}
-	public void setStatusNo(int statusNo) {
+	public void setStatusNo(String statusNo) {
 		StatusNo = statusNo;
 	}
 	public String getItemName() {
@@ -57,5 +65,13 @@ public class AdminModel implements Serializable{
 	public void setTypeNo(String typeNo) {
 		this.typeNo = typeNo;
 	}
+	public String getItemPicture() {
+		return itemPicture;
+	}
+	public void setItemPicture(String itemPicture) {
+		this.itemPicture = itemPicture;
+	}
+
+
 
 }

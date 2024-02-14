@@ -9,6 +9,43 @@
 <title>返却処理</title>
 </head>
 <body>
-
+	<h1>返却処理</h1>
+		<a href="admin"  >
+			<input type="submit" value="在庫登録">
+		</a>
+		<a href="rentalStatus"  >
+			<input type="submit" value="在庫管理へ">
+		</a>
+	<table border="1">
+		<tr>
+			<th>商品画像</th>
+			<th>商品名</th>
+			<th>在庫数</th>
+			<th>貸出数</th>
+			<th>返却</th>
+		</tr>
+		<c:forEach begin="1" end="${itemsList.size()}" step="1" var="i">
+			<form:form modelAttribute="adminModel">
+				<tr>
+					<td><img
+						src="resources/img/<c:out value="${itemsList[i].itemPicture }"  />"
+						width="96" height="128" alt="${itemsList[i].itemName }"></td>
+					<td><c:out value="${itemsList[i].itemName }" /></td>
+					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
+					 <td><c:out value="${orderList[i]}" /></td>
+					 <td>
+							<form:radiobutton path="itemNunber" value="uoo"/>
+					</td>
+			</form:form>
+		</c:forEach>
+				<tr>
+					<td colspan="5" >
+						<form method="post">
+						<button type="submit">送信</button>
+						</form>
+					</td>
+				</tr>
+	</table>
+	<a href="home">ホームへ </a>
 </body>
 </html>
