@@ -7,8 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>レンタル完了</title>
+<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
+
 </head>
-<body>
-	<h1>レンタル完了s</h1>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+		<jsp:include page="headerkari.jsp"/>
+	<br>
+	<br>
+	<div class="sample" >レンタルありがとうございました(๑❛ꆚ❛๑)</div><br>
+	<footer>
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+			<jsp:include page="footerkari.jsp"></jsp:include>
+
+	</footer>
 </body>
 </html>
