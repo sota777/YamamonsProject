@@ -96,12 +96,9 @@ public class ItemController {
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
 	public String toClearCart(@ModelAttribute("cModel")CartModel cModel, Model model, LoginModel loginModel, SessionStatus status,HttpSession httpSession ){
 		//カートのsession情報を破棄する
-		httpSession.removeAttribute("cModel");
-		System.out.println(loginModel.getCustomerName());
-		System.out.println(cModel.getItemNo());
-		//status.setComplete();
+		status.setComplete();
 		 // loginModelは保持したままで良いので、再度modelに登録
-	    //model.addAttribute("loginModel",loginModel);
+	    model.addAttribute("loginModel",loginModel);
 		return "redirect:/form";
 	}
 
