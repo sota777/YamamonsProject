@@ -30,11 +30,13 @@ public class LoginController {
 		return new LoginModel();
 	}
 
+	//homepage1.jspで「ログイン」を押したとき
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String toLogin() {
 		return "login2";
 	}
 
+	//login2.jspで「login」を押したとき
 	@RequestMapping(method = RequestMethod.POST)
 	public String toRegist(@Validated @ModelAttribute LoginModel loginModel, BindingResult result, Model model,HttpSession session) {
 		String cusMail = loginModel.getLoginMail();

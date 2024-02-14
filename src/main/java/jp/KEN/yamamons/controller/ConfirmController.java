@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.MembersDao;
@@ -26,7 +27,7 @@ import jp.KEN.yamamons.model.LoginModel;
 public class ConfirmController {
 
 	@Autowired
-	private ItemsDao itemsDao; //Item系のDaoクラス名で設定
+	private ItemsDao itemsDao;
 	@Autowired
 	private RentalHistoryDao rentalHistoryDao;
 	@Autowired
@@ -37,6 +38,8 @@ public class ConfirmController {
 		return new LoginModel();
 	}
 
+
+	//rental_form3.jspで「カートを確認」を押したとき
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, LoginModel loginModel, Model model) {
 		ArrayList<String> cart = null;
@@ -115,7 +118,7 @@ public class ConfirmController {
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel,Model model,SessionStatus status) {
 		ArrayList<String> cart = null;
 		String errormessage = "null";
 		ArrayList<Items> cartItems = null;
@@ -165,6 +168,7 @@ public class ConfirmController {
 
 
 		itemsDao.deleteItem2();
+		status.setComplete();
 
 		return "comRental5";
 	}

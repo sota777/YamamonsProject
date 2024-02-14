@@ -19,6 +19,7 @@ public class RegistrationController {
 	@Autowired
 	private MembersDao membersDao;
 
+	//homepage1.jspで「新規登録」を押したとき
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String toRegistration(Model model) {
 		model.addAttribute("membersModel", new MembersModel());
@@ -26,6 +27,7 @@ public class RegistrationController {
 		return "registration2";
 	}
 
+	//registration2.jspで「registration」を押したとき
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registMembers(Model model,@Validated(GroupOrder.class)@ModelAttribute MembersModel membersModel,
 			BindingResult result) {
@@ -57,6 +59,7 @@ public class RegistrationController {
 
 	}
 
+	//registration2.jspで「registration」を押してかつ、問題がなかったとき
 	@RequestMapping(value = "/complete", method = RequestMethod.GET)
 	public String toComplete(Model model) {
 		model.addAttribute("headline", "会員登録完了");
