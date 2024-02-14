@@ -25,7 +25,7 @@
 			<th>返却</th>
 		</tr>
 		<c:forEach begin="1" end="${itemsList.size()}" step="1" var="i">
-			<form:form modelAttribute="cModel,orderModel,orderList">
+			<form:form modelAttribute="cModel,orderModel,orderList,adminmodel">
 				<tr>
 					<td><img
 						src="resources/img/<c:out value="${itemsList[i].itemPicture }"  />"
@@ -34,13 +34,15 @@
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
 					 <td><c:out value="${orderList[i]}" /></td>
 					 <td>
-							<input type="checkbox" name="itemNunber" value="${itemsList[i].itemNo }" >
+							<input type="checkbox" name="itemNo" value="${itemsList[i].itemNo }" >
 					</td>
 			</form:form>
 		</c:forEach>
 				<tr>
 					<td colspan="5" >
-						<button type="submit">ragistration</button>
+						<form method="post">
+						<button type="submit">送信</button>
+						</form>
 					</td>
 				</tr>
 	</table>

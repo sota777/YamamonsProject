@@ -129,7 +129,7 @@ public class AdminController {
 	public String RentalStatus(Model model,@Validated @ModelAttribute AdminModel adminmodel,
 			BindingResult result) {
 
-		System.out.println("POST");
+		System.out.println("POST1");
 		//情報表示
 		//itemリストから基本情報を取得
 		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
@@ -150,14 +150,12 @@ public class AdminController {
 
 		model.addAttribute("orderList",orderStatusList);
 
-		if (result.hasErrors()) {
-			model.addAttribute("headline", "返却情報変更");
-			return "RentalStatus8";
-		}
+		System.out.println("POST2");
 
 		//返却された時の在庫の追加
 		Items items = new Items();
 		items.setItemNo(adminmodel.getItemNunber());
+		System.out.println(adminmodel.getItemNo());
 
 
 		int numberOfRow = ManagerDao.updataItemQuaDao(items);
@@ -166,6 +164,8 @@ public class AdminController {
 			model.addAttribute("headline", "返却情報更新");
 			return "RentalStatus8";
 				}
+
+		System.out.println("POST3");
 
 		//返却された時の返却ステータスの更新
 		Order order = new Order();
@@ -177,6 +177,8 @@ public class AdminController {
 			model.addAttribute("headline", "返却情報更新");
 			return "RentalStatus8";
 		}
+
+		System.out.println("POST4");
 
 		return "RentalStatus8";
 	}
