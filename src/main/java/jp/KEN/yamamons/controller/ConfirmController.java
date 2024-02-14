@@ -99,7 +99,7 @@ public class ConfirmController {
 	}
 
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
-	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel, Model model) {
+	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel,LoginModel loginModel, Model model) {
 		String paramIndex = null;
 		ArrayList<String> cart = null;
 		if (cModel != null) {
