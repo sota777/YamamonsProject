@@ -100,6 +100,7 @@ public class AdminController {
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.GET)
 	public String toRentalStatus(Model model) {
 
+		AdminModel adminModel = new AdminModel();
 		System.out.println("GET");
 
 		//情報表示
@@ -121,6 +122,7 @@ public class AdminController {
 		}
 
 		model.addAttribute("orderList",orderStatusList);
+		model.addAttribute("adminModel",adminModel);
 
 		return "RentalStatus8";
 	}
@@ -155,15 +157,15 @@ public class AdminController {
 		//返却された時の在庫の追加
 		Items items = new Items();
 		items.setItemNo(adminmodel.getItemNunber());
-		System.out.println(adminmodel.getItemNo());
+		System.out.println(adminmodel.getItemNunber());
 
 
-		int numberOfRow = ManagerDao.updataItemQuaDao(items);
-		if (numberOfRow == 0){
-			model.addAttribute("message", "在庫更新に失敗しました。");
-			model.addAttribute("headline", "返却情報更新");
-			return "RentalStatus8";
-				}
+//		int numberOfRow = ManagerDao.updataItemQuaDao(items);
+//		if (numberOfRow == 0){
+//			model.addAttribute("message", "在庫更新に失敗しました。");
+//			model.addAttribute("headline", "返却情報更新");
+//			return "RentalStatus8";
+//				}
 
 		System.out.println("POST3");
 
@@ -171,12 +173,12 @@ public class AdminController {
 		Order order = new Order();
 		order.setRentalStatusNo(adminmodel.getStatusNo());
 
-		int numberOfRow2 = ManagerDao.updataStatusDao(order);
-		if (numberOfRow2 == 0){
-			model.addAttribute("message", "返却情報の更新に失敗しました。");
-			model.addAttribute("headline", "返却情報更新");
-			return "RentalStatus8";
-		}
+//		int numberOfRow2 = ManagerDao.updataStatusDao(order);
+//		if (numberOfRow2 == 0){
+//			model.addAttribute("message", "返却情報の更新に失敗しました。");
+//			model.addAttribute("headline", "返却情報更新");
+//			return "RentalStatus8";
+//		}
 
 		System.out.println("POST4");
 
