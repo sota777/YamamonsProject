@@ -62,6 +62,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/newItem", method = RequestMethod.GET)
 	public String toNerItem(Model model) {
+		model.addAttribute("AdminModel", new AdminModel());
 		return "newItem7";
 	}
 
