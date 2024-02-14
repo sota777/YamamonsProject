@@ -63,6 +63,7 @@ public class AdminController {
 	//商品追加
 	@RequestMapping(value = "/newItem", method = RequestMethod.GET)
 	public String toNerItem(Model model) {
+		model.addAttribute("AdminModel", new AdminModel());
 		return "newItem7";
 	}
 
