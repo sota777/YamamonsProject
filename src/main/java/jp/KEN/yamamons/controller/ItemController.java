@@ -3,8 +3,6 @@ package jp.KEN.yamamons.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -94,7 +92,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
-	public String toClearCart(@ModelAttribute("cModel")CartModel cModel, Model model, LoginModel loginModel, SessionStatus status,HttpSession httpSession ){
+	public String toClearCart(@ModelAttribute("cModel")CartModel cModel, Model model, LoginModel loginModel, SessionStatus status ){
 		//カートのsession情報を破棄する
 		status.setComplete();
 		 // loginModelは保持したままで良いので、再度modelに登録
