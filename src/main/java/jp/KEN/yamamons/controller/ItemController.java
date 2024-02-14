@@ -33,6 +33,7 @@ public class ItemController {
 			return new CartModel();
 		}
 
+
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
@@ -64,7 +65,13 @@ public class ItemController {
 	public String toAddCart(@ModelAttribute("cModel") CartModel cModel, Model model) {
 		String message;
 		String cartInNo = cModel.getItemNo();
-		cModel.addCart(cartInNo);
+		if (cModel.getCart()==null) {
+			ArrayList<String> str1 = new ArrayList<String>();
+			str1.add(cartInNo);
+			cModel.setCart(str1);
+		}else {
+			cModel.addCart(cartInNo);
+		}
 
 		//カートに入っている商品の数を表示するmessage作成
 		if (cModel.getCart().isEmpty()) {
@@ -91,12 +98,17 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
-	public String toClearCart(@ModelAttribute("cModel")CartModel cModel, Model model, LoginModel loginModel, SessionStatus status ){
-		//カートのsession情報を破棄する
-		status.setComplete();
-		 // loginModelは保持したままで良いので、再度modelに登録
-	    model.addAttribute("loginModel",loginModel);
-		return "redirect:/form";
+	public String toClearCart(@ModelAttribute("cModel") CartModel cModel, Model model, SessionStatus status, LoginModel loginModel) {
+
+		ArrayList<String> cart = null;
+	    cModel.setCart(cart);
+
+		//status.setComplete();
+
+
+
+
+	    return "redirect:/form";
 	}
 
 }
