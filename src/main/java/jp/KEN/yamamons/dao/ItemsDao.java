@@ -156,6 +156,19 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	public List<Items> stockCheck(){
+		String sql = "SELECT * FROM t_item2 WHERE itemQuantity < 1";
+		try {
+			List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
+			return itemsList;
+		}catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+
 	public void deleteItem2() {
 		String sql = "DELETE FROM t_item2";
 		TransactionStatus transactionStatus = null;

@@ -117,8 +117,9 @@ public class ConfirmController {
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
 			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
 		ArrayList<String> cart = null;
-		String errormessage = "null";
-		ArrayList<Items> cartItems = null;
+		String errormessage = null;
+		List<Items> stockShortage = null;
+		List<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
@@ -127,6 +128,35 @@ public class ConfirmController {
 			//nullの時は確認画面に戻る
 			return "redirect:/confirm";
 		}
+
+		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
+		stockShortage = itemsDao.stockCheck();
+		if (stockShortage != null) {
+			for (int i = 0; i<stockShortage.size();i++) {
+				String str = stockShortage.get(i).getItemName();
+				if (errormessage == null){
+					errormessage = str;
+				}else {
+					errormessage += ","+ str;
+				}
+			}
+			errormessage += "の在庫が足りない為貸出が出来ません";
+			model.addAttribute("errormessage", errormessage);
+			cartItems = toGetCartItems(cart);
+			model.addAttribute("cartItems", cartItems);
+			return "rental_cart4";
+		}
+
+		//在庫がある場合、商品の在庫数を1つ減らす
+		for (int i = 0; i < cart.size(); i++) {
+			int order = itemsDao.reduceItemQuantity(cart.get(i));
+			if (order == 0) {
+				errormessage = "貸出に失敗しました";
+				return "rental_cart4";
+			}
+		}
+
+		/*
 		for (int i = 0; i < cart.size(); i++) {
 			//注文前の在庫数を確認する
 			int quantity = itemsDao.toGetItemQuantity(cart.get(i));
@@ -137,6 +167,8 @@ public class ConfirmController {
 				model.addAttribute("cartItems", cartItems);
 				return "rental_cart4";
 			}
+
+			//商品の在庫数を1つ減らす
 			int order = itemsDao.reduceItemQuantity(cart.get(i));
 
 			if (order == 0) {
@@ -144,6 +176,7 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 		}
+		*/
 
 
 
