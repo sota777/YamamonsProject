@@ -63,12 +63,12 @@ public class AdminController {
 	//商品追加
 	@RequestMapping(value = "/newItem", method = RequestMethod.GET)
 	public String toNerItem(Model model) {
-		model.addAttribute("AdminModel", new AdminModel());
+		model.addAttribute("adminModel", new AdminModel());
 		return "newItem7";
 	}
 
 	@RequestMapping(value = "/newItem", method = RequestMethod.POST)
-	public String NerItem(Model model,@Validated @ModelAttribute AdminModel adminmodel,
+	public String NerItem(Model model,@Validated @ModelAttribute AdminModel adminModel,
 			BindingResult result) {
 
 		if(result.hasErrors()) {
@@ -79,12 +79,12 @@ public class AdminController {
 
 
 		Items items = new Items();
-		items.setItemName(adminmodel.getItemName());
-		items.setItemQuantity(adminmodel.getItemQuanity());
-		items.setGenreNo(adminmodel.getGenreNo());
-		items.setDirector(adminmodel.getDirector());
-		items.setTypeNo(adminmodel.getTypeNo());
-		items.setItemPicture(adminmodel.getItemPicture());
+		items.setItemName(adminModel.getItemName());
+		items.setItemQuantity(adminModel.getItemQuanity());
+		items.setGenreNo(adminModel.getGenreNo());
+		items.setDirector(adminModel.getDirector());
+		items.setTypeNo(adminModel.getTypeNo());
+		items.setItemPicture(adminModel.getItemPicture());
 
 		int numberOfRow = ManagerDao.insertItem(items);
 		if (numberOfRow == 0){
