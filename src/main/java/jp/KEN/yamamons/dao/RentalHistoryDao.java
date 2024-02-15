@@ -117,13 +117,26 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 
 
 
-	//顧客IDと商品Idからその人のレンタル商品履歴を表示するメソッド
+	//顧客IDと商品Idからその人のレンタル商品履歴を表示するメソッド(レンタル重複確認用)
 	public Order getHistoryByCustomerId(String cusId,String itemNo){
 		String sql = "SELECT * FROM t_order WHERE customerId=? AND itemNo=? LIMIT 1";
 		Object[] parameters = {cusId,itemNo };
 		try {
 			Order orderHisNo = jdbcTemplate.queryForObject(sql, parameters, ordersMapper);
 			return orderHisNo;
+		}catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	//顧客IDからその人のレンタル履歴を表示するメソッド
+	public List<Order> getOrderHisByCusId(String cusId){
+		String sql = "SELECT * FROM t_order WHERE customerId=?";
+		Object[] parameters = {cusId };
+		try {
+			List<Order> orderHis = jdbcTemplate.query(sql, parameters, ordersMapper);
+			return orderHis;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return null;
