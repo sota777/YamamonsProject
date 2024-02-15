@@ -86,9 +86,14 @@ strong {
 				<p>
 					<c:out value="${errormessage }" />
 				</p>
-					<a href="home">
-					<input type="submit" value="TOP(ログインはこちら)"
-						class="btn btn--green btn--emboss btn--cubic"></a>
+			</c:if>
+
+			<c:if test="${!empty loginError}">
+				<p>
+					<c:out value="${loginError }" />
+				</p>
+				<a href="home"> <input type="submit" value="TOP(ログインはこちら)"
+					class="btn btn--green btn--emboss btn--cubic"></a>
 			</c:if>
 
 			<br>
