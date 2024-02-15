@@ -27,11 +27,18 @@ th, td {
 strong {
 	background-color: white;
 }
+.right {
+    text-align: right;
+}
 </style>
 
 </head>
 <body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
 	class="body">
+		<jsp:include page="headerkari.jsp" ></jsp:include>
+		<br>
+		<br>
+
 	<div class="sample">RENTAL SITE</div>
 	<br>
 	<h2>いらっしゃいませ、${CusData.customerName }さん</h2>

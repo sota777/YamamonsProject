@@ -50,7 +50,7 @@ strong {
 						<form:select path="genreNo" items="${genresList}" size="1"
 							multiple="false" itemLabel="genre" itemValue="genreNo" >
 						<form:option value="-1" label="選択してください"/>
-						</form:select>
+						</form:select>&nbsp;
 						<input type="submit" value="検索する" class="btn btn--green btn--emboss btn--cubic">
 					</form:form>
 				</div>
@@ -71,8 +71,8 @@ strong {
 					</tr>
 					<c:forEach var="itemsList" items="${itemsList }">
 						<tr>
-							<td><img
-								src="resources/img/<c:out value="${itemsList.itemPicture }" />"
+							<td>
+								<img src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 								width="150" height="250" alt="${itemsList.itemName }" /></td>
 							<td><strong><c:out value="${itemsList.itemName }" /></strong></td>
 							<td><c:out value="${itemsList.director }" /></td>

@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ホーム</title>
-<link href="/yamamons/resources/img/style.css" type="text/css"
-	rel="stylesheet" />
+<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
 
 </head>
 
@@ -19,12 +18,17 @@
 
 	<header>
 		<a href="login"> <input type="submit" value="ログイン"
-			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp; <a
-			href="registration"> <input type="submit" value="新規登録"
-			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp; <a
-			href="search"> <input type="submit" value="映画検索"
-			class="btn btn--green btn--emboss btn--cubic"></a> <br> <br>
-		<br> <br>
+			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp;
+
+		<a href="registration"> <input type="submit" value="新規登録"
+			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp;
+
+		<a href="search"> <input type="submit" value="映画検索"
+			class="btn btn--green btn--emboss btn--cubic"></a>
+		<br>
+		<br>
+		<br>
+		<br>
 	</header>
 	<section class="zoom-out">
 		<div class="zoom-out-img">
