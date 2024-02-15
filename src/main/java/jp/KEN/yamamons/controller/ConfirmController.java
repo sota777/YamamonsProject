@@ -56,8 +56,6 @@ public class ConfirmController {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
 
-
-			System.out.println("loginData;"+loginModel.getLoginMail());
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
@@ -67,8 +65,6 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 
-			System.out.println("loginCusDataのDAO実行");
-			System.out.println("loginCusData:"+loginCusData.getCustomerId());
 			Items item = null;
 			for (int i = 0; i < cart.size(); i++) {
 				Order orderHistory = rentalHistoryDao.getHistoryByCustomerId(loginCusData.getCustomerId(),cart.get(i));
@@ -102,6 +98,7 @@ public class ConfirmController {
 	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel,LoginModel loginModel, Model model) {
 		String paramIndex = null;
 		ArrayList<String> cart = null;
+		//選択した商品をカートから削除する
 		if (cModel != null) {
 			cart = cModel.getCart();
 
@@ -155,30 +152,6 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 		}
-
-		/*
-		for (int i = 0; i < cart.size(); i++) {
-			//注文前の在庫数を確認する
-			int quantity = itemsDao.toGetItemQuantity(cart.get(i));
-			if(quantity < 1) {
-				errormessage = "在庫が足りない為貸出が出来ません";
-				model.addAttribute("errormessage", errormessage);
-				cartItems = toGetCartItems(cart);
-				model.addAttribute("cartItems", cartItems);
-				return "rental_cart4";
-			}
-
-			//商品の在庫数を1つ減らす
-			int order = itemsDao.reduceItemQuantity(cart.get(i));
-
-			if (order == 0) {
-				errormessage = "貸出に失敗しました";
-				return "rental_cart4";
-			}
-		}
-		*/
-
-
 
 		List<Order> orderList = new ArrayList<Order>();
 		Order order = new Order();

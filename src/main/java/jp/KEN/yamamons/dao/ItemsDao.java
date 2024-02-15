@@ -156,6 +156,7 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	//カートに入れた商品で、在庫が1未満のものがあるかを確認する
 	public List<Items> stockCheck(){
 		String sql = "SELECT * FROM t_item2 WHERE itemQuantity < 1";
 		try {
