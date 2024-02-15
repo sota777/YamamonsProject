@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.MembersDao;
@@ -41,7 +42,16 @@ public class ConfirmController {
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, LoginModel loginModel, Model model) {
 		ArrayList<String> cart = null;
 		ArrayList<Items> cartItems = new ArrayList<Items>();
+		String message = null;
+		String errormessage = null;
+		String dupMessage = null;
 
+		//ログインされていない場合はエラーメッセージを出す
+		if (loginModel.getLoginMail() == null) {
+			errormessage = "顧客情報取得エラーです。再度ログインしてください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
+		}
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
@@ -50,8 +60,6 @@ public class ConfirmController {
 
 		//cartの要素(ItemNo)を一つずつ取り出し、商品情報をItemsDaoからとってくる
 		//取ってきた商品情報をcartItemsに入れていく
-		String message = null;
-		String dupMessage = null;
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
@@ -60,8 +68,8 @@ public class ConfirmController {
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
 			if (loginCusData == null) {
-				message = "顧客情報取得エラーです。再度ログインしてください。";
-				model.addAttribute("message", message);
+				errormessage = "顧客情報取得エラーです。再度ログインしてください。";
+				model.addAttribute("errormessage", errormessage);
 				return "rental_cart4";
 			}
 
@@ -112,7 +120,7 @@ public class ConfirmController {
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel,SessionStatus status,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = null;
 		List<Items> stockShortage = null;
@@ -128,7 +136,7 @@ public class ConfirmController {
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
-		if (stockShortage != null) {
+		if (!stockShortage.isEmpty()) {
 			for (int i = 0; i<stockShortage.size();i++) {
 				String str = stockShortage.get(i).getItemName();
 				if (errormessage == null){
@@ -171,6 +179,7 @@ public class ConfirmController {
 
 
 		itemsDao.deleteItem2();
+		status.setComplete();
 
 		return "comRental5";
 	}
