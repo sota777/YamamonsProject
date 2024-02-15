@@ -37,7 +37,6 @@ strong {
 	class="body">
 		<jsp:include page="headerkari.jsp" ></jsp:include>
 		<br>
-		<br>
 
 	<div class="sample">RENTAL SITE</div>
 	<br>

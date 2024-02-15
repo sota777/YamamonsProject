@@ -7,35 +7,58 @@
 <head>
 <meta charset="UTF-8">
 <title>カート内容確認</title>
-<link href="/yamamons/resources/img/style.css" type="text/css" rel="stylesheet" />
-<link href="/yamamons/resources/img/rental.css" type="text/css" rel="stylesheet" />
+<link href="/yamamons/resources/img/style.css" type="text/css"
+	rel="stylesheet" />
+<link href="/yamamons/resources/img/rental.css" type="text/css"
+	rel="stylesheet" />
 
 <style>
 td {
 	text-align: center;
 }
-    table {
-        width: 100%; /* テーブルを利用可能な全幅に設定 */
-        border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
-    }
 
-    th, td {
-        padding: 10px; /* オプション: セルに余白を追加してスペーシングを改善 */
-        text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
-    }
-    strong {
-    	background-color: white;
+table {
+	width: 100%; /* テーブルを利用可能な全幅に設定 */
+	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+}
+
+th, td {
+	padding: 10px; /* オプション: セルに余白を追加してスペーシングを改善 */
+	text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
+}
+
+strong {
+	background-color: white;
+}
+.text-right {
+      text-align: right;
+      margin-right: 50px; /* 調整したい余白の幅を指定 */
+
     }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
-	<div class="sample" >CART</div><br>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+	class="body">
+	<jsp:include page="headerkari.jsp"></jsp:include>
+	<a href="form"> <input type="submit" value="レンタルサイト"
+		class="btn btn--green btn--emboss btn--cubic"></a>
+	<br>
+	<br>
+	  <div class="text-right">
+	<a href="history"> <input type="submit" value="レンタル履歴"
+		class="btn btn--green btn--emboss btn--cubic"></a>
 		<form action="clear" method="get">
-					<input type="submit" name="clear" value="カートを空にする" class="btn btn--green btn--emboss btn--cubic">
-		</form>
-		<a href="form" >
-			<input type="submit" value="レンタルサイト" class="btn btn--green btn--emboss btn--cubic"></a><br>
-<br>
+		<input type="submit" name="clear" value="カートを空にする"
+			class="btn btn--green btn--emboss btn--cubic">
+	</form>
+
+	</div>
+	<br>
+
+	<br>
+	<div class="sample">CART</div>
+	<br>
+
 	<div id="wrapper">
 		<main>
 
@@ -51,12 +74,12 @@ td {
 					step="1" varStatus="status">
 					<form:form modelAttribute="dModel">
 						<tr>
-							<td>
-							<img src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
+							<td><img
+								src="resources/img/<c:out value="${cartItems.itemPicture }"  />"
 								width="96" height="128" alt="${cartItems.itemName }"></td>
 							<th><strong><c:out value="${cartItems.itemName }" /></strong></th>
-							<td><input type="submit" value="削除">
-								<input type="hidden" name="index" value="${status.count }"></td>
+							<td><input type="submit" value="削除"> <input
+								type="hidden" name="index" value="${status.count }"></td>
 						</tr>
 					</form:form>
 				</c:forEach>
@@ -67,32 +90,25 @@ td {
 			</p>
 
 			<c:if test="${!empty alertMessage}">
-			<p>
-			<font color="red">
-				<c:out value="${alertMessage }" />
-			</font>
-			</p>
+				<p>
+					<font color="red"> <c:out value="${alertMessage }" />
+					</font>
+				</p>
 			</c:if>
 
 
 			<c:if test="${!empty errormessage}">
-			<p>
-				<c:out value="${errormessage }" />
-			</p>
 				<p>
-							</p>
+					<c:out value="${errormessage }" />
+				</p>
+				<p></p>
 			</c:if>
-<br>
-				 <form action="orderComplete" method="get">
-        			<input type="submit" class="btn btn--green btn--emboss btn--cubic"
-        			value="RENTAL"  style="font-size: 24px;">
-				</form>
-    			<br>
-    			<br>
-    			<br>
-
-		<a href="history"  >
-			<input type="submit" value="レンタル履歴" class="btn btn--green btn--emboss btn--cubic"></a><br>
+			<br>
+			<form action="orderComplete" method="get">
+				<input type="submit" class="btn btn--green btn--emboss btn--cubic"
+					value="RENTAL" style="font-size: 24px;">
+			</form>
+			<br> <br> <br>
 
 		</main>
 	</div>
@@ -105,7 +121,7 @@ td {
 	<br>
 	<footer>
 
-			<jsp:include page="footerkari.jsp"></jsp:include>
+		<jsp:include page="footerkari.jsp"></jsp:include>
 
 	</footer>
 </body>

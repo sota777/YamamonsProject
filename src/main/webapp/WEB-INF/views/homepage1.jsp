@@ -29,6 +29,7 @@
 		<br>
 		<br>
 		<br>
+		<br>
 	</header>
 	<section class="zoom-out">
 		<div class="zoom-out-img">
@@ -69,6 +70,15 @@
 			</a>
 		</div>
 	</section>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+			<jsp:include page="footerkari.jsp"></jsp:include>
+
 </body>
 </html>
 
