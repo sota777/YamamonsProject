@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Items;
@@ -98,7 +97,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
-	public String toClearCart(@ModelAttribute("cModel") CartModel cModel, Model model, SessionStatus status, LoginModel loginModel) {
+	public String toClearCart(@ModelAttribute("cModel") CartModel cModel, Model model, LoginModel loginModel) {
 
 		ArrayList<String> cart = null;
 	    cModel.setCart(cart);

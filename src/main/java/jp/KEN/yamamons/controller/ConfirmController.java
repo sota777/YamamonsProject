@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.MembersDao;
@@ -112,7 +113,7 @@ public class ConfirmController {
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel,Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel,SessionStatus status,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = null;
 		List<Items> stockShortage = null;
@@ -128,7 +129,7 @@ public class ConfirmController {
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
-		if (stockShortage != null) {
+		if (!stockShortage.isEmpty()) {
 			for (int i = 0; i<stockShortage.size();i++) {
 				String str = stockShortage.get(i).getItemName();
 				if (errormessage == null){
@@ -171,6 +172,7 @@ public class ConfirmController {
 
 
 		itemsDao.deleteItem2();
+		status.setComplete();
 
 		return "comRental5";
 	}
