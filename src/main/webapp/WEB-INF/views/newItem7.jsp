@@ -14,7 +14,7 @@
 		<main>
 
 
-			<form:form modelAttribute="AdminModel">
+			<form:form modelAttribute="adminModel">
 				<div class="form-row">
 					<label for="itemName" class="disp-block">作品名</label>
 					<form:input path="itemName" />
