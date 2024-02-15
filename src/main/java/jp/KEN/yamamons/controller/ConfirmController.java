@@ -43,13 +43,13 @@ public class ConfirmController {
 		ArrayList<String> cart = null;
 		ArrayList<Items> cartItems = new ArrayList<Items>();
 		String message = null;
-		String errormessage = null;
+		String loginError = null;
 		String dupMessage = null;
 
 		//ログインされていない場合はエラーメッセージを出す
 		if (loginModel.getLoginMail() == null) {
-			errormessage = "顧客情報取得エラーです。再度ログインしてください。";
-			model.addAttribute("errormessage", errormessage);
+			loginError = "顧客情報取得エラーです。再度ログインしてください。";
+			model.addAttribute("loginError", loginError);
 			return "rental_cart4";
 		}
 
@@ -68,22 +68,22 @@ public class ConfirmController {
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
 			if (loginCusData == null) {
-				errormessage = "顧客情報取得エラーです。再度ログインしてください。";
-				model.addAttribute("errormessage", errormessage);
+				loginError = "顧客情報取得エラーです。再度ログインしてください。";
+				model.addAttribute("loginError", loginError);
 				return "rental_cart4";
 			}
 
 			Items item = null;
 			for (int i = 0; i < cart.size(); i++) {
-				Order orderHistory = rentalHistoryDao.getHistoryByCustomerId(loginCusData.getCustomerId(),cart.get(i));
+				Order orderHistory = rentalHistoryDao.getHistoryByCustomerId(loginCusData.getCustomerId(), cart.get(i));
 				System.out.println("顧客IDから商品履歴のDAO実行");
 				//カートに入れた商品がレンタル履歴と一致する場合、メッセージで前借りたよーと教える
 				if (orderHistory != null) {
 					item = itemsDao.getItemsByNo(Integer.parseInt(orderHistory.getItemNo()));
 					if (dupMessage == null) {
 						dupMessage = item.getItemName();
-					}else {
-						dupMessage += ","+ item.getItemName();
+					} else {
+						dupMessage += "," + item.getItemName();
 					}
 				}
 			}
@@ -96,14 +96,15 @@ public class ConfirmController {
 		}
 		DeleteModel dModel = new DeleteModel();
 		model.addAttribute("message", message);
-		model.addAttribute("alertMessage",dupMessage);
+		model.addAttribute("alertMessage", dupMessage);
 		model.addAttribute("cartItems", cartItems);
 		model.addAttribute(dModel);
 		return "rental_cart4";
 	}
 
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
-	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel,LoginModel loginModel, Model model) {
+	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel, LoginModel loginModel,
+			Model model) {
 		String paramIndex = null;
 		ArrayList<String> cart = null;
 		//選択した商品をカートから削除する
@@ -120,7 +121,7 @@ public class ConfirmController {
 
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel,SessionStatus status,Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel, SessionStatus status, Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = null;
 		List<Items> stockShortage = null;
@@ -137,12 +138,12 @@ public class ConfirmController {
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
 		if (!stockShortage.isEmpty()) {
-			for (int i = 0; i<stockShortage.size();i++) {
+			for (int i = 0; i < stockShortage.size(); i++) {
 				String str = stockShortage.get(i).getItemName();
-				if (errormessage == null){
+				if (errormessage == null) {
 					errormessage = str;
-				}else {
-					errormessage += ","+ str;
+				} else {
+					errormessage += "," + str;
 				}
 			}
 			errormessage += "の在庫が足りない為貸出が出来ません";
@@ -164,7 +165,7 @@ public class ConfirmController {
 		List<Order> orderList = new ArrayList<Order>();
 		Order order = new Order();
 
-		for(String roop : cart) {
+		for (String roop : cart) {
 			order.setItemNo(roop);
 			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
 			String customerId = members.getCustomerId();
@@ -177,7 +178,6 @@ public class ConfirmController {
 
 		rentalHistoryDao.addOrder(orderList);
 
-
 		itemsDao.deleteItem2();
 		status.setComplete();
 
@@ -189,9 +189,8 @@ public class ConfirmController {
 		return "redirect;/orderComplete";
 	}
 
-
 	//カートに入っている商品情報一覧を取り出すためのメソッド
-	public ArrayList<Items> toGetCartItems (ArrayList<String> cart){
+	public ArrayList<Items> toGetCartItems(ArrayList<String> cart) {
 		ArrayList<Items> cartItems = new ArrayList<Items>();
 		for (int i = 0; i < cart.size(); i++) {
 			//ID検索
