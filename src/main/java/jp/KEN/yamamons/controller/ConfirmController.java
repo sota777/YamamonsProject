@@ -42,7 +42,16 @@ public class ConfirmController {
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, LoginModel loginModel, Model model) {
 		ArrayList<String> cart = null;
 		ArrayList<Items> cartItems = new ArrayList<Items>();
+		String message = null;
+		String errormessage = null;
+		String dupMessage = null;
 
+		//ログインされていない場合はエラーメッセージを出す
+		if (loginModel.getLoginMail() == null) {
+			errormessage = "顧客情報取得エラーです。再度ログインしてください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
+		}
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
@@ -51,8 +60,6 @@ public class ConfirmController {
 
 		//cartの要素(ItemNo)を一つずつ取り出し、商品情報をItemsDaoからとってくる
 		//取ってきた商品情報をcartItemsに入れていく
-		String message = null;
-		String dupMessage = null;
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
@@ -61,8 +68,8 @@ public class ConfirmController {
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
 			if (loginCusData == null) {
-				message = "顧客情報取得エラーです。再度ログインしてください。";
-				model.addAttribute("message", message);
+				errormessage = "顧客情報取得エラーです。再度ログインしてください。";
+				model.addAttribute("errormessage", errormessage);
 				return "rental_cart4";
 			}
 
