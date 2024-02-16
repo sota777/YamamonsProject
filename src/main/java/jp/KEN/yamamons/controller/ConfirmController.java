@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.MembersDao;
@@ -73,12 +74,9 @@ public class ConfirmController {
 				return "rental_cart4";
 			}
 
-			System.out.println("loginCusDataのDAO実行");
-			System.out.println("loginCusData:" + loginCusData.getCustomerId());
 			Items item = null;
 			for (int i = 0; i < cart.size(); i++) {
 				Order orderHistory = rentalHistoryDao.getHistoryByCustomerId(loginCusData.getCustomerId(), cart.get(i));
-				System.out.println("顧客IDから商品履歴のDAO実行");
 				//カートに入れた商品がレンタル履歴と一致する場合、メッセージで前借りたよーと教える
 				if (orderHistory != null) {
 					item = itemsDao.getItemsByNo(Integer.parseInt(orderHistory.getItemNo()));
@@ -123,7 +121,7 @@ public class ConfirmController {
 	//rental_cart4.jspで「RENTAL」を押したとき
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel, Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel, SessionStatus status,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = null;
 		List<Items> stockShortage = null;
@@ -182,6 +180,8 @@ public class ConfirmController {
 		rentalHistoryDao.addOrder(orderList);
 
 		itemsDao.deleteItem2();
+
+		status.setComplete();
 
 		return "comRental5";
 	}
