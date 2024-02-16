@@ -128,11 +128,15 @@ public class ConfirmController {
 		List<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
-		if (cModel != null) {
+		if (!cModel.getCart().isEmpty()) {
+			System.out.println("cModelがemptyじゃない");
 			cart = cModel.getCart();
 		} else {
 			//nullの時は確認画面に戻る
-			return "redirect:/confirm";
+			System.out.println("cModelがempty");
+			errormessage ="商品を選択してください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
 		}
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
