@@ -147,6 +147,18 @@ public class ItemsDao {
 		return numberRow;
 	}
 
+	//t_item2の一覧を返すためのメソッド
+	public List<Items> getItems2List() {
+		String sql = "SELECT * FROM t_item2";
+		try {
+			List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
+			return itemsList;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public List<Items> stockCheck() {
 		String sql = "SELECT * FROM t_item2 WHERE itemQuantity <= 0";
 		try {
@@ -190,28 +202,25 @@ public class ItemsDao {
 		return itemsList;
 	}
 
-
-
-
 	public void deleteFromItem2(int itemNo) {
-	String sql = "DELETE FROM t_item2 WHERE itemNo =?";
-	Object[] parameters = { itemNo };
-	TransactionStatus transactionStatus = null;
-	DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
-	try {
-		transactionStatus = transactionManager.getTransaction(transactionDefinition);
-		jdbcTemplate.update(sql,parameters);
-		transactionManager.commit(transactionStatus);
-	} catch (DataAccessException e) {
-		e.printStackTrace();
-		transactionManager.rollback(transactionStatus);
-	} catch (TransactionException e) {
-		e.printStackTrace();
-		if (transactionStatus != null) {
+		String sql = "DELETE FROM t_item2 WHERE itemNo =?";
+		Object[] parameters = { itemNo };
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
 			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
 		}
-	}
-	return;
+		return;
 	}
 
 }
