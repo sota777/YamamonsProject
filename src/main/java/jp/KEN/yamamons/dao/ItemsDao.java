@@ -64,13 +64,13 @@ public class ItemsDao {
 	public Items getItemsByNo(Integer itemNo) {
 		String sql = "SELECT * FROM t_item WHERE itemNo=?";
 		//INパラメータに使用する値の配列を生成
-		Object[] parameters = {itemNo};
+		Object[] parameters = { itemNo };
 		try {
 			//第二引数はIDでとってきた配列を入れる
 			//queryForObjectは検索結果が一件の時
 			Items items = jdbcTemplate.queryForObject(sql, parameters, itemsMapper);
 			return items;
-		} catch(EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -79,7 +79,7 @@ public class ItemsDao {
 	public List<Items> getItemsExceptCart(ArrayList<String> cart) {
 		String sql = "SELECT * FROM t_item WHERE itemNo NOT IN(select itemNo from t_item2)";
 		//Object[] parameters = {cart};
-		List<Items> items = jdbcTemplate.query(sql,itemsMapper);
+		List<Items> items = jdbcTemplate.query(sql, itemsMapper);
 
 		return items;
 	}
@@ -87,22 +87,21 @@ public class ItemsDao {
 	//商品番号の在庫数を取り出すメソッド
 	public int toGetItemQuantity(String itemNo) {
 		String sql = "SELECT itemQuantity FROM t_item WHERE itemNo=?";
-		Object[] parameters = {itemNo};
+		Object[] parameters = { itemNo };
 		try {
 			int quantity = jdbcTemplate.queryForInt(sql, parameters);
 			return quantity;
-		} catch(EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return 0;
 		}
 	}
 
-
 	//商品番号の在庫を1つ減らすためのメソッド
 	public int reduceItemQuantity(String itemNo) {
 		int numberRow = 0;
 		String sql = "UPDATE t_item SET itemQuantity = itemQuantity - 1 WHERE itemNo=?";
-		Object[] parameters = {itemNo};
+		Object[] parameters = { itemNo };
 
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
@@ -123,19 +122,11 @@ public class ItemsDao {
 		return numberRow;
 	}
 
-
-
-
-
-
-
-
-
-
 	public int insertItem2(Items items) {
 		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?,?);";
 
-		Object[] parameters = { items.getItemNo(), items.getItemName(), items.getItemQuantity(), items.getGenreNo(), items.getDirector(),
+		Object[] parameters = { items.getItemNo(), items.getItemName(), items.getItemQuantity(), items.getGenreNo(),
+				items.getDirector(),
 				items.getTypeNo(), items.getItemPicture() };
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
@@ -156,19 +147,16 @@ public class ItemsDao {
 		return numberRow;
 	}
 
-	//カートに入れた商品で、在庫が1未満のものがあるかを確認する
-	public List<Items> stockCheck(){
+	public List<Items> stockCheck() {
 		String sql = "SELECT * FROM t_item2 WHERE itemQuantity < 1";
 		try {
 			List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
 			return itemsList;
-		}catch(EmptyResultDataAccessException e) {
+		} catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-
-
 
 	public void deleteItem2() {
 		String sql = "DELETE FROM t_item2";
@@ -190,15 +178,40 @@ public class ItemsDao {
 		return;
 	}
 
-	public List<Items> getListByName(String itemName){
+	public List<Items> getListByName(String itemName) {
 		String sql = "SELECT * FROM t_item WHERE itemName LIKE ?";
 		//ワイルドカード文字をただの文字として認識するため
 		itemName = itemName.replace("%", "\\%").replace("_", "\\_");
 		itemName = "%" + itemName + "%";
-		Object[] parameters = {itemName};
+		Object[] parameters = { itemName };
 		//queryメソッドは検索結果の件数が決まっていないとき
 		//第二引数にINパラメータにセットする配列、あとは上と一緒
 		List<Items> itemsList = jdbcTemplate.query(sql, parameters, itemsMapper);
 		return itemsList;
 	}
+
+
+
+
+	public void deleteFromItem2(int itemNo) {
+	String sql = "DELETE FROM t_item2 WHERE itemNo =?";
+	Object[] parameters = { itemNo };
+	TransactionStatus transactionStatus = null;
+	DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+	try {
+		transactionStatus = transactionManager.getTransaction(transactionDefinition);
+		jdbcTemplate.update(sql,parameters);
+		transactionManager.commit(transactionStatus);
+	} catch (DataAccessException e) {
+		e.printStackTrace();
+		transactionManager.rollback(transactionStatus);
+	} catch (TransactionException e) {
+		e.printStackTrace();
+		if (transactionStatus != null) {
+			transactionManager.rollback(transactionStatus);
+		}
+	}
+	return;
+	}
+
 }
