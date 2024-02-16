@@ -25,6 +25,7 @@ import jp.KEN.yamamons.model.LoginModel;
 @SessionAttributes({ "loginModel", "cModel" })
 public class ConfirmController {
 
+
 	@Autowired
 	private ItemsDao itemsDao; //Item系のDaoクラス名で設定
 	@Autowired
