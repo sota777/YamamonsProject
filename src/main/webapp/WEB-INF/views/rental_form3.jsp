@@ -18,7 +18,7 @@ table {
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
 	font-weight:bold;
-	color: black;
+	color: #000000;
 
 }
 
