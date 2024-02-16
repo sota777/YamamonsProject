@@ -134,7 +134,7 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 
 	//顧客IDからその人のレンタル商品履歴を表示するメソッド
 	public List<OrderItems> getHistoryByCustomerIdOnly(String customerId){
-		String sql = "SELECT t_order.orderDate, t_item.itemName, t_item.itemPicture FROM t_order JOIN t_item ON t_order.itemNo = t_item.itemNo WHERE t_order.customerId = ?;";
+		String sql = "SELECT t_item.itemName, t_item.itemPicture, t_item.director, t_order.orderDate, t_order.rentalStatusNo FROM t_order JOIN t_item ON t_order.itemNo = t_item.itemNo WHERE t_order.customerId = ?;";
 		Object[] parameters = {customerId };
 		try {
 			List<OrderItems> orderHistory = jdbcTemplate.query(sql, parameters, orderItemsMapper);

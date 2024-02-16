@@ -48,7 +48,10 @@ td {
 								width="96" height="128" alt="${rentalHistory.itemName }"></td>
 								<td><c:out value="${rentalHistory.director }"  /></td>
 								<td><c:out value="${rentalHistory.orderDate }"  /></td>
-								<td><c:out value="${rentalHistory.rentalStatusNo }"  /></td>
+								<td><c:if test="${rentalHistory.rentalStatusNo == 0}">
+									返却済</c:if>
+									<c:if test="${rentalHistory.rentalStatusNo == 1}">
+									貸出中</c:if></td>
 						</tr>
 
 		</c:forEach>
