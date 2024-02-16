@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>返却処理</title>
 </head>
-<body>
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');">
 	<h1>返却処理</h1>
 		<a href="admin"  >
 			<input type="submit" value="在庫登録">

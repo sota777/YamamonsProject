@@ -39,7 +39,7 @@ strong {
 </style>
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
 	class="body">
 	<div class="container">
 		<jsp:include page="headerkari.jsp"></jsp:include>
