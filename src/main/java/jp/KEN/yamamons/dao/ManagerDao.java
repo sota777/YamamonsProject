@@ -29,9 +29,9 @@ public class ManagerDao {
 
 	//管理者が商品を追加するDao
 	public int insertItem(Items items) {
-		String sql = "INSERT INTO t_item(itemName,itemQuantity,genreNo,director,typeNo) VALUES(?,?,?,?,?);";
+		String sql = "INSERT INTO t_item(itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?);";
 		Object[] parameters = { items.getItemName(),items.getItemQuantity(),items.getGenreNo(),items.getDirector(),
-				items.getTypeNo() };
+				items.getTypeNo(), items.getItemPicture() };
 
 		TransactionStatus transactionStatus = null;
 		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
@@ -40,16 +40,19 @@ public class ManagerDao {
 
 		try {
 			transactionStatus = transactionManager.getTransaction(transactionDefinition);
-			numberRow = jdbcTemplate.update(sql, parameters);
+			numberRow = jdbcTemplate.update(sql,parameters);
+			System.out.println("正解");
 			transactionManager.commit(transactionStatus);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			System.out.println("データアクセス");
 			transactionManager.rollback(transactionStatus);
 		} catch (TransactionException e) {
 			e.printStackTrace();
 			if (transactionStatus != null) {
 				transactionManager.rollback(transactionStatus);
 			}
+			System.out.println("トランザクション");
 		}
 		return numberRow;
 	}
