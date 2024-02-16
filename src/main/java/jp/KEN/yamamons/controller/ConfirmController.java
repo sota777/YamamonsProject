@@ -164,9 +164,9 @@ public class ConfirmController {
 		}
 
 		List<Order> orderList = new ArrayList<Order>();
-		Order order = new Order();
 
 		for (String roop : cart) {
+			Order order = new Order();
 			order.setItemNo(roop);
 			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
 			String customerId = members.getCustomerId();
