@@ -92,7 +92,7 @@ public class AdminController {
 			model.addAttribute("headline", "商品登録");
 			return "newItem7";
 		}
-
+		model.addAttribute("message","在庫追加しました");
 		return "newItem7";
 	}
 

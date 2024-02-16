@@ -11,10 +11,13 @@ public class AdminModel implements Serializable{
 	private String StatusNo;
 	@NotEmpty(message="商品名は必須です")
 	private String itemName;
+	@NotEmpty(message="入荷数は必須です")
 	private String itemQuanity;
+	@NotEmpty(message="ジャンルナンバーは必須です")
 	private String genreNo;
 	@NotEmpty(message="監督名は必須です")
 	private String director;
+	@NotEmpty(message="タイプナンバーは必須です")
 	private String typeNo;
 	private String itemPicture;
 	public int getItemNo() {
