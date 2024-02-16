@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>在庫管理</title>
 </head>
-<body>
-	<h1>在庫管理</h1>
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+	class="body">	<h1>在庫管理</h1>
 
 		<a href="newItem"  >
 			<input type="submit" value="在庫登録">
