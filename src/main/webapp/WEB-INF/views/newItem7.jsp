@@ -7,12 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>新しい商品の追加</title>
+<link href="/yamamons/resources/img/style.css" type="text/css"
+	rel="stylesheet" />
+<jsp:include page="headerkari.jsp"/>
 </head>
-<body>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+	class="body">
 <div class="container">
 
 		<main>
 
+			<h1>在庫追加</h1>
 
 			<form:form modelAttribute="adminModel">
 				<div class="form-row">
