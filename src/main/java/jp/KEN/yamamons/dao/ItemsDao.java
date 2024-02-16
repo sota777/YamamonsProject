@@ -148,7 +148,7 @@ public class ItemsDao {
 	}
 
 	public List<Items> stockCheck() {
-		String sql = "SELECT * FROM t_item2 WHERE itemQuantity =< 0";
+		String sql = "SELECT * FROM t_item2 WHERE itemQuantity <= 0";
 		try {
 			List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
 			return itemsList;

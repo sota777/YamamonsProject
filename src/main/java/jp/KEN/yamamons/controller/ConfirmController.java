@@ -139,7 +139,7 @@ public class ConfirmController {
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
-		if (stockShortage != null) {
+		if (!stockShortage.isEmpty()) {
 			for (int i = 0; i < stockShortage.size(); i++) {
 				String str = stockShortage.get(i).getItemName();
 				if (errormessage == null) {
