@@ -37,6 +37,17 @@ public class RegistrationController {
 			return "registration2";
 		}
 
+		String mail = membersModel.getMail();
+		Members check = membersDao.getCusDataByMail(mail);
+		String errorMessage = null;
+		if (check != null) {
+			System.out.println("エラーだよ");
+			errorMessage="既に登録されているメールアドレスです";
+			model.addAttribute("errorMessage",errorMessage);
+			model.addAttribute("headline", "会員登録");
+			return "registration2";
+		}
+
 
 		Members members = new Members();
 		members.setCustomerName(membersModel.getName());

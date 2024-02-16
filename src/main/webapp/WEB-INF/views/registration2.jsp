@@ -71,6 +71,12 @@
 
     <button type="submit">ragistration</button>
 
+	<p></p>
+	<c:if test="${!empty errorMessage}">
+				<p>
+					<c:out value="${errorMessage }" />
+				</p>
+			</c:if>
 
     <div class="form-row errors">
     	<c:out value="${message }"></c:out>
