@@ -28,7 +28,7 @@ td {
     }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');" class="body">
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');" class="body">
 	<h1>レンタル履歴確認</h1>
 
 

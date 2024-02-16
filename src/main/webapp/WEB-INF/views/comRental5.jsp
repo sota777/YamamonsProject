@@ -22,14 +22,15 @@ strong {
 }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
 	class="body">
-	<h1>レンタル完了</h1>
+		<jsp:include page="headerkari.jsp"></jsp:include>
+	<br>
+	<br>
+	<div class="sample" style="font-size: 50px;">レンタル完了</div>
 
-	<br>
-	<a href="home"> <input type="submit" value="TOP"
-		class="btn btn--green btn--emboss btn--cubic"></a>
-	<br>
+
+
 
 </body>
 </html>

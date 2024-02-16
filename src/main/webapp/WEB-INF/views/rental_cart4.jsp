@@ -13,13 +13,12 @@
 	rel="stylesheet" />
 
 <style>
-td {
-	text-align: center;
-}
-
 table {
-	width: 100%; /* テーブルを利用可能な全幅に設定 */
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+	text-align: center;
 }
 
 th, td {
@@ -30,9 +29,14 @@ th, td {
 strong {
 	background-color: white;
 }
+
+.text-right {
+      text-align: right;
+      margin-right: 50px; /* 調整したい余白の幅を指定 */
+      }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
 	class="body">
 	<div class="sample">CART</div>
 	<br>
@@ -42,6 +46,15 @@ strong {
 	</form>
 	<a href="form"> <input type="submit" value="レンタルサイト"
 		class="btn btn--green btn--emboss btn--cubic"></a>
+
+	<div class="text-right">
+		<a href="history"> <input type="submit" value="レンタル履歴"
+			class="btn btn--green btn--emboss btn--cubic">
+		</a>
+	</div>
+
+
+	<br>
 	<br>
 	<br>
 	<div id="wrapper">
@@ -95,15 +108,13 @@ strong {
 				<a href="home"> <input type="submit" value="TOP(ログインはこちら)"
 					class="btn btn--green btn--emboss btn--cubic"></a>
 			</c:if>
-
+			<br>
 			<br>
 			<form action="orderComplete" method="get">
 				<input type="submit" class="btn btn--green btn--emboss btn--cubic"
-					value="RENTAL" style="font-size: 24px;">
+					value="RENTAL" style="font-size: 50px;">
 			</form>
-			<br> <br> <br> <a href="history"> <input
-				type="submit" value="レンタル履歴"
-				class="btn btn--green btn--emboss btn--cubic"></a><br>
+			<br> <br> <br>
 
 		</main>
 	</div>
