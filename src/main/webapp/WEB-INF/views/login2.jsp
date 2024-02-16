@@ -1,31 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ログイン</title>
 <style>
-.error {
-	color: #ff0000;
+	.errors{
+		color: red;
 	}
-table {
-	border-collapse: separate;
-	border-spacing: 10px;
-}
 </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン</title>
+<link href="/yamamons/resources/img/style.css" type="text/css"
+	rel="stylesheet" />
+<link href="/yamamons/resources/img/login.css" type="text/css"
+	rel="stylesheet" />
 
-		<jsp:include page="headerkari.jsp"></jsp:include>
-		<a href="registration">登録画面へ</a>
-	<h1>ログイン画面</h1>
-	<hr />
+</head>
+<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+	class="body">
+	<jsp:include page="headerkari.jsp"></jsp:include>
+
+	<a href="registration"> <input type="submit" value="新規登録へ"
+		class="btn btn--green btn--emboss btn--cubic"></a>
+	<br>
+
 	<form:form modelAttribute="loginModel">
-		<div class="error">${errorMessage }</div>
-		<table>
+		<br>
+
+		<div class="container">
+			<form action="rental_form3.jsp" method="get">
+				<p class="fsize">
+					<img src="/yamamons/resources/img/signin.png">
+				</p>
+				<div class="errors">${errorMessage }</div>
+				<form:input path="loginMail" placeholder="MailAddress" />
+				<form:password path="password" placeholder="Password" />
+				<a href="form">
+					<button type="submit">Login</button>
+				</a>
+			</form>
+		</div>
+		<!--  <table>
 			<tr>
 				<td>メールアドレス</td>
 				<td>
@@ -49,12 +67,12 @@ table {
 					<input type="submit" value="ログイン" />
 				</td>
 			</tr>
-		</table>
+		</table>-->
 	</form:form>
 	<hr />
 	<footer>
-			<jsp:include page="footerkari.jsp"></jsp:include>
+		<jsp:include page="footerkari.jsp"></jsp:include>
 
 	</footer>
-			</body>
+</body>
 </html>

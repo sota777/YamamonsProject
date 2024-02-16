@@ -30,11 +30,13 @@ public class LoginController {
 		return new LoginModel();
 	}
 
+	//homepage1.jspで「ログイン」を押したとき
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String toLogin() {
 		return "login2";
 	}
 
+	//login2.jspで「Login」を押したとき
 	@RequestMapping(method = RequestMethod.POST)
 	public String toRegist(@Validated @ModelAttribute LoginModel loginModel, BindingResult result, Model model,HttpSession session) {
 		String cusMail = loginModel.getLoginMail();
@@ -42,7 +44,7 @@ public class LoginController {
 
 		//入力したMailアドレスがDBと一致しない場合
 		if (loginCusData == null) {
-			model.addAttribute("errorMessage", "ログインIDもしくはパスワードが間違っています。");
+			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
 			return "login2";
 		}
 
@@ -50,14 +52,12 @@ public class LoginController {
 		if (result.hasErrors()) {
 			return "login2";
 
-			//＜仮作成＞：管理者専用画面へ遷移するためのメソッド。一致したら管理者画面へ
-		} else if (loginModel.getLoginMail().equals("kanrisha@mail>com")
-				&& loginModel.getPassword().equals("owner")) {
-			session.setAttribute("CusData", loginCusData);
-			return "redirect:/stock6";
 
 			//顧客が入力したMailとパスワードがデータベースと一致するか確認するメソッド
 			//一致すれば商品選択ページに飛ぶ
+		} else if (loginModel.getLoginMail().equals("kanri@kenschool.com")
+				&& loginModel.getPassword().equals("admin")) {
+			return "redirect:/admin";
 		} else if (loginModel.getLoginMail().equals(loginCusData.getMail())
 				&& loginModel.getPassword().equals(loginCusData.getPassword())) {
 			session.setAttribute("CusData", loginCusData);

@@ -2,6 +2,7 @@ package jp.KEN.yamamons.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
@@ -12,27 +13,28 @@ import jp.KEN.yamamons.Group.Group1;
 
 public class MembersModel implements Serializable {
 
-	@NotEmpty(message="名前入力は必須です")
+	@NotEmpty(message="※Not Empty Name")
 	private String name;
 
-	@NotEmpty(message="emailは必須です")
-	@Email(groups=Group1.class, message="メールアドレスではありません")
+	@NotEmpty(message="※Not Empty Email")
+	@Email(groups=Group1.class, message="Not Email")
 	private String mail;
 
-	@NotEmpty(message="電話番号は必須です")
-	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="携帯番号ではありません",groups=Group1.class)
+	@NotEmpty(message="※Not Empty Phonenumber")
+	@Pattern(regexp="^[0-9]{3}-[0-9]{4}-[0-9]{4}$",message="※Not Phonenumber",groups=Group1.class)
 	private String phoneNumber;
 
+	@NotNull(message="※Not Empty Credit")
 	private String credit;
 
 	private String planNo;
 
-	@NotEmpty(message="パスワードは必須です")
-	@Length(min=4, max=10,message="4文字以上10文字以下で入力してください",groups=Group1.class)
+	@NotEmpty(message="※Not Empty Password")
+	@Length(min=4, max=10,message="※Between 4 And 10 Alphanumeric Characters",groups=Group1.class)
 
 	private String password;
 
-	@NotEmpty(message="住所は必須です")
+	@NotEmpty(message="※Not Empty Address")
 	private String address;
 
 	public String getName() {
