@@ -17,7 +17,7 @@ public class MembersModel implements Serializable {
 	private String name;
 
 	@NotEmpty(message="※Not Empty Email")
-	@Email(groups=Group1.class, message="メールアドレスではありません")
+	@Email(groups=Group1.class, message="Not Email")
 	private String mail;
 
 	@NotEmpty(message="※Not Empty Phonenumber")
