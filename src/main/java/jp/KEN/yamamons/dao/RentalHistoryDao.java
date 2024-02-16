@@ -147,4 +147,6 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 
 
 
+
+
 }
