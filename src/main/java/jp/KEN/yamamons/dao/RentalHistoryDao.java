@@ -146,5 +146,20 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 	}
 
 
+	//顧客IDからその人のレンタル履歴を表示するメソッド
+	public List<Order> getOrderHisByCusId(String cusId){
+		String sql = "SELECT * FROM t_order WHERE customerId=?";
+		Object[] parameters = {cusId };
+		try {
+			List<Order> orderHis = jdbcTemplate.query(sql, parameters, ordersMapper);
+			return orderHis;
+		}catch(EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+
 
 }
