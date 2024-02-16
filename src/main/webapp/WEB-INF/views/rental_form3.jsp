@@ -14,7 +14,9 @@
 
 <style>
 table {
-	width: 100%; /* テーブルを利用可能な全幅に設定 */
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
 	font-weight:bold;
@@ -31,7 +33,7 @@ th, td {
 </style>
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
 	class="body">
 	<div class="sample">RENTAL SITE</div>
 	<br>
