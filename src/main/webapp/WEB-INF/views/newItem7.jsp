@@ -45,7 +45,11 @@
 					<form:input path="typeNo" />
 					<form:errors path="typeNo" element="span" cssClass="errors" />
 				</div>
-
+				<div class="form-row">
+					<label for="itemPicture" class="disp-block">画像</label>
+					<form:input path="itemPicture" />
+					<form:errors path="itemPicture" element="span" cssClass="errors" />
+				</div>
 				<div></div>
 				<div></div>
 				<div class ="form-row">
