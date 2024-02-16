@@ -50,7 +50,7 @@ public class ItemController {
 		if (cart != null && !cart.isEmpty()) {
 			message = "カートに" + cart.size() + "個の商品が入っています";
 		} else {
-			message = "商品を選んでください";
+			message ="";
 		}
 		model.addAttribute("message", message);
 
