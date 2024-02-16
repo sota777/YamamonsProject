@@ -22,6 +22,10 @@ table {
 	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
+	font-weight:bold;
+	color: #000000;
+
+}
 }
 
 th, td {
@@ -74,7 +78,7 @@ strong {
 							<td><img
 								src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 								width="150" height="250" alt="${itemsList.itemName }" /></td>
-							<td><strong><c:out value="${itemsList.itemName }" /></strong></td>
+							<td><c:out value="${itemsList.itemName }" /></td>
 							<td><c:out value="${itemsList.director }" /></td>
 							<td><a href="login"> <input type="submit"
 									value="カートに入れる"><br>ログイン画面へ移ります <input

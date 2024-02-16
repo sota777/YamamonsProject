@@ -17,6 +17,9 @@ table {
 	width: 100%; /* テーブルを利用可能な全幅に設定 */
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
+	font-weight:bold;
+	color: #000000;
+
 }
 
 th, td {
@@ -24,9 +27,7 @@ th, td {
 	text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
 }
 
-strong {
-	background-color: white;
-}
+
 </style>
 
 </head>
@@ -62,8 +63,7 @@ strong {
 					<td><img
 						src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 						width="150" height="250" alt="${itemsList.itemName }" /></td>
-					<td height="250"><strong><c:out
-								value="${itemsList.itemName }" /></strong></td>
+					<td ><c:out value="${itemsList.itemName }" /></td>
 					<td><c:out value="${itemsList.director }" /></td>
 					<td><input type="submit" value="カートに入れる"> <input
 						type="hidden" name="itemNo" value="${itemsList.itemNo }"></td>
@@ -71,6 +71,7 @@ strong {
 
 			</form:form>
 		</c:forEach>
+		</p>
 	</table>
 	<br>
 
