@@ -127,7 +127,6 @@ public class ConfirmController {
 		List<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
-
 		if(cModel.getCart() == null) {
 			//nullの時は確認画面に戻る
 			errormessage ="商品を選択してください。";
@@ -141,19 +140,6 @@ public class ConfirmController {
 			model.addAttribute("errormessage", errormessage);
 			return "rental_cart4";
 		}
-		/*
-		if (!cModel.getCart().isEmpty()) {
-			cart = cModel.getCart();
-			System.out.println("cModelがnotEmpty");
-		} else {
-			//nullの時は確認画面に戻る
-			System.out.println("cModelがempty");
-			errormessage ="商品を選択してください。";
-			model.addAttribute("errormessage", errormessage);
-			return "rental_cart4";
-		}
-		*/
-
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
