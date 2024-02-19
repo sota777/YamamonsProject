@@ -22,15 +22,18 @@ strong {
 }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 		<jsp:include page="headerkari.jsp"></jsp:include>
 	<br>
 	<br>
 	<div class="sample" style="font-size: 50px;">レンタル完了</div>
 
+	<br>
+	<br>
+	<br>
 
-
+		<jsp:include page="footerkari.jsp"/>
 
 </body>
 </html>

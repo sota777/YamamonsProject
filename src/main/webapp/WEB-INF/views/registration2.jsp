@@ -25,7 +25,7 @@
 
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 
 	<jsp:include page="headerkari.jsp" />

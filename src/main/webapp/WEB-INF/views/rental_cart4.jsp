@@ -19,6 +19,8 @@ table {
 	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
+
 }
 
 th, td {
@@ -36,7 +38,7 @@ strong {
       }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 	<div class="sample">CART</div>
 	<br>

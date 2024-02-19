@@ -11,7 +11,7 @@
 <link href="/yamamons/resources/img/login.css" type="text/css" rel="stylesheet" />
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');" class="body">
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');" class="body">
 	<jsp:include page="headerkari.jsp"></jsp:include>
 		<a href="login" >
 			<input type="submit" value="ログイン" class="btn btn--green btn--emboss btn--cubic"></a><br>

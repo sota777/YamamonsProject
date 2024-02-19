@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>在庫管理</title>
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">	<h1>在庫管理</h1>
 
 		<a href="newItem"  >
@@ -40,5 +40,8 @@
 		</c:forEach>
 	</table>
 	<a href="home">ホームへ </a>
+
+	<jsp:include page="footerkari.jsp"/>
+
 </body>
 </html>
