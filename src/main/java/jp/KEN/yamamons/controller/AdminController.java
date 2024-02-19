@@ -1,4 +1,5 @@
 package jp.KEN.yamamons.controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ import jp.KEN.yamamons.entity.RentalHistory;
 import jp.KEN.yamamons.model.AdminModel;
 import jp.KEN.yamamons.model.CheckboxForm;
 
-
 @SessionAttributes("loginModel")
 @Controller
 public class AdminController {
@@ -32,7 +32,7 @@ public class AdminController {
 	@Autowired
 	private ManagerDao ManagerDao;
 	@Autowired
-	private  RentalHistoryDao rentalHistoryDao;
+	private RentalHistoryDao rentalHistoryDao;
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String toAdmin(Model model) {
@@ -45,23 +45,22 @@ public class AdminController {
 		AdminModel aModel = new AdminModel();
 		List<String> orderStatusList = new ArrayList<String>();
 
-		for(int i = 0;i <= itemsList.size();i++) {
+		for (int i = 0; i <= itemsList.size(); i++) {
 			aModel.setItemNo(i);
 			//for(Items itemNo : itemsList) {
-				List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
-				//System.out.println(orderList.size());
-				orderStatusList.add(String.valueOf(orderList.size()));
+			List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
+			//System.out.println(orderList.size());
+			orderStatusList.add(String.valueOf(orderList.size()));
 			//}
 		}
 
-		model.addAttribute("orderList",orderStatusList);
-
+		model.addAttribute("orderList", orderStatusList);
 
 		return "stock6";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
-	public String Admin( Model model){
+	public String Admin(Model model) {
 		return "stock6";
 	}
 
@@ -73,14 +72,13 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/newItem", method = RequestMethod.POST)
-	public String NerItem(Model model,@Validated @ModelAttribute AdminModel adminModel,
+	public String NerItem(Model model, @Validated @ModelAttribute AdminModel adminModel,
 			BindingResult result) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.addAttribute("headline", "会員登録");
 			return "newItem7";
 		}
-
 
 		Items items = new Items();
 		items.setItemName(adminModel.getItemName());
@@ -91,19 +89,18 @@ public class AdminController {
 		items.setItemPicture(adminModel.getItemPicture());
 
 		int numberOfRow = ManagerDao.insertItem(items);
-		if (numberOfRow == 0){
+		if (numberOfRow == 0) {
 			model.addAttribute("message", "登録に失敗しました。");
 			model.addAttribute("headline", "商品登録");
 			return "newItem7";
 		}
-		model.addAttribute("message","在庫追加しました");
+		model.addAttribute("message", "在庫追加しました");
 		return "newItem7";
 	}
 
-
 	//返却処理ページ
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.GET)
-	public String toRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm,Model model) {
+	public String toRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm, Model model) {
 		List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
 		if (notReturnItems.isEmpty()) {
 			model.addAttribute("message", "全て返却されています");
@@ -116,46 +113,43 @@ public class AdminController {
 
 	//返却処理実行
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.POST)
-	public String changeRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm, Model model){
-
-		 // 選択されたorderNoを取得
-        List<String> selectedOrderNos = checkboxForm.getSelectedOrderNos();
-        if (selectedOrderNos == null) {
-        	List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
-    		model.addAttribute("notReturnItems", notReturnItems);
-        	model.addAttribute("message", "商品を選択してください");
-    		return "RentalStatus10";
-        }
-
-        List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+	public String changeRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm, Model model) {
+		//未返却の注文一覧を表示する
+		List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
 		model.addAttribute("notReturnItems", notReturnItems);
 
-        for (String orderNo : selectedOrderNos) {
-        	int numberOfRow =itemsDao.changeReturnStatusNo(orderNo);
-        	if (numberOfRow == 0) {
-        		model.addAttribute("message", "返却処理に失敗しました。");
-        		return "RentalStatus10";
-        	}
-        	String itemNo = itemsDao.getItemNoFromOrderNo(orderNo);
-        	if (itemNo.isEmpty()) {
-        		model.addAttribute("message", "返却処理(商品Id取得)に失敗しました。");
-        		return "RentalStatus10";
-        	}
-        	int numberOfRow1 = itemsDao.increaseItemQuantity(itemNo);
-        	if (numberOfRow1 == 0) {
-        		model.addAttribute("message", "在庫の更新に失敗しました。");
-        		return "RentalStatus10";
-        	}
-        }
+		// 選択されたorderNoを取得
+		List<String> selectedOrderNos = checkboxForm.getSelectedOrderNos();
+		if (selectedOrderNos == null) {
+			model.addAttribute("message", "商品を選択してください");
+			return "RentalStatus10";
+		}
 
+		for (String orderNo : selectedOrderNos) {
+			int numberOfRow = itemsDao.changeReturnStatusNo(orderNo);
+			if (numberOfRow == 0) {
+				model.addAttribute("message", "返却処理に失敗しました。");
+				return "RentalStatus10";
+			}
+			String itemNo = itemsDao.getItemNoFromOrderNo(orderNo);
+			if (itemNo.isEmpty()) {
+				model.addAttribute("message", "返却処理(商品Id取得)に失敗しました。");
+				return "RentalStatus10";
+			}
+			int numberOfRow1 = itemsDao.increaseItemQuantity(itemNo);
+			if (numberOfRow1 == 0) {
+				model.addAttribute("message", "在庫の更新に失敗しました。");
+				return "RentalStatus10";
+			}
+		}
+
+		//未返却の注文一覧を表示する
+		notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+		model.addAttribute("notReturnItems", notReturnItems);
 		model.addAttribute("message", "返却処理が完了しました。");
-
 
 		return "RentalStatus10";
 
-
 	}
-
-
 
 }
