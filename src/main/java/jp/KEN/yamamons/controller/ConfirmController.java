@@ -63,7 +63,7 @@ public class ConfirmController {
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
-			
+
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
@@ -127,8 +127,24 @@ public class ConfirmController {
 		List<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
+
+		if(cModel.getCart() == null) {
+			//nullの時は確認画面に戻る
+			errormessage ="商品を選択してください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
+		}else if (!cModel.getCart().isEmpty()){
+			cart = cModel.getCart();
+		}else {
+			System.out.println("cModelがempty");
+			errormessage ="商品を選択してください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
+		}
+		/*
 		if (!cModel.getCart().isEmpty()) {
 			cart = cModel.getCart();
+			System.out.println("cModelがnotEmpty");
 		} else {
 			//nullの時は確認画面に戻る
 			System.out.println("cModelがempty");
@@ -136,6 +152,8 @@ public class ConfirmController {
 			model.addAttribute("errormessage", errormessage);
 			return "rental_cart4";
 		}
+		*/
+
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
 		stockShortage = itemsDao.stockCheck();
