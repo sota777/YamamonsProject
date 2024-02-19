@@ -15,6 +15,10 @@ body {
 	background-image: url("/yamamons/resources/img/雲.jpg");
 	width: 100%;
 }
+.text-right {
+      text-align: right;
+      margin-right: 350px; /* 調整したい余白の幅を指定 */
+      }
 </style>
 </head>
 
@@ -24,12 +28,15 @@ body {
 
 	<header>
 		<a href="login"> <input type="submit" value="ログイン"
-			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp; <a
-			href="registration"> <input type="submit" value="新規登録"
-			class="btn btn--green btn--emboss btn--cubic"></a>&nbsp; <a
-			href="search"> <input type="submit" value="映画検索"
-			class="btn btn--green btn--emboss btn--cubic"></a> <br> <br>
-		<br> <br>
+			class="btn btn--green btn--emboss btn--cubic"></a>
+			<br>
+		<a href="registration"> <input type="submit" value="新規登録"
+			class="btn btn--green btn--emboss btn--cubic"></a>
+			<br>
+	 	<a href="search"> <input type="submit" value="映画検索"
+			class="btn btn--green btn--emboss btn--cubic"></a>
+		<br>
+		<br>
 	</header>
 	<section class="zoom-out">
 		<div class="zoom-out-img">
