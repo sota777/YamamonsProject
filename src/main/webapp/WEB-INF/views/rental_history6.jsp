@@ -17,6 +17,8 @@ td {
     table {
         width: 100%; /* テーブルを利用可能な全幅に設定 */
         border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+        background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
+
     }
 
     th, td {
@@ -28,8 +30,8 @@ td {
     }
 </style>
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');" class="body">
-	<h1>レンタル履歴確認</h1>
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');" class="body">
+	<div class="sample"><h5>レンタル履歴確認</h5></div>
 
 
 	<table border="1">
@@ -56,11 +58,15 @@ td {
 
 		</c:forEach>
 	</table>
+	<br>
+	<br>
 	<a href="confirm" >
 			<input type="submit" value="カート確認画面へ戻る" class="btn btn--green btn--emboss btn--cubic"></a><br>
+	<br>
+	<br>
 
 
-
+		<jsp:include page="footerkari.jsp"/>
 
 </body>
 </html>

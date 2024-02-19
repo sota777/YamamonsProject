@@ -19,9 +19,7 @@ table {
 	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
-	font-weight:bold;
-	color: #000000;
-
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
 }
 
 th, td {
@@ -37,7 +35,7 @@ th, td {
 </style>
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 	<div class="sample">RENTAL SITE</div>
 	<br>
@@ -60,7 +58,7 @@ th, td {
 		</a>
 	</div>
 
-	<table border="1">
+	<table border="1" >
 		<tr>
 			<th><img src="/yamamons/resources/img/movie.png"></th>
 			<th><img src="/yamamons/resources/img/name.png"></th>

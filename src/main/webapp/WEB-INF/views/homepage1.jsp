@@ -10,10 +10,15 @@
 <link href="/yamamons/resources/img/style.css" type="text/css"
 	rel="stylesheet" />
 
+<style>
+body {
+	background-image: url("/yamamons/resources/img/雲.jpg");
+	width: 100%;
+}
+</style>
 </head>
 
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
-	class="body">
+<body>
 	<div class="sample">MUSIC LIFE AGENCY</div>
 	<br>
 
@@ -45,12 +50,12 @@
 			</a>
 		</div>
 		<div class="zoom-out-img">
-			<a href="https://minions.jp/"> <img src="resources/img/しんちゃん.jpg"
+			<a href="https://www.shinchan-movie.com/2024/"> <img src="resources/img/しんちゃん.jpg"
 				alt="写真" width="400" height="250" />
 			</a>
 		</div>
 		<div class="zoom-out-img">
-			<a href="https://minions.jp/"> <img src="resources/img/ドラえもん.png"
+			<a href="https://doraeiga.com/2024/"> <img src="resources/img/ドラえもん.png"
 				alt="写真" width="400" height="250" />
 			</a>
 		</div>
@@ -65,6 +70,12 @@
 			</a>
 		</div>
 	</section>
+	<br>
+	<br>
+	<br>
+	<br>
+		<jsp:include page="footerkari.jsp"/>
+
 </body>
 </html>
 

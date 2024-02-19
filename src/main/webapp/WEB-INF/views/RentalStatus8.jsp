@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>返却処理</title>
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');">
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');">
 	<h1>返却処理</h1>
 		<a href="admin"  >
 			<input type="submit" value="在庫登録">
@@ -47,5 +47,7 @@
 				</tr>
 	</table>
 	<a href="home">ホームへ </a>
+		<jsp:include page="footerkari.jsp"/>
+
 </body>
 </html>

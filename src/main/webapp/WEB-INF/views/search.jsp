@@ -22,10 +22,8 @@ table {
 	margin-right: 50%;
 	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
 	text-align: center;
-	font-weight:bold;
-	color: #000000;
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
 
-}
 }
 
 th, td {
@@ -39,7 +37,8 @@ strong {
 </style>
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/クリーム色.jpg');"
+<body
+	style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 	<div class="container">
 		<jsp:include page="headerkari.jsp"></jsp:include>
@@ -52,10 +51,13 @@ strong {
 
 					<form:form modelAttribute="genres">
 						<form:select path="genreNo" items="${genresList}" size="1"
-							multiple="false" itemLabel="genre" itemValue="genreNo" >
-						<form:option value="-1" label="選択してください"/>
+							multiple="false" itemLabel="genre" itemValue="genreNo">
+							<form:option value="-1" label="選択してください" />
 						</form:select>
-						<input type="submit" value="検索する" class="btn btn--green btn--emboss btn--cubic">
+						<input type="submit" value="検索する"
+							class="btn btn--green btn--emboss btn--cubic">
+						<br>
+						<br>
 					</form:form>
 				</div>
 				<div class="form-row errors">
@@ -81,8 +83,8 @@ strong {
 							<td><c:out value="${itemsList.itemName }" /></td>
 							<td><c:out value="${itemsList.director }" /></td>
 							<td><a href="login"> <input type="submit"
-									value="カートに入れる"><br>ログイン画面へ移ります <input
-									type="hidden" name="itemNo" value="${itemsList.itemNo }"></a></td>
+									value="カートに入れる"> <input type="hidden"
+									name="itemNo" value="${itemsList.itemNo }"></a></td>
 						</tr>
 					</c:forEach>
 

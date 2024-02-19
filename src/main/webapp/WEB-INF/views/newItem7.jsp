@@ -61,5 +61,7 @@
 				</form:form>
 	</main>
 	</div>
+		<jsp:include page="footerkari.jsp"/>
+
 </body>
 </html>
