@@ -32,10 +32,7 @@ strong {
 	background-color: white;
 }
 
-.text-right {
-      text-align: right;
-      margin-right: 50px; /* 調整したい余白の幅を指定 */
-      }
+
 </style>
 </head>
 <body style="background-image: url('/yamamons/resources/img/雲.jpg');"
