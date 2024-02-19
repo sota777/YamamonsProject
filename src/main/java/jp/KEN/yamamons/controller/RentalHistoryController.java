@@ -35,7 +35,6 @@ public class RentalHistoryController {
 			String customerId = members.getCustomerId();
 			List<OrderItems> rentalHistories = rentalHistoryDao.getHistoryByCustomerIdOnly(customerId);
 			model.addAttribute("rentalHistories", rentalHistories);
-			System.out.println("エラー出る"+rentalHistories);
 			return "rental_history6";
 
 		}
