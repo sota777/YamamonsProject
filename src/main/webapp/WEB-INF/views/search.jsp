@@ -73,14 +73,14 @@ strong {
 						<th><img src="/yamamons/resources/img/movie.png"></th>
 						<th><img src="/yamamons/resources/img/name.png"></th>
 						<th><img src="/yamamons/resources/img/director.png"></th>
-
+						<th></th>
 					</tr>
 					<c:forEach var="itemsList" items="${itemsList }">
 						<tr>
 							<td><img
 								src="resources/img/<c:out value="${itemsList.itemPicture }" />"
 								width="150" height="250" alt="${itemsList.itemName }" /></td>
-							<td><strong><c:out value="${itemsList.itemName }" /></strong></td>
+							<td><c:out value="${itemsList.itemName }" /></td>
 							<td><c:out value="${itemsList.director }" /></td>
 							<td><a href="login"> <input type="submit"
 									value="カートに入れる"> <input type="hidden"

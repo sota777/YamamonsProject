@@ -37,7 +37,6 @@ public class ItemController {
 	public String toForm(@ModelAttribute CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
 		String message;
-		itemsDao.deleteItem2();
 
 		//cModelに商品番号が入っている場合は、ArrayListのcartに
 		//カートに入れた商品の番号を配列で入れていく。
@@ -49,15 +48,22 @@ public class ItemController {
 		if (cart != null && !cart.isEmpty()) {
 			message = "カートに" + cart.size() + "個の商品が入っています";
 		} else {
-			message = "商品を選んでください";
+			message ="";
 		}
 		model.addAttribute("message", message);
 
-		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-		List<Items> itemsList = itemsDao.getItemsList();
-		model.addAttribute("itemsList", itemsList);
-		return "rental_form3";
-
+		//カートに商品が入っている場合は、カート以外の商品が表示されるようにする
+		List<Items> items2List =itemsDao.getItems2List();
+		if (!items2List.isEmpty()) {
+			List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
+			model.addAttribute("itemsList", itemsList);
+			return "rental_form3";
+		}else{
+			//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
+			List<Items> itemsList = itemsDao.getItemsList();
+			model.addAttribute("itemsList", itemsList);
+			return "rental_form3";
+		}
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
@@ -101,6 +107,7 @@ public class ItemController {
 
 		ArrayList<String> cart = null;
 	    cModel.setCart(cart);
+	    itemsDao.deleteItem2();
 
 		//status.setComplete();
 

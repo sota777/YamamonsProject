@@ -14,16 +14,15 @@ import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.entity.Genres;
 import jp.KEN.yamamons.entity.Items;
 
-
 @Controller
 public class SearchController {
 
 	@Autowired
 	private ItemsDao itemsDao;
-	
-	@Autowired 
+
+	@Autowired
 	private GenresDao genresDao;
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String toSearch(Model model) {
 		model.addAttribute("items", new Items());
@@ -36,7 +35,7 @@ public class SearchController {
 		model.addAttribute("genresList", genresList);
 		return "search";
 	}
-	
+
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String searchItems(@ModelAttribute Items items,@ModelAttribute Genres genres, Model model) {
 		boolean itemNameIsEmpty = items.getItemName().isEmpty();
@@ -57,12 +56,17 @@ public class SearchController {
 			model.addAttribute("itemsList", aaList);
 			return "search";
 		//ジャンルAND名前検索
-		} else if (!itemNameIsEmpty && searchGenre != -1) {
+		} else if(!itemNameIsEmpty && searchGenre != -1) {
 			Integer genreNo = Integer.parseInt(genres.getGenreNo());
-			List<Items> aaList = genresDao.getListByNameAndNo(items.getItemName(),genreNo);
-			model.addAttribute("itemsList", aaList);
-			return "search";
+			List<Items> bbList = genresDao.getListByNameAndNo(items.getItemName(),genreNo);
+			model.addAttribute("itemsList", bbList);
+			
+			if(bbList.isEmpty()) {
+				model.addAttribute("message", "該当データはありません");
+			}
 		}
+	
+		
 		//全件検索
 		if(itemNameIsEmpty && searchGenre == -1) {
 			List<Items> itemsList = itemsDao.getItemsList();
@@ -75,17 +79,7 @@ public class SearchController {
 			} else {
 				model.addAttribute("itemsList", itemsList);
 			}
-		} else {
-			model.addAttribute("message", "作品名を入力してください");
 		}
-		
-		
-		if(genres.getGenreNo() != null) {
-			Integer genreNo = Integer.parseInt(genres.getGenreNo());
-			List<Items> aaList = genresDao.getByGenre(genreNo);
-			model.addAttribute("imtesList", aaList);
-			
-		} 
 		return "search";
 		
 	}

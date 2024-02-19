@@ -18,6 +18,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.entity.Members;
 import jp.KEN.yamamons.entity.Order;
+import jp.KEN.yamamons.entity.OrderItems;
 
 @Component
 public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
@@ -30,6 +31,7 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 	private RowMapper<Members> membersMapper = new BeanPropertyRowMapper<Members>(Members.class);
 	private RowMapper<Order> ordersMapper = new BeanPropertyRowMapper<Order>(Order.class);
 	private RowMapper<Items> itemsMapper = new BeanPropertyRowMapper<Items>(Items.class);
+	private RowMapper<OrderItems> orderItemsMapper = new BeanPropertyRowMapper<OrderItems>(OrderItems.class);
 
 
 	/*削除予定
@@ -117,7 +119,7 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 
 
 
-	//顧客IDと商品Idからその人のレンタル商品履歴を表示するメソッド(レンタル重複確認用)
+	//顧客IDと商品Idからその人のレンタル商品履歴を表示するメソッド
 	public Order getHistoryByCustomerId(String cusId,String itemNo){
 		String sql = "SELECT * FROM t_order WHERE customerId=? AND itemNo=? LIMIT 1";
 		Object[] parameters = {cusId,itemNo };
@@ -130,18 +132,20 @@ public class RentalHistoryDao {//レンタル履歴閲覧画面のDAO
 		}
 	}
 
-	//顧客IDからその人のレンタル履歴を表示するメソッド
-	public List<Order> getOrderHisByCusId(String cusId){
-		String sql = "SELECT * FROM t_order WHERE customerId=?";
-		Object[] parameters = {cusId };
+	//顧客IDからその人のレンタル商品履歴を表示するメソッド
+	public List<OrderItems> getHistoryByCustomerIdOnly(String customerId){
+		String sql = "SELECT t_item.itemName, t_item.itemPicture, t_item.director, t_order.orderDate, t_order.rentalStatusNo FROM t_order JOIN t_item ON t_order.itemNo = t_item.itemNo WHERE t_order.customerId = ?;";
+		Object[] parameters = {customerId };
 		try {
-			List<Order> orderHis = jdbcTemplate.query(sql, parameters, ordersMapper);
-			return orderHis;
+			List<OrderItems> orderHistory = jdbcTemplate.query(sql, parameters, orderItemsMapper);
+			return orderHistory;
 		}catch(EmptyResultDataAccessException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
+
 
 
 

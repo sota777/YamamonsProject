@@ -38,6 +38,7 @@ public class ConfirmController {
 		return new LoginModel();
 	}
 
+	//rental_form3.jspで「カートを確認」を押したとき
 	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
 	public String toConfirm(@ModelAttribute("cModel") CartModel cModel, LoginModel loginModel, Model model) {
 		ArrayList<String> cart = null;
@@ -52,7 +53,6 @@ public class ConfirmController {
 			model.addAttribute("loginError", loginError);
 			return "rental_cart4";
 		}
-
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (cModel != null) {
 			cart = cModel.getCart();
@@ -63,7 +63,7 @@ public class ConfirmController {
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
-
+			
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
@@ -76,7 +76,6 @@ public class ConfirmController {
 			Items item = null;
 			for (int i = 0; i < cart.size(); i++) {
 				Order orderHistory = rentalHistoryDao.getHistoryByCustomerId(loginCusData.getCustomerId(), cart.get(i));
-				System.out.println("顧客IDから商品履歴のDAO実行");
 				//カートに入れた商品がレンタル履歴と一致する場合、メッセージで前借りたよーと教える
 				if (orderHistory != null) {
 					item = itemsDao.getItemsByNo(Integer.parseInt(orderHistory.getItemNo()));
@@ -102,37 +101,40 @@ public class ConfirmController {
 		return "rental_cart4";
 	}
 
+	//rental_cart4.jspで「削除」を押したとき
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
 	public String toDelete(@ModelAttribute("cModel") CartModel cModel, DeleteModel dModel, LoginModel loginModel,
 			Model model) {
 		String paramIndex = null;
 		ArrayList<String> cart = null;
-		//選択した商品をカートから削除する
 		if (cModel != null) {
 			cart = cModel.getCart();
-
-			System.out.println(cart.size());
 			paramIndex = dModel.getIndex();
+			int delItem = Integer.parseInt(cart.get(Integer.parseInt(paramIndex) - 1));
 			cart.remove(Integer.parseInt(paramIndex) - 1);
-			System.out.println(cart.size());
+			itemsDao.deleteFromItem2(delItem);
 		}
 		return "redirect:/confirm";
 	}
 
+	//rental_cart4.jspで「RENTAL」を押したとき
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.GET)
 	public String toOrderComplete(@ModelAttribute("cModel") CartModel cModel,
-			@ModelAttribute("loginModel") LoginModel loginModel, SessionStatus status, Model model) {
+			@ModelAttribute("loginModel") LoginModel loginModel, SessionStatus status,Model model) {
 		ArrayList<String> cart = null;
 		String errormessage = null;
 		List<Items> stockShortage = null;
 		List<Items> cartItems = null;
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
-		if (cModel != null) {
+		if (!cModel.getCart().isEmpty()) {
 			cart = cModel.getCart();
 		} else {
 			//nullの時は確認画面に戻る
-			return "redirect:/confirm";
+			System.out.println("cModelがempty");
+			errormessage ="商品を選択してください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
 		}
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
@@ -162,14 +164,14 @@ public class ConfirmController {
 			}
 		}
 
+
 		List<Order> orderList = new ArrayList<Order>();
-		Order order = new Order();
 
 		for (String roop : cart) {
+			Order order = new Order();
 			order.setItemNo(roop);
 			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
 			String customerId = members.getCustomerId();
-			System.out.println(customerId);
 			order.setCustomerId(customerId);
 			order.setOrderQuantity("1");
 			order.setRentalStatusNo("1");
@@ -179,14 +181,26 @@ public class ConfirmController {
 		rentalHistoryDao.addOrder(orderList);
 
 		itemsDao.deleteItem2();
+
 		status.setComplete();
 
 		return "comRental5";
 	}
 
+	//在庫が足りませんという表示が出た画面で、「削除」を押したとき
 	@RequestMapping(value = "/orderComplete", method = RequestMethod.POST)
-	public String toRedirectOrder(@ModelAttribute("cModel") CartModel cModel, Model model) {
-		return "redirect;/orderComplete";
+	public String toRedirectOrder(@ModelAttribute("cModel") CartModel cModel, Model model, DeleteModel dModel) {
+
+		String paramIndex = null;
+		ArrayList<String> cart = null;
+		if (cModel != null) {
+			cart = cModel.getCart();
+			paramIndex = dModel.getIndex();
+			int delItem = Integer.parseInt(cart.get(Integer.parseInt(paramIndex) - 1));
+			cart.remove(Integer.parseInt(paramIndex) - 1);
+			itemsDao.deleteFromItem2(delItem);
+		}
+		return "redirect:/confirm";
 	}
 
 	//カートに入っている商品情報一覧を取り出すためのメソッド

@@ -72,7 +72,6 @@ public class AdminController {
 			BindingResult result) {
 
 		if(result.hasErrors()) {
-			System.out.println("エラーだよ");
 			model.addAttribute("headline", "会員登録");
 			return "newItem7";
 		}
@@ -92,7 +91,7 @@ public class AdminController {
 			model.addAttribute("headline", "商品登録");
 			return "newItem7";
 		}
-
+		model.addAttribute("message","在庫追加しました");
 		return "newItem7";
 	}
 
