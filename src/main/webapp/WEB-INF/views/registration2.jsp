@@ -73,9 +73,8 @@
 
 	<p></p>
 	<c:if test="${!empty errorMessage}">
-				<p>
+	<br>
 					<c:out value="${errorMessage }" />
-				</p>
 			</c:if>
 
     <div class="form-row errors">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
@@ -7,17 +7,43 @@
 <head>
 <meta charset="UTF-8">
 <title>在庫管理</title>
+<link href="/yamamons/resources/img/style.css" type="text/css"
+	rel="stylesheet" />
 </head>
+<style>
+table {
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 50%;
+	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+	text-align: center;
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
+}
+
+.text-right {
+	text-align: right;
+	margin-right: 350px; /* 調整したい余白の幅を指定 */
+}
+</style>
 <body style="background-image: url('/yamamons/resources/img/雲.jpg');"
-	class="body">	<h1>在庫管理</h1>
-
-		<a href="newItem"  >
-			<input type="submit" value="在庫登録">
+	class="body">
+	<jsp:include page="headerkari.jsp"></jsp:include>
+	<br>
+	<div class="sample">在庫管理</div>
+	<p>
+	<div class="text-right">
+		<a href="newItem"> <input type="submit" value="在庫登録"
+			class="btn btn--green btn--emboss btn--cubic">
 		</a>
-		<a href="rentalStatus"  >
-			<input type="submit" value="返却処理">
+	</div>
+	<p>
+	<div class="text-right">
+		<a href="rentalStatus"> <input type="submit" value="返却処理"
+			class="btn btn--green btn--emboss btn--cubic">
 		</a>
-
+	</div>
+	<br>
+	<br>
 	<table border="1">
 		<tr>
 			<th>商品画像</th>
@@ -34,14 +60,11 @@
 					<td><c:out value="${itemsList[i].itemName }" /></td>
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
 					<td><c:out value="${orderList[i]}" /></td>
-
-
 			</form:form>
 		</c:forEach>
 	</table>
-	<a href="home">ホームへ </a>
 
-	<jsp:include page="footerkari.jsp"/>
+	<jsp:include page="footerkari.jsp" />
 
 </body>
 </html>

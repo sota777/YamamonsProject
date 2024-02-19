@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
@@ -7,15 +7,29 @@
 <head>
 <meta charset="UTF-8">
 <title>返却処理</title>
+<link href="/yamamons/resources/img/style.css" type="text/css"
+	rel="stylesheet" />
+<style>
+table {
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 50%;
+	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+	text-align: center;
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
+}
+</style>
 </head>
 <body style="background-image: url('/yamamons/resources/img/雲.jpg');">
-	<h1>返却処理</h1>
-		<a href="admin"  >
-			<input type="submit" value="在庫登録">
-		</a>
-		<a href="rentalStatus"  >
-			<input type="submit" value="在庫管理へ">
-		</a>
+
+	<header>
+		<a href="admin"> <input type="submit" value="戻る"
+			class="btn btn--green btn--emboss btn--cubic"></a>
+	</header>
+	<br>
+	<div class="sample">返却処理</div>
+	<br>
+
 	<table border="1">
 		<tr>
 			<th>商品画像</th>
@@ -32,22 +46,19 @@
 						width="96" height="128" alt="${itemsList[i].itemName }"></td>
 					<td><c:out value="${itemsList[i].itemName }" /></td>
 					<td><c:out value="${itemsList[i].itemQuantity }" /></td>
-					 <td><c:out value="${orderList[i]}" /></td>
-					 <td>
-							<form:radiobutton path="itemNunber" value="uoo"/>
-					</td>
+					<td><c:out value="${orderList[i]}" /></td>
+					<td><form:radiobutton path="itemNunber" value="uoo" /></td>
 			</form:form>
 		</c:forEach>
-				<tr>
-					<td colspan="5" >
-						<form method="post">
-						<button type="submit">送信</button>
-						</form>
-					</td>
-				</tr>
+		<tr>
+			<td colspan="5"><br>
+				<form method="post">
+					<button type="submit" class="btn btn--green btn--emboss btn--cubic"
+						style="font-size: 30px;">送信</button><br>
+				</form></td>
+		</tr>
 	</table>
-	<a href="home">ホームへ </a>
-		<jsp:include page="footerkari.jsp"/>
+	<jsp:include page="footerkari.jsp" />
 
 </body>
 </html>
