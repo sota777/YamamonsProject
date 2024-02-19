@@ -32,7 +32,6 @@ public class RegistrationController {
 	public String registMembers(Model model,@Validated(GroupOrder.class)@ModelAttribute MembersModel membersModel,
 			BindingResult result) {
 		if(result.hasErrors()) {
-			System.out.println("エラーだよ");
 			model.addAttribute("headline", "会員登録");
 			return "registration2";
 		}
@@ -41,7 +40,6 @@ public class RegistrationController {
 		Members check = membersDao.getCusDataByMail(mail);
 		String errorMessage = null;
 		if (check != null) {
-			System.out.println("エラーだよ");
 			errorMessage="既に登録されているメールアドレスです";
 			model.addAttribute("errorMessage",errorMessage);
 			model.addAttribute("headline", "会員登録");

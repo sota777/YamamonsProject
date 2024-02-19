@@ -29,6 +29,10 @@ th, td {
 	text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
 }
 
+.text-right {
+      text-align: right;
+      margin-right: 50px; /* 調整したい余白の幅を指定 */
+      }
 
 </style>
 
@@ -50,7 +54,11 @@ th, td {
 		class="btn btn--green btn--emboss btn--cubic"></a>
 	<br>
 	<br>
-
+	<div class="text-right">
+		<a href="history"> <input type="submit" value="レンタル履歴"
+		class="btn btn--green btn--emboss btn--cubic">
+		</a>
+	</div>
 
 	<table border="1">
 		<tr>
