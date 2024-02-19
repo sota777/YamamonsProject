@@ -51,7 +51,7 @@ table {
 			<th>在庫数</th>
 			<th>貸出数</th>
 		</tr>
-		<c:forEach begin="1" end="${itemsList.size()}" step="1" var="i">
+		<c:forEach begin="1" end="${itemsList.size()-1}" step="1" var="i">
 			<form:form modelAttribute="cModel,orderModel,orderList">
 				<tr>
 					<td><img
