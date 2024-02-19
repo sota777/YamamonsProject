@@ -29,7 +29,7 @@ th, td {
 
 .text-right {
       text-align: right;
-      margin-right: 50px; /* 調整したい余白の幅を指定 */
+      margin-right: 350px; /* 調整したい余白の幅を指定 */
       }
 
 </style>
