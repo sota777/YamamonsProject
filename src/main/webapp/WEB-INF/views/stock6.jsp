@@ -32,7 +32,7 @@ table {
 	<div class="sample">在庫管理</div>
 	<p>
 	<div class="text-right">
-		<a href="newItem"> <input type="submit" value="在庫登録"
+		<a href="newItem"> <input type="submit" value="作品追加"
 			class="btn btn--green btn--emboss btn--cubic">
 		</a>
 	</div>
