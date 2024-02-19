@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
@@ -9,17 +9,26 @@
 <title>新しい商品の追加</title>
 <link href="/yamamons/resources/img/style.css" type="text/css"
 	rel="stylesheet" />
-<jsp:include page="headerkari.jsp"/>
+<link href="/yamamons/resources/img/login.css" type="text/css"
+	rel="stylesheet" />
+
 </head>
 <body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
 	class="body">
-<div class="container">
 
+	<header>
+		<a href="admin"> <input type="submit" value="戻る"
+			class="btn btn--green btn--emboss btn--cubic"></a>
+	</header>
+	<br>
+	<div class="container">
 		<main>
-
-			<h1>在庫追加</h1>
+			<div class="sample">
+				<font size="20">在庫追加</font>
+			</div>
 
 			<form:form modelAttribute="adminModel">
+
 				<div class="form-row">
 					<label for="itemName" class="disp-block">作品名</label>
 					<form:input path="itemName" />
@@ -52,16 +61,18 @@
 				</div>
 				<div></div>
 				<div></div>
-				<div class ="form-row">
-					<input type="submit" value="登録する" class="btn">
-				</div>
+				<div class="form-row"></div>
+				<button type="submit">ragistration</button>
+
 				<div class="form-row errors">
-					<c:out value="${message }"/>
+					<c:out value="${message }" />
 				</div>
-				</form:form>
-	</main>
+
+			</form:form>
+			<p></p>
+		</main>
 	</div>
-		<jsp:include page="footerkari.jsp"/>
+	<jsp:include page="footerkari.jsp" />
 
 </body>
 </html>
