@@ -3,12 +3,13 @@ package jp.KEN.yamamons.entity;
 public class RentalHistory {
 	private String orderDate;
 	private String itemNo;
-	private String customerId;
-	private String rentalStatusNo;
 	private String itemName;
+	private String customerId;
+	private String customerName;
+	private String rentalStatusNo;
 	private String genreNo;
-	private String director;
-	private String itemPicture;
+	private String orderNo;
+		private String itemPicture;
 
 	public String getOrderDate() {
 		return orderDate;
@@ -58,12 +59,12 @@ public class RentalHistory {
 		this.genreNo = genreNo;
 	}
 
-	public String getDirector() {
-		return director;
+	public String getOrderNo() {
+		return orderNo;
 	}
 
-	public void setDirector(String director) {
-		this.director = director;
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public String getItemPicture() {
@@ -73,4 +74,13 @@ public class RentalHistory {
 	public void setItemPicture(String itemPicture) {
 		this.itemPicture = itemPicture;
 	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 }

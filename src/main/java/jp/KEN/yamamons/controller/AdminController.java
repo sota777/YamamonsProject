@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jp.KEN.yamamons.dao.ItemsDao;
 import jp.KEN.yamamons.dao.ManagerDao;
+import jp.KEN.yamamons.dao.RentalHistoryDao;
 import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.entity.Order;
+import jp.KEN.yamamons.entity.RentalHistory;
 import jp.KEN.yamamons.model.AdminModel;
+import jp.KEN.yamamons.model.CheckboxForm;
 
 
 @SessionAttributes("loginModel")
@@ -28,6 +31,8 @@ public class AdminController {
 
 	@Autowired
 	private ManagerDao ManagerDao;
+	@Autowired
+	private  RentalHistoryDao rentalHistoryDao;
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String toAdmin(Model model) {
@@ -97,93 +102,56 @@ public class AdminController {
 	}
 
 
-	//返却処理
+	//返却処理ページ
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.GET)
-	public String toRentalStatus(Model model) {
-
-		AdminModel adminModel = new AdminModel();
-		System.out.println("GET");
-
-		//情報表示
-		//itemリストから基本情報を取得
-		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-		List<Items> itemsList = itemsDao.getItemsList();
-		model.addAttribute("itemsList", itemsList);
-
-		AdminModel aModel = new AdminModel();
-		List<String> orderStatusList = new ArrayList<String>();
-
-		for(int i = 0;i <= itemsList.size();i++) {
-			aModel.setItemNo(i);
-			//for(Items itemNo : itemsList) {
-				List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
-				//System.out.println(orderList.size());
-				orderStatusList.add(String.valueOf(orderList.size()));
-			//}
+	public String toRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm,Model model) {
+		List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+		if (notReturnItems.isEmpty()) {
+			model.addAttribute("message", "全て返却されています");
 		}
+		model.addAttribute("notReturnItems", notReturnItems);
+		model.addAttribute("message", "返却処理を行うものにチェックしてください");
 
-		model.addAttribute("orderList",orderStatusList);
-		model.addAttribute("adminModel",adminModel);
-
-		return "RentalStatus8";
+		return "RentalStatus10";
 	}
 
+	//返却処理実行
 	@RequestMapping(value = "/rentalStatus", method = RequestMethod.POST)
-	public String RentalStatus(Model model,@Validated @ModelAttribute AdminModel adminmodel,
-			BindingResult result) {
+	public String changeRentalStatus(@ModelAttribute("checkboxForm") CheckboxForm checkboxForm, Model model){
 
-		System.out.println("POST1");
-		//情報表示
-		//itemリストから基本情報を取得
-		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-		List<Items> itemsList = itemsDao.getItemsList();
-		model.addAttribute("itemsList", itemsList);
+		 // 選択されたorderNoを取得
+        List<String> selectedOrderNos = checkboxForm.getSelectedOrderNos();
+        if (selectedOrderNos == null) {
+        	model.addAttribute("message", "商品を選択してください");
+    		return "RentalStatus10";
+        }
 
-		AdminModel aModel = new AdminModel();
-		List<String> orderStatusList = new ArrayList<String>();
+        for (String orderNo : selectedOrderNos) {
+        	int numberOfRow =itemsDao.changeReturnStatusNo(orderNo);
+        	if (numberOfRow == 0) {
+        		model.addAttribute("message", "返却処理に失敗しました。");
+        		return "RentalStatus10";
+        	}
+        	String itemNo = itemsDao.getItemNoFromOrderNo(orderNo);
+        	if (itemNo.isEmpty()) {
+        		model.addAttribute("message", "返却処理(商品Id取得)に失敗しました。");
+        		return "RentalStatus10";
+        	}
+        	int numberOfRow1 = itemsDao.increaseItemQuantity(itemNo);
+        	if (numberOfRow1 == 0) {
+        		model.addAttribute("message", "在庫の更新に失敗しました。");
+        		return "RentalStatus10";
+        	}
+        }
 
-		for(int i = 0;i <= itemsList.size();i++) {
-			aModel.setItemNo(i);
-			//for(Items itemNo : itemsList) {
-				List<Order> orderList = ManagerDao.getOrderItemNo(aModel.getItemNo());
-				//System.out.println(orderList.size());
-				orderStatusList.add(String.valueOf(orderList.size()));
-			//}
-		}
-
-		model.addAttribute("orderList",orderStatusList);
-
-		System.out.println("POST2");
-
-		//返却された時の在庫の追加
-		Items items = new Items();
-		items.setItemNo(adminmodel.getItemNunber());
-		System.out.println(adminmodel.getItemNunber());
+        List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+		model.addAttribute("notReturnItems", notReturnItems);
+		model.addAttribute("message", "返却処理が完了しました。");
 
 
-//		int numberOfRow = ManagerDao.updataItemQuaDao(items);
-//		if (numberOfRow == 0){
-//			model.addAttribute("message", "在庫更新に失敗しました。");
-//			model.addAttribute("headline", "返却情報更新");
-//			return "RentalStatus8";
-//				}
+		return "RentalStatus10";
 
-		System.out.println("POST3");
 
-		//返却された時の返却ステータスの更新
-		Order order = new Order();
-		order.setRentalStatusNo(adminmodel.getStatusNo());
-
-//		int numberOfRow2 = ManagerDao.updataStatusDao(order);
-//		if (numberOfRow2 == 0){
-//			model.addAttribute("message", "返却情報の更新に失敗しました。");
-//			model.addAttribute("headline", "返却情報更新");
-//			return "RentalStatus8";
-//		}
-
-		System.out.println("POST4");
-
-		return "RentalStatus8";
 	}
 
 
