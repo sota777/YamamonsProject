@@ -71,7 +71,7 @@ strong {
 						<th><img src="/yamamons/resources/img/movie.png"></th>
 						<th><img src="/yamamons/resources/img/name.png"></th>
 						<th><img src="/yamamons/resources/img/director.png"></th>
-
+						<th></th>
 					</tr>
 					<c:forEach var="itemsList" items="${itemsList }">
 						<tr>

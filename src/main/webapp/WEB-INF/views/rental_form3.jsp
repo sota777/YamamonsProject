@@ -29,6 +29,10 @@ th, td {
 	text-align: center; /* オプション: セル内のテキストを中央寄せに設定 */
 }
 
+.text-right {
+      text-align: right;
+      margin-right: 50px; /* 調整したい余白の幅を指定 */
+      }
 
 </style>
 
@@ -50,13 +54,17 @@ th, td {
 		class="btn btn--green btn--emboss btn--cubic"></a>
 	<br>
 	<br>
-
+	<div class="text-right">
+		<a href="history"> <input type="submit" value="レンタル履歴"
+		class="btn btn--green btn--emboss btn--cubic">
+		</a>
+	</div>
 
 	<table border="1">
 		<tr>
-			<th>商品画像</th>
-			<th>商品名</th>
-			<th>監督名</th>
+			<th><img src="/yamamons/resources/img/movie.png"></th>
+			<th><img src="/yamamons/resources/img/name.png"></th>
+			<th><img src="/yamamons/resources/img/director.png"></th>
 			<th></th>
 		</tr>
 		<c:forEach var="itemsList" items="${itemsList }">

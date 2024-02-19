@@ -63,10 +63,9 @@ strong {
 
 			<table border="1">
 				<tr>
-					<th>商品画像</th>
-					<th>商品名</th>
-					<th>商品点数</th>
-
+					<th><img src="/yamamons/resources/img/movie.png"></th>
+					<th><img src="/yamamons/resources/img/name.png"></th>
+					<th></th>
 				</tr>
 				<c:forEach var="cartItems" items="${cartItems }" begin="0" end="100"
 					step="1" varStatus="status">

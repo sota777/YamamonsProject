@@ -63,8 +63,7 @@ public class ConfirmController {
 		if (cart != null && !cart.isEmpty()) {
 			cartItems = toGetCartItems(cart);
 			message = "カートに" + cart.size() + "個の商品が入っています";
-
-			System.out.println("loginData;" + loginModel.getLoginMail());
+			
 			//顧客情報を取り出し、顧客IDからその人のレンタル履歴を取り出す
 			String cusMail = loginModel.getLoginMail();
 			Members loginCusData = membersDao.getCusDataByMail(cusMail);
@@ -129,7 +128,6 @@ public class ConfirmController {
 
 		//cModelに要素が入っていた場合、ArrayListのcartに配列を代入する
 		if (!cModel.getCart().isEmpty()) {
-			System.out.println("cModelがemptyじゃない");
 			cart = cModel.getCart();
 		} else {
 			//nullの時は確認画面に戻る
@@ -174,7 +172,6 @@ public class ConfirmController {
 			order.setItemNo(roop);
 			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
 			String customerId = members.getCustomerId();
-			System.out.println(customerId);
 			order.setCustomerId(customerId);
 			order.setOrderQuantity("1");
 			order.setRentalStatusNo("1");
