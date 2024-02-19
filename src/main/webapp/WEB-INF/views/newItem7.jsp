@@ -13,7 +13,7 @@
 	rel="stylesheet" />
 
 </head>
-<body style="background-image: url('/yamamons/resources/img/グレー2.jpg');"
+<body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
 
 	<header>
@@ -24,7 +24,7 @@
 	<div class="container">
 		<main>
 			<div class="sample">
-				<font size="20">在庫追加</font>
+				<font size="20">作品追加</font>
 			</div>
 
 			<form:form modelAttribute="adminModel">
@@ -59,8 +59,6 @@
 					<form:input path="itemPicture" />
 					<form:errors path="itemPicture" element="span" cssClass="errors" />
 				</div>
-				<div></div>
-				<div></div>
 				<div class="form-row"></div>
 				<button type="submit">ragistration</button>
 
