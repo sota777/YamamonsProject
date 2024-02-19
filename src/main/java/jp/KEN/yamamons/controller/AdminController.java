@@ -121,9 +121,14 @@ public class AdminController {
 		 // 選択されたorderNoを取得
         List<String> selectedOrderNos = checkboxForm.getSelectedOrderNos();
         if (selectedOrderNos == null) {
+        	List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+    		model.addAttribute("notReturnItems", notReturnItems);
         	model.addAttribute("message", "商品を選択してください");
     		return "RentalStatus10";
         }
+
+        List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
+		model.addAttribute("notReturnItems", notReturnItems);
 
         for (String orderNo : selectedOrderNos) {
         	int numberOfRow =itemsDao.changeReturnStatusNo(orderNo);
@@ -143,8 +148,6 @@ public class AdminController {
         	}
         }
 
-        List<RentalHistory> notReturnItems = rentalHistoryDao.getOrderListNotReturn();
-		model.addAttribute("notReturnItems", notReturnItems);
 		model.addAttribute("message", "返却処理が完了しました。");
 
 
