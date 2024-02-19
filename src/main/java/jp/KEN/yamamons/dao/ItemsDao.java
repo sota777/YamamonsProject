@@ -223,4 +223,69 @@ public class ItemsDao {
 		return;
 	}
 
+	//引数に入れたorderNoの商品を返却済にするメソッド
+	public int changeReturnStatusNo(String orderNo) {
+		int numberRow = 0;
+		String sql = "UPDATE t_order SET rentalStatusNo = 0 WHERE orderNo = ?";
+		Object[] parameters = { orderNo };
+
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
+
+	//引数に入れたorderNoの商品Idを取り出すメソッド
+	public String getItemNoFromOrderNo(String orderNo) {
+		String sql = "SELECT itemNo FROM t_order WHERE orderNo = ?";
+		Object[] parameters = { orderNo };
+		 try {
+		        // 戻り値を String で取得する
+		        return jdbcTemplate.queryForObject(sql, parameters, String.class);
+		    } catch (EmptyResultDataAccessException e) {
+		        e.printStackTrace();
+		        return null;
+		    }
+	}
+
+	//引数に入れたItemNoの在庫を1つ増やすメソッド
+	public int increaseItemQuantity(String itemNo) {
+		int numberRow = 0;
+		String sql = "UPDATE t_item SET itemQuantity = itemQuantity + 1 WHERE itemNo=?";
+		Object[] parameters = { itemNo };
+
+		TransactionStatus transactionStatus = null;
+		DefaultTransactionDefinition transactionDefinition = new DefaultTransactionDefinition();
+
+		try {
+			transactionStatus = transactionManager.getTransaction(transactionDefinition);
+			numberRow = jdbcTemplate.update(sql, parameters);
+			transactionManager.commit(transactionStatus);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			transactionManager.rollback(transactionStatus);
+		} catch (TransactionException e) {
+			e.printStackTrace();
+			if (transactionStatus != null) {
+				transactionManager.rollback(transactionStatus);
+			}
+		}
+		return numberRow;
+	}
+
+
+
 }

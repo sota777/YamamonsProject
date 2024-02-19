@@ -14,12 +14,14 @@
 td {
 	text-align: center;
 }
-    table {
-        width: 100%; /* テーブルを利用可能な全幅に設定 */
-        border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
-        background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
-
-    }
+table {
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 50%;
+	border-collapse: collapse; /* オプション: セル間の境界線を折り畳む */
+	text-align: center;
+	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
+}
 
     th, td {
         padding: 10px; /* オプション: セルに余白を追加してスペーシングを改善 */
@@ -36,8 +38,8 @@ td {
 
 	<table border="1">
 		<tr>
-			<th>商品名</th>
 			<th>商品画像</th>
+			<th>商品名</th>
 			<th>監督名</th>
 			<th>レンタル日</th>
 			<th>貸出状況</th>
@@ -45,9 +47,9 @@ td {
 
 		<c:forEach var="rentalHistory" items="${rentalHistories }" >
 						<tr>
-							<td><c:out value="${rentalHistory.itemName }"  /></td>
 							<td><img src="resources/img/<c:out value="${rentalHistory.itemPicture }"  />"
 								width="96" height="128" alt="${rentalHistory.itemName }"></td>
+								<td><c:out value="${rentalHistory.itemName }"  /></td>
 								<td><c:out value="${rentalHistory.director }"  /></td>
 								<td><c:out value="${rentalHistory.orderDate }"  /></td>
 								<td><c:if test="${rentalHistory.rentalStatusNo == 0}">
