@@ -23,6 +23,9 @@ table {
 	text-align: center;
 	background-image: url("/yamamons/resources/img/白ピンク背景.jpg");
 }
+.custom-font-size {
+        font-size: 40px; /* お好みのサイズに変更してください */
+    }
 </style>
 </head>
 <body>
@@ -31,10 +34,10 @@ table {
 		<a href="admin"> <input type="submit" value="戻る"
 			class="btn btn--green btn--emboss btn--cubic"></a> <br> <br>
 	</header>
-	<div class="sample">返却処理</div>
-
+	<div class="sample" >返却処理</div>
+	<br>
 	<p>
-		<c:out value="${message }" />
+<span class="custom-font-size"><c:out value="${message}" /></span>
 	</p>
 	<form:form modelAttribute="checkboxForm">
 		<br>

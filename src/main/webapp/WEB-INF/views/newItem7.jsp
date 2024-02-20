@@ -11,7 +11,11 @@
 	rel="stylesheet" />
 <link href="/yamamons/resources/img/login.css" type="text/css"
 	rel="stylesheet" />
-
+<style>
+.errors {
+	color: red;
+}
+</style>
 </head>
 <body style="background-image: url('/yamamons/resources/img/雲.jpg');"
 	class="body">
