@@ -77,11 +77,32 @@ public class ItemsDao {
 	}
 
 	public List<Items> getItemsExceptCart(ArrayList<String> cart) {
+		if (cart == null || cart.isEmpty()) {
+	        // cartが空の場合は全アイテムを取得
+	        String sql = "SELECT * FROM t_item";
+	        return jdbcTemplate.query(sql, itemsMapper);
+	    } else {
+	        // cartが空でない場合は、cartに含まれないアイテムを取得
+	        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM t_item WHERE itemNo NOT IN (");
+	        for (int i = 0; i < cart.size(); i++) {
+	            if (i > 0) {
+	                sqlBuilder.append(", ");
+	            }
+	            sqlBuilder.append("?");
+	        }
+	        sqlBuilder.append(")");
+
+	        Object[] parameters = cart.toArray();
+	        return jdbcTemplate.query(sqlBuilder.toString(), parameters, itemsMapper);
+	    }
+
+		/*
 		String sql = "SELECT * FROM t_item WHERE itemNo NOT IN(select itemNo from t_item2)";
 		//Object[] parameters = {cart};
 		List<Items> items = jdbcTemplate.query(sql, itemsMapper);
 
 		return items;
+		*/
 	}
 
 	//商品番号の在庫数を取り出すメソッド
@@ -121,7 +142,7 @@ public class ItemsDao {
 		}
 		return numberRow;
 	}
-
+	/*
 	public int insertItem2(Items items) {
 		String sql = "INSERT INTO t_item2(itemNo, itemName,itemQuantity,genreNo,director,typeNo,itemPicture) VALUES(?,?,?,?,?,?,?);";
 
@@ -158,18 +179,29 @@ public class ItemsDao {
 			return null;
 		}
 	}
+	*/
 
-	public List<Items> stockCheck() {
-		String sql = "SELECT * FROM t_item2 WHERE itemQuantity <= 0";
-		try {
-			List<Items> itemsList = jdbcTemplate.query(sql, itemsMapper);
-			return itemsList;
-		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public List<Items> stockCheck(ArrayList<String> cart) {
+		if (cart == null || cart.isEmpty()) {
+	        // cartが空の場合はnullを返す
+	        return null;
+	    } else {
+	        // cartが空でない場合は、指定されたアイテムの中で在庫が0以下のものを取得
+	        StringBuilder sqlBuilder = new StringBuilder("SELECT * FROM t_item WHERE itemQuantity <= 0 AND itemNo IN (");
+	        for (int i = 0; i < cart.size(); i++) {
+	            if (i > 0) {
+	                sqlBuilder.append(", ");
+	            }
+	            sqlBuilder.append("?");
+	        }
+	        sqlBuilder.append(")");
+
+	        Object[] parameters = cart.toArray();
+	        return jdbcTemplate.query(sqlBuilder.toString(), parameters, itemsMapper);
+	    }
+
 	}
-
+	/*
 	public void deleteItem2() {
 		String sql = "DELETE FROM t_item2";
 		TransactionStatus transactionStatus = null;
@@ -189,6 +221,7 @@ public class ItemsDao {
 		}
 		return;
 	}
+	*/
 
 	public List<Items> getListByName(String itemName) {
 		String sql = "SELECT * FROM t_item WHERE itemName LIKE ?";

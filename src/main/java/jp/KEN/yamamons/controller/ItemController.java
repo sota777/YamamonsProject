@@ -16,25 +16,21 @@ import jp.KEN.yamamons.entity.Items;
 import jp.KEN.yamamons.model.CartModel;
 import jp.KEN.yamamons.model.LoginModel;
 
-
-
 @Controller
 @SessionAttributes({ "loginModel", "cModel" })
 public class ItemController {
 
+	@Autowired
+	private ItemsDao itemsDao;
 
-		@Autowired
-		private ItemsDao itemsDao;
-
-		//画面遷移時もカート内容を引き継ぐためセッション登録
-		@ModelAttribute("cModel")
-		public CartModel setupCartModel() {
-			return new CartModel();
-		}
-
+	//画面遷移時もカート内容を引き継ぐためセッション登録
+	@ModelAttribute("cModel")
+	public CartModel setupCartModel() {
+		return new CartModel();
+	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
-	public String toForm(@ModelAttribute CartModel cModel, Model model) {
+	public String toForm(@ModelAttribute("cModel") CartModel cModel, Model model) {
 		ArrayList<String> cart = null;
 		String message;
 
@@ -48,56 +44,37 @@ public class ItemController {
 		if (cart != null && !cart.isEmpty()) {
 			message = "カートに" + cart.size() + "個の商品が入っています";
 		} else {
-			message ="";
+			message = "";
 		}
 		model.addAttribute("message", message);
 
-		//カートに商品が入っている場合は、カート以外の商品が表示されるようにする
-		List<Items> items2List =itemsDao.getItems2List();
-		if (!items2List.isEmpty()) {
-			List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
-			model.addAttribute("itemsList", itemsList);
-			return "rental_form3";
-		}else{
-			//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
-			List<Items> itemsList = itemsDao.getItemsList();
-			model.addAttribute("itemsList", itemsList);
-			return "rental_form3";
-		}
+		List<Items> itemsList = itemsDao.getItemsExceptCart(cart);
+		model.addAttribute("itemsList", itemsList);
+		return "rental_form3";
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String toAddCart(@ModelAttribute("cModel") CartModel cModel, Model model) {
 		String message;
 		String cartInNo = cModel.getItemNo();
-		if (cModel.getCart()==null) {
+		if (cModel.getCart() == null) {
 			ArrayList<String> str1 = new ArrayList<String>();
 			str1.add(cartInNo);
 			cModel.setCart(str1);
-		}else {
+		} else {
 			cModel.addCart(cartInNo);
 		}
 
 		//カートに入っている商品の数を表示するmessage作成
 		if (cModel.getCart().isEmpty()) {
-			message="商品を選んでください";
-		}else {
-			message="カートに"+cModel.getCart().size()+"個の商品が入っています";
+			message = "商品を選んでください";
+		} else {
+			message = "カートに" + cModel.getCart().size() + "個の商品が入っています";
 		}
-		model.addAttribute("message",message);
+		model.addAttribute("message", message);
 
-
-		//カートに入れた商品をt_item2に追加する
-
-		Integer itemNo = new Integer(Integer.parseInt(cartInNo));
-		Items items = itemsDao.getItemsByNo(itemNo);
-		itemsDao.insertItem2(items);
-
-		//データベースの内容をList型で取得し、JSPで表示できるようaddAttribute
 		List<Items> itemsList = itemsDao.getItemsExceptCart(cModel.getCart());
 		model.addAttribute("itemsList", itemsList);
-
-
 		return "rental_form3";
 
 	}
@@ -106,15 +83,9 @@ public class ItemController {
 	public String toClearCart(@ModelAttribute("cModel") CartModel cModel, Model model, LoginModel loginModel) {
 
 		ArrayList<String> cart = null;
-	    cModel.setCart(cart);
-	    itemsDao.deleteItem2();
+		cModel.setCart(cart);
 
-		//status.setComplete();
-
-
-
-
-	    return "redirect:/form";
+		return "redirect:/form";
 	}
 
 }

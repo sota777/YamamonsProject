@@ -142,8 +142,12 @@ public class ConfirmController {
 		}
 
 		//カートに入れた商品の在庫が1つ未満のものがあれば取得する
-		stockShortage = itemsDao.stockCheck();
-		if (!stockShortage.isEmpty()) {
+		stockShortage = itemsDao.stockCheck(cart);
+		if (stockShortage == null) {
+			errormessage ="商品を選択してください。";
+			model.addAttribute("errormessage", errormessage);
+			return "rental_cart4";
+		}else if (!stockShortage.isEmpty()) {
 			for (int i = 0; i < stockShortage.size(); i++) {
 				String str = stockShortage.get(i).getItemName();
 				if (errormessage == null) {
@@ -184,8 +188,6 @@ public class ConfirmController {
 
 		rentalHistoryDao.addOrder(orderList);
 
-		itemsDao.deleteItem2();
-
 		status.setComplete();
 
 		return "comRental5";
@@ -200,9 +202,9 @@ public class ConfirmController {
 		if (cModel != null) {
 			cart = cModel.getCart();
 			paramIndex = dModel.getIndex();
-			int delItem = Integer.parseInt(cart.get(Integer.parseInt(paramIndex) - 1));
+			//int delItem = Integer.parseInt(cart.get(Integer.parseInt(paramIndex) - 1));
 			cart.remove(Integer.parseInt(paramIndex) - 1);
-			itemsDao.deleteFromItem2(delItem);
+			//itemsDao.deleteFromItem2(delItem);
 		}
 		return "redirect:/confirm";
 	}
