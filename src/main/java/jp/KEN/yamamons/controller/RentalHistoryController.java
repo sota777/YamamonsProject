@@ -18,24 +18,30 @@ import jp.KEN.yamamons.entity.Members;
 import jp.KEN.yamamons.entity.OrderItems;
 import jp.KEN.yamamons.model.LoginModel;
 
-
 @SessionAttributes("loginModel")
 @Controller
 public class RentalHistoryController {
 
 	@Autowired
-	private  RentalHistoryDao rentalHistoryDao;
+	private RentalHistoryDao rentalHistoryDao;
 	@Autowired
-	private  MembersDao membersDao;
+	private MembersDao membersDao;
 
-		//rental_cart4.jspで「レンタル履歴」を押したとき
-		@RequestMapping(value="/history", method= RequestMethod.GET)
-			public String toRentalHistory(@ModelAttribute LoginModel loginModel, Model model) {
-			Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
-			String customerId = members.getCustomerId();
-			List<OrderItems> rentalHistories = rentalHistoryDao.getHistoryByCustomerIdOnly(customerId);
-			model.addAttribute("rentalHistories", rentalHistories);
-			return "rental_history6";
+	//rental_cart4.jspで「レンタル履歴」を押したとき
+	@RequestMapping(value = "/history", method = RequestMethod.GET)
+	public String toRentalHistory(@ModelAttribute LoginModel loginModel, Model model) {
+		String message = null;
 
+		if (loginModel == null || loginModel.getLoginMail() == null || loginModel.getLoginMail().isEmpty()) {
+		    message = "顧客情報を取得できません。再度ログインしてください。";
+		    model.addAttribute("message", message);
+		    return "rental_history6";
 		}
+		Members members = membersDao.getCusDataByMail(loginModel.getLoginMail());
+		String customerId = members.getCustomerId();
+		List<OrderItems> rentalHistories = rentalHistoryDao.getHistoryByCustomerIdOnly(customerId);
+		model.addAttribute("rentalHistories", rentalHistories);
+		return "rental_history6";
+
 	}
+}

@@ -35,7 +35,14 @@ table {
 <body style="background-image: url('/yamamons/resources/img/雲.jpg');" class="body">
 	<div class="sample"><h5>レンタル履歴確認</h5></div>
 
-
+	<c:if test="${!empty message}">
+				<p>
+					<c:out value="${message }" />
+				</p>
+				<a href="home"> <input type="submit" value="TOP(ログインはこちら)"
+					class="btn btn--green btn--emboss btn--cubic"></a>
+			</c:if>
+	<c:if test="${!empty rentalHistories}">
 	<table border="1">
 		<tr>
 			<th>商品画像</th>
@@ -60,6 +67,7 @@ table {
 
 		</c:forEach>
 	</table>
+	</c:if>
 	<br>
 	<br>
 	<a href="confirm" >
