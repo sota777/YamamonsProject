@@ -9,15 +9,15 @@ public class AdminModel implements Serializable{
 	private int itemNo;
 	private String itemNunber;
 	private String StatusNo;
-	@NotEmpty(message="商品名は必須です")
+	@NotEmpty(message="※Not Empty 商品名")
 	private String itemName;
-	@NotEmpty(message="入荷数は必須です")
+	@NotEmpty(message="※Not Empty 入荷数")
 	private String itemQuanity;
-	@NotEmpty(message="ジャンルナンバーは必須です")
+	@NotEmpty(message="※Not Empty ジャンルナンバー")
 	private String genreNo;
-	@NotEmpty(message="監督名は必須です")
+	@NotEmpty(message="※Not Empty 監督名")
 	private String director;
-	@NotEmpty(message="タイプナンバーは必須です")
+	@NotEmpty(message="※Not Empty タイプナンバー")
 	private String typeNo;
 	private String itemPicture;
 	public int getItemNo() {
